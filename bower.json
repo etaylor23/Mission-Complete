@@ -1,0 +1,23 @@
+{
+  "name": "mission-complete",
+  "description": "",
+  "main": "gulpfile.js",
+  "authors": [
+    "Ellis Taylor"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation-sites": "6.2.4"
+  },
+  "resolutions": {
+    "what-input": "~4.0.3"
+  }
+}

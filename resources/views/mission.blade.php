@@ -1,0 +1,139 @@
+@extends('layouts.wrapper')
+@section('content')
+
+<div class="page-wrapper">
+    @if($mission)
+    <div class="row">
+        <div class="column small-12 medium-10 large-9">
+            <h1 data-step="2" data-intro="Now we're making ground, this is your first mission. The idea of a mission is to begin to give some structure to a campaign. <br />
+                                        Whilst a campaign allows you to create some sort of aim, a mission allows you to start to put some structure to that campaign. So be structured with creating your missions, create a few or create many... just make sure that they deliver.
+                                        Good examples of a mission are: (Where the campaign is: I want to earn more money)
+                                        <ul>
+                                            <li>I need to progress from my current role to a management role</li>
+                                            <li>I should build an eCommerce store as a side business in my spare time</li>
+                                        </ul>
+                                        Are the strokes still to broad? We'll tell you about the secret weapon soon.">{{ $mission->name }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            {!! Breadcrumbs::render('campaign.mission.show', $campaign, $mission) !!}
+        </div>
+    </div>
+    <div class="row">
+        <div class="columns small-12 medium-4 large-4">
+            <div data-step="3" data-intro="Remove missions at your will, but don't forget all of the hard work you put into it. Consider why you're choosing to stop attacking on this front, what's changed?" class="callout">
+                <div class="row">
+                    <div class="column small-12 medium-12 large-12">
+                        {!! Form::open(['method' => 'DELETE', 'action' => ['MissionsContoller@destroy', $campaign->slug, $mission->mission_slug]]) !!}
+                          {!! Form::submit('Delete this mission', ['class' => 'button']) !!}
+                        {!! Form::close() !!}
+                    </div>
+                    @if(session('deletedObjective'))
+                        <div class="column small-12 medium-12 large-12">
+                            <strong>{{session('deletedObjective')}}</strong>
+                        </div>
+                    @endif
+
+                </div>
+            </div>
+        </div>
+
+        <div class="columns small-12 medium-4 large-4">
+            <div data-step="4" data-intro="This pane shows you how your mission has progressed. Your progression is based on the completion of each objective in this mission." class="callout">
+                @if(count($relatedObjectives) === 0)
+                    <strong>You have no objectives in this mission, create one now</strong>
+                @else
+                    <div class="percent-complete text-center">
+                        <div>{{ $mission->name }} is:</div>
+                        <div><strong>{{ $mission->percent_complete }}%</strong></div>
+                        <div>complete</div>
+                    </div>
+                @endif
+            </div>
+        </div>
+
+
+        <div class="columns small-12 medium-4 large-4 text-center">
+            <div data-step="5" data-intro="Lastly, this pane will tell you when you first created this mission, it'll give you some idea into how much work you've put into it." class="callout">
+                <strong>You started this mission {{ $timeSinceCreation }}</strong>
+            </div>
+        </div>
+    </div>
+
+    <div data-step="6" data-intro="Here are all of the objectives in this mission, but what are objectives? Well, they're the nuts and bolts behind this super weapon. Lets take a look at them together." class="row">
+        <div class="column small-12 medium-6 large-6">
+            <div class="callout">
+                <h2>Open objectives</h2>
+                <ul class="open-objectives listing">
+                    @foreach ($relatedObjectives as $objective)
+                        @if($objective->done !== 1)
+                            <li>
+                                <div class="card">
+                                    <div class="summary">
+                                        <a href="/campaign/{{$objective->Mission->Campaign->slug}}/mission/{{$objective->mission->mission_slug}}/objective/{{$objective->objective_slug}}">{{ $objective->name }}</a>
+                                    </div>
+                                </div>
+                            </li>
+                        @endif
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+        <div class="column small-12 medium-6 large-6">
+            <div class="callout">
+                <h2>Completed objectives</h2>
+                <ul class="completed-objectives listing">
+                  @foreach ($relatedObjectives as $objective)
+                      @if($objective->done === 1)
+                          <li>
+                              <div class="card">
+                                  <div class="summary">
+                                      <a href="/campaign/{{$objective->Mission->Campaign->slug}}/mission/{{$objective->mission->mission_slug}}/objective/{{$objective->objective_slug}}">{{ $objective->name }}</a>
+                                  </div>
+                              </div>
+                          </li>
+                      @endif
+                  @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="callout">
+              {!! Form::open(['action' => 'ObjectivesController@store', 'class' => 'row']) !!}
+                    <div class="column small-12 medium-6 large-6">
+                        {!! Form::label('name', 'Name') !!}
+                        {!! Form::text('name') !!}
+                    </div>
+                    <div class="column small-12 medium-6 large-6">
+                        {!! Form::label('description', 'About this mission') !!}
+                        {!! Form::textarea('description', null, ['size' => '30x5']) !!}
+                    </div>
+                    <div class="column small-12 medium-12 large-12">
+                        <p>Create as completed mission?</p>
+                    </div>
+                    <div class="column small-12 medium-1 large-1">
+                        {!! Form::label('done', 'Yes') !!}
+                        {!! Form::radio('done', '1', true) !!}
+                    </div>
+                    <div class="column small-12 medium-1 large-1">
+                        {!! Form::label('done', 'No') !!}
+                        {!! Form::radio('done', '0', true) !!}
+                    </div>
+
+                    <div class="column small-12 medium-4 large-4">
+                        {!! Form::submit('Create new objective', ['class' => 'button']) !!}
+                    </div>
+                {!! Form::close() !!}
+
+            </div>
+        </div>
+    </div>
+    @else
+        <h1>You cannot access this mission</h1>
+    @endif
+</div>
+@endsection
