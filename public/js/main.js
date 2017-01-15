@@ -42,7 +42,7 @@ function App() {
                     // });
                 } else if(window.location.pathname.indexOf('mission') > 0) {
                     intro.oncomplete(function() {
-                        window.location.href = '/campaign/your-very-first-campaign/mission/your-very-first-mission/objective/your-very-first-mission';
+                        window.location.href = '/campaign/your-very-first-campaign/mission/your-very-first-mission/objective/your-very-first-objective';
                     })
                 } else if(window.location.pathname.indexOf('campaign') > 0) {
                     intro.oncomplete(function() {
