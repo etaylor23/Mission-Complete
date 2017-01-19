@@ -29,7 +29,7 @@ function App() {
                 var intro = introJs()
                 intro.setOption('doneLabel', 'Next page')
                 intro.start();
-                //debugger;
+
                 if(window.location.pathname.indexOf('objective') > 0) {
                     intro.oncomplete(function() {
                         localStorage.setItem("tour-complete", "true");
@@ -68,8 +68,12 @@ function App() {
         $('.logout').click(function(event) {
             event.preventDefault();
             $(this).parent('form').submit()
-        })
+        });
 
+        $('.hi').typed({
+            strings: ["Mission Complete... ✓", "The First 'To Be' List"],
+            typeSpeed: 5
+        })
 
     }
 }

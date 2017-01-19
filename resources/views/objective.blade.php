@@ -21,7 +21,7 @@
         <div class="columns small-12 medium-4 large-4">
             <div class="callout">
                 <div class="row">
-                  <div data-step="4" data-intro="Just like before, this lets you remove an objective" class="columns small-6 medium-6 large-6">
+                  <div data-step="4" data-intro="Just like before, this lets you remove an objective." class="columns small-6 medium-6 large-6">
                       {!! Form::open(['method' => 'DELETE', 'action' => ['ObjectivesController@destroy', $campaign->slug, $mission->mission_slug, $objective->objective_slug]]) !!}
                         {!! Form::submit('Delete this objective', ['class' => 'button']) !!}
                       {!! Form::close() !!}
@@ -101,7 +101,7 @@
             </div>
         </div>
         <div class="columns small-12 medium-4 large-4 text-center">
-            <div data-step="6" data-intro="This tells you when you created your objective, looks familiar huh?" class="callout">
+            <div data-step="6" data-intro="This tells you when you created your objective, but you already knew that." class="callout">
                 You created this objective {{ $timeSinceCreation }}
             </div>
         </div>

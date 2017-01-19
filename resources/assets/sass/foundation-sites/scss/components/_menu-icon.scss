@@ -1,6 +1,6 @@
 @mixin foundation-menu-icon {
   .menu-icon {
-    @include hamburger($color: $titlebar-icon-color, $color-hover: $titlebar-icon-color-hover);
+    @include hamburger($color: $darkGreen, $color-hover: $lightGreen);
   }
 
   .menu-icon.dark {

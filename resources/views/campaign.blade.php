@@ -6,12 +6,40 @@
         <div class="row">
             <div class="column small-12 medium-6 large-9">
                 <h1 data-step="2" data-intro="Okay, this is your first campaign. The idea of a campaign is to create a long term aim, this might last a couple of months or even a couple of years or more.
-                                            It has to mean a lot to you, (you will focus on it for a long time) but it doesn't have to be too specific. Good examples may be:
+                                            It has to mean a lot to you, (you'll be focussing on it for a long time) but it doesn't have to be too specific. Good examples are:
                                             <ul>
                                                 <li>I want to earn more money</li>
                                                 <li>I want to get fitter and stronger</li>
                                             </ul>
                                             See, not too specifc - some may say that its not very measurable, its okay we'll cover the specifics in just a second.">{{ $campaign->name }}</h1>
+                <div class="reveal" id="completed-status" data-reveal>
+                    <div class="row">
+                          {!! Form::open(['action' => 'MissionsContoller@store', 'class' => 'row']) !!}
+                                <div class="column small-12 medium-12 large-12">
+                                    {!! Form::label('name', 'Name') !!}
+                                    {!! Form::text('name') !!}
+                                </div>
+                                <div class="column small-12 medium-12 large-12">
+                                    {!! Form::label('description', 'About this mission') !!}
+                                    {!! Form::textarea('description', null, ['size' => '30x5']) !!}
+                                </div>
+                                <div class="column small-12 medium-12 large-12">
+                                    <p>Create as completed mission?</p>
+                                </div>
+                                <div class="column small-12 medium-1 large-1">
+                                    {!! Form::label('done', 'Yes') !!}
+                                    {!! Form::radio('done', '1', true) !!}
+                                </div>
+                                <div class="column small-12 medium-1 large-1">
+                                    {!! Form::label('done', 'No') !!}
+                                    {!! Form::radio('done', '0', true) !!}
+                                </div>
+                                <div class="column small-12 medium-4 large-4">
+                                    {!! Form::submit('Create new mission', ['class' => 'button']) !!}
+                                </div>
+                            {!! Form::close() !!}
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -26,7 +54,7 @@
                     <div class="row">
                         <div class="column small-12 medium-12 large-12">
                         {!! Form::open(['method' => 'DELETE', 'action' => ['CampaignsController@destroy', $campaign->slug]]) !!}
-                          {!! Form::submit('Delete this campaign', ['class' => 'button']) !!}
+                          {!! Form::submit('Delete this campaign', ['class' => 'button full-width']) !!}
                         {!! Form::close() !!}
                         </div>
                         @if(session('deletedMission'))
@@ -107,38 +135,6 @@
     @else
         <h1>You cannot access this campaign</h1>
     @endif
-
-        <div class="row">
-            <div class="large-12 columns">
-                <div class="callout">
-                  {!! Form::open(['action' => 'MissionsContoller@store', 'class' => 'row']) !!}
-                        <div class="column small-12 medium-6 large-6">
-                            {!! Form::label('name', 'Name') !!}
-                            {!! Form::text('name') !!}
-                        </div>
-                        <div class="column small-12 medium-6 large-6">
-                            {!! Form::label('description', 'About this mission') !!}
-                            {!! Form::textarea('description', null, ['size' => '30x5']) !!}
-                        </div>
-                        <div class="column small-12 medium-12 large-12">
-                            <p>Create as completed mission?</p>
-                        </div>
-                        <div class="column small-12 medium-1 large-1">
-                            {!! Form::label('done', 'Yes') !!}
-                            {!! Form::radio('done', '1', true) !!}
-                        </div>
-                        <div class="column small-12 medium-1 large-1">
-                            {!! Form::label('done', 'No') !!}
-                            {!! Form::radio('done', '0', true) !!}
-                        </div>
-                        <div class="column small-12 medium-4 large-4">
-                            {!! Form::submit('Create new mission', ['class' => 'button']) !!}
-                        </div>
-                    {!! Form::close() !!}
-
-                </div>
-            </div>
-        </div>
 
     </div>
 

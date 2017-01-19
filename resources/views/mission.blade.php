@@ -12,7 +12,37 @@
                                             <li>I need to progress from my current role to a management role</li>
                                             <li>I should build an eCommerce store as a side business in my spare time</li>
                                         </ul>
-                                        Are the strokes still to broad? We'll tell you about the secret weapon soon.">{{ $mission->name }}</h1>
+                                        If you think that the strokes are still too broad then its time to tell you about your objectives.">{{ $mission->name }}</h1>
+            <div class="reveal" id="completed-status" data-reveal>
+                <div class="row">
+                        {!! Form::open(['action' => 'ObjectivesController@store', 'class' => 'row']) !!}
+                            <div class="column small-12 medium-12 large-12">
+                                {!! Form::label('name', 'Name') !!}
+                                {!! Form::text('name') !!}
+                            </div>
+                            <div class="column small-12 medium-12 large-12">
+                                {!! Form::label('description', 'About this mission') !!}
+                                {!! Form::textarea('description', null, ['size' => '30x5']) !!}
+                            </div>
+                            <div class="column small-12 medium-12 large-12">
+                                <p>Create as completed mission?</p>
+                            </div>
+                            <div class="column small-12 medium-1 large-1">
+                                {!! Form::label('done', 'Yes') !!}
+                                {!! Form::radio('done', '1', true) !!}
+                            </div>
+                            <div class="column small-12 medium-1 large-1">
+                                {!! Form::label('done', 'No') !!}
+                                {!! Form::radio('done', '0', true) !!}
+                            </div>
+
+                            <div class="column small-12 medium-4 large-4">
+                                {!! Form::submit('Create new objective', ['class' => 'button']) !!}
+                            </div>
+                        {!! Form::close() !!}
+
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -26,7 +56,7 @@
                 <div class="row">
                     <div class="column small-12 medium-12 large-12">
                         {!! Form::open(['method' => 'DELETE', 'action' => ['MissionsContoller@destroy', $campaign->slug, $mission->mission_slug]]) !!}
-                          {!! Form::submit('Delete this mission', ['class' => 'button']) !!}
+                          {!! Form::submit('Delete this mission', ['class' => 'button full-width']) !!}
                         {!! Form::close() !!}
                     </div>
                     @if(session('deletedObjective'))
@@ -100,38 +130,7 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="large-12 columns">
-            <div class="callout">
-              {!! Form::open(['action' => 'ObjectivesController@store', 'class' => 'row']) !!}
-                    <div class="column small-12 medium-6 large-6">
-                        {!! Form::label('name', 'Name') !!}
-                        {!! Form::text('name') !!}
-                    </div>
-                    <div class="column small-12 medium-6 large-6">
-                        {!! Form::label('description', 'About this mission') !!}
-                        {!! Form::textarea('description', null, ['size' => '30x5']) !!}
-                    </div>
-                    <div class="column small-12 medium-12 large-12">
-                        <p>Create as completed mission?</p>
-                    </div>
-                    <div class="column small-12 medium-1 large-1">
-                        {!! Form::label('done', 'Yes') !!}
-                        {!! Form::radio('done', '1', true) !!}
-                    </div>
-                    <div class="column small-12 medium-1 large-1">
-                        {!! Form::label('done', 'No') !!}
-                        {!! Form::radio('done', '0', true) !!}
-                    </div>
 
-                    <div class="column small-12 medium-4 large-4">
-                        {!! Form::submit('Create new objective', ['class' => 'button']) !!}
-                    </div>
-                {!! Form::close() !!}
-
-            </div>
-        </div>
-    </div>
     @else
         <h1>You cannot access this mission</h1>
     @endif

@@ -56,7 +56,7 @@ $menu-icon-spacing: 0.25rem !default;
   }
 
   // Reset line height to make the height of the overall item easier to calculate
-  > li > a {
+  > li > a, > li > form {
     display: block;
     padding: $menu-item-padding;
     line-height: 1;

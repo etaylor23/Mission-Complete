@@ -4,8 +4,6 @@
 <div class="page-wrapper">
     <div class="row">
         <h1 class="column small-11 medium-11 large-11">Your Dashboard</h1>
-        <div class="column small-1 medium-1 large-1 fa fa-fighter-jet">
-            <span data-open="completed-status" style="font-size:3rem;">+</span>
 
             <div class="reveal" id="completed-status" data-reveal>
                 <div class="row">
@@ -115,7 +113,7 @@
                                                       <div class="plan-inner">
                                                             <div>{{$objective->maintenance_plan}}</div>
                                                             <div>
-                                                                <strong>Next Maintenance Date: </strong>{{ date("l n F Y", strtotime($objective->next_maintenance_instance_date)) }}
+                                                                <strong>Next Maintenance Date: </strong>{{ date("l d F Y", strtotime($objective->next_maintenance_instance_date)) }}
                                                             </div>
 
                                                             {!! Form::open(['method' => 'PUT', 'action' => ['DashboardController@maintenanceComplete', $objective->objective_slug], 'class'=>'row']) !!}
@@ -140,7 +138,7 @@
 
     <div class="row">
         <div class="column small-12 medium-6 large-6">
-            <div data-step="4" data-intro="These are completed campaigns, campaigns will show as complete when all of their elements are 100% completed. Don't expect to see anything hear for a while, campaigns are pretty epic." class="callout">
+            <div data-step="4" data-intro="These are completed campaigns, campaigns will show as complete when all of their elements are 100% completed. Don't expect to see anything hear for a while, campaigns take a long time to complete." class="callout">
                 <h2>Completed Campigns</h2>
                 @if(!$campaigns->isEmpty())
                     <ul class="completed-campaigns listing">
@@ -202,7 +200,7 @@
                                                             <div class="plan-inner">
                                                                 <div>{{$objective->maintenance_plan}}</div>
                                                                 <div>
-                                                                    <strong>Next Maintenance Date: </strong>{{ date("l n F Y", strtotime($objective->next_maintenance_instance_date)) }}
+                                                                    <strong>Next Maintenance Date: </strong>{{ date("l d F Y", strtotime($objective->next_maintenance_instance_date)) }}
                                                                 </div>
                                                                 {!! Form::open(['method' => 'PUT', 'action' => ['DashboardController@maintenanceComplete', $objective->objective_slug], 'class'=>'row']) !!}
                                                                     {!! Form::submit('&#xf058;', ['class' => 'button awesome double maintenance-complete']) !!}
