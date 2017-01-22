@@ -1,7 +1,7 @@
 @extends('layouts.wrapper')
 @section('content')
 
-<div class="page-wrapper">
+<div class="main-content">
     <div class="row">
         <div class="column small-12 medium-10 large-10">
             <h1 data-step="2" data-intro="You've made it, well done Soldier. This is where you come to complete your objectives.

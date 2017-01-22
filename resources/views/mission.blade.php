@@ -1,7 +1,7 @@
 @extends('layouts.wrapper')
 @section('content')
 
-<div class="page-wrapper">
+<div class="main-content">
     @if($mission)
     <div class="row">
         <div class="column small-12 medium-10 large-9">

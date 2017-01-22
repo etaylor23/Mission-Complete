@@ -73,7 +73,27 @@ function App() {
         $('.hi').typed({
             strings: ["Mission Complete... ✓", "The First 'To Be' List"],
             typeSpeed: 5
+        });
+
+        function scrollToAnchor(aid){
+            var aTag = $("[name='"+ aid +"']");
+            //-110 because of fixed header
+            $('html,body').animate({scrollTop: (aTag.offset().top - 110)},'slow');
+        }
+
+
+        $('.nav a').on('click', function(event) {
+          console.log($(this).attr('id'));
+          scrollToAnchor($(this).attr('id'));
         })
+
+        $(window).scroll(function(event, top) {
+          if(Math.round($(this).scrollTop()) > 40) {
+            $('.title-bar').addClass('not-top');
+          } else {
+        	$('.title-bar').removeClass('not-top');
+          }
+        });
 
     }
 }

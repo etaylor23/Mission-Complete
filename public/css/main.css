@@ -3753,6 +3753,8 @@ table.hover tbody tr:nth-of-type(even):hover {
   background: #807c79;
   color: #fefefe;
   padding: 1.5rem; }
+  .title-bar.transparent {
+    background: transparent; }
   .title-bar::before, .title-bar::after {
     content: ' ';
     display: table; }
@@ -3991,13 +3993,15 @@ table.hover tbody tr:nth-of-type(even):hover {
   clear: both; }
 
 .parallax-window {
-  min-height: 400px;
+  min-height: 300px;
   background: transparent; }
 
 body .title-bar {
   background: #807c79;
   color: #fefefe;
   padding: 1.5rem; }
+  body .title-bar.transparent {
+    background: transparent; }
   body .title-bar::before, body .title-bar::after {
     content: ' ';
     display: table; }
@@ -4047,16 +4051,46 @@ body .full-width {
   width: 100%; }
 
 body .global-spacing.top {
-  margin-top: 2rem; }
+  margin-top: 1rem; }
 
 body .global-spacing.right {
-  margin-right: 2rem; }
+  margin-right: 1rem; }
 
 body .global-spacing.bottom {
-  margin-bottom: 2rem; }
+  margin-bottom: 1rem; }
 
 body .global-spacing.left {
-  margin-left: 2rem; }
+  margin-left: 1rem; }
+
+body .nav a {
+  display: inline-block;
+  border: 3px solid #173701;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 1.1rem; }
+
+body .homepage-content {
+  top: 100%;
+  width: 100%;
+  position: absolute; }
+  body .homepage-content h2 {
+    border-bottom-style: double;
+    border-top-style: double;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom-color: #5b7632;
+    border-top-color: #5b7632;
+    border-bottom-width: 5px;
+    border-top-width: 5px; }
+  body .homepage-content .our-mission, body .homepage-content .your-mission {
+    height: 600px; }
+
+body .title-bar {
+  transition: all 500ms ease; }
+
+body .title-bar.not-top {
+  background: #807c79; }
 
 body .awesome, body .fa {
   font-family: FontAwesome; }
@@ -4064,6 +4098,11 @@ body .awesome, body .fa {
     font-size: 2rem; }
   body .awesome.triple, body .fa.triple {
     font-size: 3rem; }
+
+body #header-bar.homepage {
+  position: fixed;
+  width: 100%;
+  z-index: 1000; }
 
 body .header .home-logo a {
   display: block;
@@ -4136,17 +4175,15 @@ body .listing {
         body .listing > li > .card .summary .plan {
           margin-bottom: 20px; }
 
-body {
-  background: #000; }
-
 .cover {
   position: absolute;
-  top: 107px;
+  top: 0;
   left: 0;
-  z-index: 2;
+  z-index: -1;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=);
   width: 100%;
-  height: 88%;
-  background: rgba(0, 0, 0, 0.4); }
+  height: 100%;
+  background-color: rgba(127, 127, 127, 0.5); }
   .cover .hi {
     position: absolute;
     top: 50%;
@@ -4162,11 +4199,11 @@ body {
 
 .tv {
   position: absolute;
-  top: 107px;
+  top: 0;
   left: 0;
-  z-index: 1;
+  z-index: -2;
   width: 100%;
-  height: 88%;
+  height: 100%;
   overflow: hidden; }
   .tv .screen {
     position: absolute;

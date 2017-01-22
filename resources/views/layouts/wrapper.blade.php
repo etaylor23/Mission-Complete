@@ -106,78 +106,50 @@
     </head>
     <body>
 
-
-        <!--<div class="off-canvas-wrapper">
-            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>-->
-          		<!--<div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
-          			<nav d="site-navigation" class="main-navigation" role="navigation" style="padding:50px 10px; margin-bottom:20px;">
-                        <button class="close-button" aria-label="Close menu" type="button" data-close>
-                             <span aria-hidden="true">&times;</span>
-                        </button>
-
-                        <ul class="vertical menu">
-                            <li>
-                                <form id="logout-form" action="{{ url('/logout') }}" method="POST">
-                                 {{ csrf_field() }}
-                                 <a href="#" class="logout">Logout</a>
-                                </form>
-                            </li>
-                            <li>
-                                <a href="{{ url('/dashboard') }}">Dashboard</a>
-                            </li>
-                            <li>
-                                <a data-open="completed-status" aria-controls="completed-status" aria-haspopup="true">Create New Campaign</a>
-                            </li>
-                        </ul>
-                     </nav>
-          		</div> --><!-- end .off-canvas -->
-
-                <div class="off-canvas-content" data-off-canvas-content>
-                  	<section id="fixedWrapper">
-              			<div id="header-bar">
-            					<header class="header" role="banner">
-            						<div class="title-bar">
-            							<div class="row">
-            								<div class="text-left small-5 columns">
-            									<!--<a class="left fa fa-arrow-circle-right triple" data-toggle="offCanvasLeft"></a>-->
-            								</div>
-            								<div class="home-logo text-center small-2 columns">
-                                                @if(Auth::check())
-            									    <a href="/dashboard">
-                                                @else
-                                                    <a href="/">
-                                                @endif
-                                                    <img src="{{{ asset('images/mission-complete.png') }}}" />
-                                                </a>
-            								</div>
-            								<div class="text-right small-5 columns">
-                                                @if (Route::has('login'))
-                                                    <div class="top-right nav-links-row row">
-                                                        <div class="nav-links">
-                                                            @if(!Auth::check())
-                                                            <a href="{{ url('/login') }}" class="login triple fa fa-sign-in"></a>
-                                                            <a href="{{ url('/register') }}" class="fa triple fa-user-circle-o"></a>
-                                                            @else
-                                                            <form id="logout-form" action="{{ url('/logout') }}" method="POST">
-                                                                {{ csrf_field() }}
-                                                                <a href="#" class="logout triple fa fa-sign-out"></a>
-                                                            </form>
-                                                            <a class="fa fa-tachometer triple" data-step="1" data-intro="Welcome Soldier, good to have you aboard! We're about to take you on a training programme so you know how to use this super weapon that we've created." href="{{ url('/dashboard') }}"></a>
-                                                            <a class="fa fa-plus-circle triple" data-open="completed-status" aria-controls="completed-status" aria-haspopup="true"></a>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                            </div>
-            							</div>
-            						</div>
-            					</header>
+        <div class="page-wrapper">
+			<div id="header-bar" class="@if(Request::is('/')) homepage @endif">
+				<header class="header" role="banner">
+					<div class="title-bar @if(Request::is('/')) transparent @endif">
+						<div class="row">
+							<div class="text-left small-5 columns nav">
+                                <a id="our-mission" href="#our-mission" class="global-spacing left">Our Mission</a>
+                                <a id="your-mission" href="#your-mission" class="global-spacing left">Your Mission</a>
+							</div>
+							<div class="home-logo text-center small-2 columns">
+                                @if(Auth::check())
+								    <a href="/dashboard">
+                                @else
+                                    <a href="/">
+                                @endif
+                                    <img src="{{{ asset('images/mission-complete.png') }}}" />
+                                </a>
+							</div>
+							<div class="text-right small-5 columns">
+                                @if (Route::has('login'))
+                                    <div class="top-right nav-links-row row">
+                                        <div class="nav-links">
+                                            @if(!Auth::check())
+                                            <a href="{{ url('/login') }}" class="login triple fa fa-sign-in"></a>
+                                            <a href="{{ url('/register') }}" class="fa triple fa-user-circle-o"></a>
+                                            @else
+                                            <form id="logout-form" action="{{ url('/logout') }}" method="POST">
+                                                {{ csrf_field() }}
+                                                <a href="#" class="logout triple fa fa-sign-out"></a>
+                                            </form>
+                                            <a class="fa fa-tachometer triple" data-step="1" data-intro="Welcome Soldier, good to have you aboard! We're about to take you on a training programme so you know how to use this super weapon that we've created." href="{{ url('/dashboard') }}"></a>
+                                            <a class="fa fa-plus-circle triple" data-open="completed-status" aria-controls="completed-status" aria-haspopup="true"></a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
-                        @yield('content')
-                      </section>
-                  </div> <!-- end .off-canvas-content -->
-            <!--  </div> end .off-canvas-wrapper-inner -->
-         <!-- </div>  end .off-canvas-wrapper -->
+						</div>
+					</div>
+				</header>
+            </div>
+            @yield('content')
+        </div>
+
 
 
     </body>

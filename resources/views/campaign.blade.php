@@ -2,7 +2,7 @@
 @section('content')
 
 @if($campaign)
-    <div class="page-wrapper">
+    <div class="main-content">
         <div class="row">
             <div class="column small-12 medium-6 large-9">
                 <h1 data-step="2" data-intro="Okay, this is your first campaign. The idea of a campaign is to create a long term aim, this might last a couple of months or even a couple of years or more.

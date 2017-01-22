@@ -1,7 +1,7 @@
 @extends('layouts.wrapper')
 @section('content')
 
-<div class="page-wrapper">
+<div class="main-content">
     <div class="row">
         <h1 class="column small-11 medium-11 large-11">Your Dashboard</h1>
 
