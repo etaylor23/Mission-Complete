@@ -5,7 +5,7 @@
     <div class="row">
         <h1 class="column small-11 medium-11 large-11">Your Dashboard</h1>
 
-            <div class="reveal" id="completed-status" data-reveal>
+            <div class="reveal" id="completed-status" data-reveal data-animation-in="slide-in-down" data-animation-out="slide-out-down">
                 <div class="row">
                     <div class="large-12 columns">
                           @if(!$campaigns->isEmpty())

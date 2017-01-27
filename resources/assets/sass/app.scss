@@ -5,6 +5,7 @@
 @import "_variables";
 @import "foundation-sites/scss/settings/settings";
 @import "foundation";
+@import "motion-ui/motion-ui";
 
 
 
@@ -58,7 +59,10 @@ body {
             margin-left: 1rem;
         }
     }
-
+    .active {
+        background: #173701;
+        color: #fff;
+    }
     .nav {
         a {
             display: inline-block;
@@ -66,13 +70,22 @@ body {
             padding: 15px;
             border-radius: 5px;
             font-size: 1.1rem;
+            transition: all 500ms ease;
+        }
+    }
+    .secondary-nav {
+        a {
+            display: inline-block;
+            padding: 15px;
+            font-size: 1.1rem;
+            transition: all 500ms ease;
         }
     }
     .homepage-content {
         top: 100%;
         width:100%;
         position: absolute;
-        h2 {
+        h2, h3 {
             border-bottom-style: double;
             border-top-style: double;
             margin-top: 1rem;
@@ -84,16 +97,22 @@ body {
             border-top-width: 5px;
         }
 
-        .our-mission, .your-mission {
-            height: 600px;
-        }
     }
     .title-bar {
         transition: all 500ms ease;
+        position: relative;
+        z-index: 1;
     }
     .title-bar.not-top {
         background:$darkNeutral;
 
+    }
+    .secondary-nav {
+        background: white;
+        height: 55px;
+        position: relative;
+        margin-top: -55px;
+        transition: all 500ms ease;
     }
 
     .awesome, .fa {

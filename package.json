@@ -27,6 +27,7 @@
   "author": "Ellis Taylor",
   "license": "ISC",
   "dependencies": {
-    "foundation-sites": "^6.3.0-rc2"
+    "foundation-sites": "^6.3.0-rc2",
+    "motion-ui": "^1.2.2"
   }
 }

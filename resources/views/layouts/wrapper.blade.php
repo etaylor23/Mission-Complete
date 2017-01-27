@@ -15,9 +15,11 @@
         <script src="{{{ asset('js/foundation.util.box.js') }}} "></script>
         <script src="{{{ asset('js/foundation.util.triggers.js') }}} "></script>
         <script src="{{{ asset('js/foundation.util.mediaQuery.js') }}} "></script>
-        <script src="{{{ asset('js/foundation.util.motion.js') }}} "></script>
         <script src="{{{ asset('js/foundation.reveal.js') }}} "></script>
-        <script src="{{{ asset('js/foundation.offcanvas.js') }}}"></script>
+
+        <script src="{{{ asset('js/foundation.util.motion.js') }}} "></script>
+
+
         <script src="{{{ asset('js/intro.js') }}}"></script>
         <script src="{{{ asset('js/typed.js')}}}"></script>
 
@@ -28,7 +30,7 @@
 
 
         <script type="text/javascript">
-
+            if(window.location.pathname === '/') {
                 var tag = document.createElement('script');
                 		tag.src = 'https://www.youtube.com/player_api';
                 var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -101,7 +103,7 @@
                   $('.hi em:nth-of-type(2)').html('~');
                   tv.pauseVideo();
                 });
-
+            }
         </script>
     </head>
     <body>
@@ -109,42 +111,47 @@
         <div class="page-wrapper">
 			<div id="header-bar" class="@if(Request::is('/')) homepage @endif">
 				<header class="header" role="banner">
-					<div class="title-bar @if(Request::is('/')) transparent @endif">
-						<div class="row">
-							<div class="text-left small-5 columns nav">
-                                <a id="our-mission" href="#our-mission" class="global-spacing left">Our Mission</a>
-                                <a id="your-mission" href="#your-mission" class="global-spacing left">Your Mission</a>
-							</div>
-							<div class="home-logo text-center small-2 columns">
-                                @if(Auth::check())
-								    <a href="/dashboard">
-                                @else
-                                    <a href="/">
-                                @endif
-                                    <img src="{{{ asset('images/mission-complete.png') }}}" />
-                                </a>
-							</div>
-							<div class="text-right small-5 columns">
-                                @if (Route::has('login'))
-                                    <div class="top-right nav-links-row row">
-                                        <div class="nav-links">
-                                            @if(!Auth::check())
-                                            <a href="{{ url('/login') }}" class="login triple fa fa-sign-in"></a>
-                                            <a href="{{ url('/register') }}" class="fa triple fa-user-circle-o"></a>
-                                            @else
-                                            <form id="logout-form" action="{{ url('/logout') }}" method="POST">
-                                                {{ csrf_field() }}
-                                                <a href="#" class="logout triple fa fa-sign-out"></a>
-                                            </form>
-                                            <a class="fa fa-tachometer triple" data-step="1" data-intro="Welcome Soldier, good to have you aboard! We're about to take you on a training programme so you know how to use this super weapon that we've created." href="{{ url('/dashboard') }}"></a>
-                                            <a class="fa fa-plus-circle triple" data-open="completed-status" aria-controls="completed-status" aria-haspopup="true"></a>
-                                            @endif
+                    <nav>
+    					<div class="title-bar @if(Request::is('/')) transparent @endif">
+    						<div class="row">
+    							<div class="text-left small-5 columns main-nav nav">
+                                    <!--
+                                    <a id="our-mission" href="#our-mission" class="global-spacing left">Our Mission</a>
+                                    <a id="your-mission" href="#your-mission" class="global-spacing left">Your Mission</a>-->
+    							</div>
+    							<div class="home-logo text-center small-2 columns">
+                                    @if(Auth::check())
+    								    <a href="/dashboard">
+                                    @else
+                                        <a href="/">
+                                    @endif
+                                        <img src="{{{ asset('images/mission-complete.png') }}}" />
+                                    </a>
+    							</div>
+    							<div class="text-right small-5 columns">
+                                    @if (Route::has('login'))
+                                        <div class="top-right nav-links-row row">
+                                            <div class="nav-links">
+                                                @if(!Auth::check())
+                                                <a href="{{ url('/login') }}" class="login triple fa fa-sign-in"></a>
+                                                <a href="{{ url('/register') }}" class="fa triple fa-user-circle-o"></a>
+                                                @else
+                                                <form id="logout-form" action="{{ url('/logout') }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    <a href="#" class="logout triple fa fa-sign-out"></a>
+                                                </form>
+                                                <a class="fa fa-tachometer triple" data-step="1" data-intro="Welcome Soldier, good to have you aboard! We're about to take you on a training programme so you know how to use this super weapon that we've created." href="{{ url('/dashboard') }}"></a>
+                                                <a class="fa fa-plus-circle triple" data-open="completed-status" aria-controls="completed-status" aria-haspopup="true"></a>
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                @endif
-                            </div>
-						</div>
-					</div>
+                                    @endif
+                                </div>
+    						</div>
+    					</div>
+                        <div class="secondary-nav hidden" style="">Lipsum
+                        </div>
+                    </nav>
 				</header>
             </div>
             @yield('content')
