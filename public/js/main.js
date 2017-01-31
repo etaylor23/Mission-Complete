@@ -151,7 +151,6 @@ function App() {
         }
 
         self.getMatchingSection = function getMatchingSection(id) {
-            debugger;
             var section = $("[name='"+ id +"']"),
             distFromTop = self.getDistanceFromTop(section, $('.title-bar').outerHeight());
             return distFromTop;
