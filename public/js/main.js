@@ -81,10 +81,6 @@ function App() {
         var self = this;
 
         function generateNav(dataLevel, navLevelContainer, afterAddActiveDone, afterRemoveActiveDone) {
-            //nav container selector
-            //data-levell selector
-            //cb?
-
             var navContainer = navLevelContainer,
                 navlinks = "";
 
@@ -102,51 +98,13 @@ function App() {
             navContainer.empty();
             navContainer.append(navlinks);
 
-                    var scrollTo = new ScrollTo();
-                    scrollTo.init(navLevelContainer.find('a'));
-        }
-
-
-        function primary() {
-
-            var mainNavContainer = $('.main-nav'),
-                mainNavlinks = "";
-
-            $('[data-level="primary"]').each(function() {
-                var el = $(this),
-                  className = el.attr('class');
-
-                mainNavlinks += '<a id="' + className + '" href="#' + className + '" class="global-spacing left">' + className.replace('-', ' ') + '</a>';
-
-                self.addActiveClass(el, mainNavContainer, className, function(el, elPosition) {
-                    var secondaryNav = $('.secondary-nav'),
-                        secondaryNavLinks = "";
-
-                    el.find('[data-level="secondary"]').each(function() {
-                        var navLink = $(this).find('h3').text()
-                        secondaryNavLinks += '<a id=' + navLink.replace(/ /g, '-').toLowerCase() + '>' + navLink + '</a>';
-                        self.addActiveClass($(this), secondaryNav, navLink.replace(/ /g, '-').toLowerCase())
-
-                    });
-                    secondaryNav.empty();
-                    secondaryNav.append(secondaryNavLinks);
-                    secondaryNav.removeClass('hidden');
-                    secondaryNav.css({'margin-top': 0});
-                    var scrollTo = new ScrollTo();
-                    scrollTo.init(secondaryNav.find('a'));
-
-                });
-
-
-            });
-
-            mainNavContainer.empty();
-            mainNavContainer.append(mainNavlinks);
+            var scrollTo = new ScrollTo();
+            scrollTo.init(navLevelContainer.find('a'));
         }
 
         self.addActiveClass = function addActiveClass(el, container, id, afterAddActiveDone, afterRemoveActiveDone) {
             var scrollTo = new ScrollTo(),
-                elPosition = scrollTo.getDistanceFromTop(el);
+                elPosition = scrollTo.getDistanceFromTop(el, $('.title-bar').outerHeight() + $('.secondary-nav').outerHeight());
 
             $(window).on('scroll', function() {
               var scrollTop = $(window).scrollTop();
@@ -156,11 +114,7 @@ function App() {
                       if(typeof afterAddActiveDone === 'function') {
                           afterAddActiveDone(el);
                       }
-                    //   if(container.hasClass('hidden')) {
-                    //       container.removeClass('hidden');
-                    //       container.css('margin-top', '0');
-                    //   }
-                      console.log('Fires once')
+                    //   console.log('Fires once')
                   }
 
               } else {
@@ -169,19 +123,13 @@ function App() {
                       if(typeof afterRemoveActiveDone === 'function') {
                           afterRemoveActiveDone(el, elPosition);
                       }
-                    //   if(!container.hasClass('hidden')) {
-                    //       container.addClass('hidden');
-                    //       container.css('margin-top', '-55px');
-                    //   }
                   }
 
               }
             })
         }
 
-
         return {
-            primary : primary,
             generateNav : generateNav
         }
     }
@@ -190,27 +138,22 @@ function App() {
         var self = this;
 
         function init(el) {
-            //for every anchor with data-nav-level - get the id
-            //call getMatchingSection with each id which will return the top and bottom for the matching id
-            //when the user scrolls between the top and bottom add an active class to that anchor
-            //find that anchors sub navigation - data-nav-level secondary with identical id and populate it with an object of anchors based on all .secondary that have identical id
-            //call event listeners on secondary nav links
             el.on('click', function(event) {
                 self.scrollToAnchor($(this).attr('id'));
             })
         }
 
-        self.getDistanceFromTop = function getDistanceFromTop(element) {
-            var top = element.offset().top - 110,
+        self.getDistanceFromTop = function getDistanceFromTop(element, furtherOffset) {
+            var top = element.offset().top - furtherOffset,
                 bottom = top + element.outerHeight();
 
             return { 'top' : top, 'bottom' : bottom }
-            //110 is the height of the fixed nav
         }
 
         self.getMatchingSection = function getMatchingSection(id) {
+            debugger;
             var section = $("[name='"+ id +"']"),
-            distFromTop = self.getDistanceFromTop(section);
+            distFromTop = self.getDistanceFromTop(section, $('.title-bar').outerHeight());
             return distFromTop;
         }
 
@@ -258,8 +201,17 @@ function App() {
         });
 
         var navigation = new Navigation();
-
-
+        /**
+        * Pass:
+        * - Sections to generate navigation from
+        * - Navigation container to append to
+        * - A callback for once the active class has been applied
+        * - A callback for once the active class has been removed
+        * - Hint: Pass one level of navigation down to child levels by nesting generateNav calls.
+        *       - The callback emits an el for context
+        *       - E.g. el in data-level primary will be our-mission or your-mission
+        *       - This can be used to build child navigation
+        */
         navigation.generateNav($('[data-level="primary"]'), $('.main-nav'), function(el) {
             navigation.generateNav(el.find('[data-level="secondary"]'), $('.secondary-nav'));
             $('.secondary-nav').removeClass('hidden').css({'margin-top':'0'});
@@ -268,10 +220,8 @@ function App() {
             $('.secondary-nav').addClass('hidden').css({'margin-top':'-55px'});
         })
 
-
         var transparenyModifier = new TransparencyModifier();
         transparenyModifier.init();
-
     }
 }
 

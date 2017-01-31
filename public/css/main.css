@@ -4476,6 +4476,9 @@ body h1 {
   margin-bottom: 40px;
   margin-top: 30px; }
 
+body ul li, body ol li {
+  text-align: initial; }
+
 body .white {
   color: #fefefe; }
 
