@@ -31,7 +31,7 @@
               </div>
 
                 <div class="columns small-12 medium-12 large-12">
-                    <div name="effort" data-level="secondary">
+                    <div name="effort-output-vs-feedback" data-level="secondary">
                         <div class="row">
                             <div class="column small-12 medium-4 large-4 text-center large-offset-4 global-spacing bottom">
                                 <h3>Effort Output vs Feedback</h3>
@@ -60,7 +60,7 @@
               </div>
 
               <div class="columns small-12 medium-12 large-12">
-                  <div name="acheivement" data-level="secondary">
+                  <div name="acheive-and-quantify" data-level="secondary">
                       <div class="row">
                           <div class="column small-12 medium-4 large-4 text-center large-offset-4 global-spacing bottom">
                               <h3>Acheive and Quantify</h3>
