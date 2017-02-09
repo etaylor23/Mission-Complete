@@ -30,7 +30,7 @@
 
                             <button data-step="5" data-intro="Here we can mark an objective as completed, you'll have to provide some proof of completion and come up with a maintenance plan." data-open="completed-status" type="button" name="button" class="button">Change Status</button>
 
-                            <div class="reveal" id="completed-status" data-reveal>
+                            <div class="reveal" id="completed-status" data-reveal data-animation-in="slide-in-down" data-animation-out="slide-out-down">
                               <h1>Completion Status:</h1>
                               @if($objective->done !== 1)
                                   {!! Form::model($objective, ['method' => 'PUT', 'action' => ['ObjectivesController@update', $campaign->slug, $mission->mission_slug, $objective->objective_slug]]) !!}
@@ -115,7 +115,6 @@
             </div>
         </div>
     </div>
-
 
 
 

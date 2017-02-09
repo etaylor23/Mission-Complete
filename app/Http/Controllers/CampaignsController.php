@@ -88,6 +88,8 @@ class CampaignsController extends Controller
         /*
          * Get all of the missions that are related to the current campaign
          * Returns: Array of unfiltered missions
+         * If: There are missions filter them into open and completed missions
+         * Else: set open and completed missions to null
          */
         if(!empty($campaign)) {
             $relatedMissions          = $campaign

@@ -90,7 +90,7 @@
           </div>
       </div>
       <div class="parallax-window" data-parallax="scroll" data-image-src="{{{ asset('images/old-planes.jpg') }}}"></div>
-      <div name="your-mission" class="your-mission" data-level="primary">
+      <!--<div name="your-mission" class="your-mission" data-level="primary">
           <div class="row">
               <div class="column small-12 medium-4 large-4 text-center large-offset-4 global-spacing top bottom">
                   <h2>Your Mission</h2>
@@ -188,7 +188,19 @@
               </div>
 
           </div>
-      </div>
+      </div>-->
+
+
+      <footer>
+          <div class="row">
+              <div class="small-12 medium-6 large-6 column">
+                  <strong>Mission Complete ©</strong>
+              </div>
+              <div class="small-12 medium-6 large-6 column">
+                  <a href="mailto:ellis.taylor499@gmail.com">Contact Us</a>
+              </div>
+          </div>
+      </footer>
     </div>
 
 </div>

@@ -28,6 +28,21 @@
         <script src="{{{ asset('js/parallax.js') }}}"></script>
         <script src="{{{ asset('js/main.js') }}}"></script>
 
+        <script src="{{{ asset('js/d3.v3.min.js') }}}"></script>
+        <script src="{{{ asset('js/d3pie.js') }}}"></script>
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-38672471-2', 'auto');
+          ga('send', 'pageview');
+
+        </script>
+
+
 
         <script type="text/javascript">
             if(window.location.pathname === '/') {
@@ -141,7 +156,9 @@
                                                     <a href="#" class="logout triple fa fa-sign-out"></a>
                                                 </form>
                                                 <a class="fa fa-tachometer triple" data-step="1" data-intro="Welcome Soldier, good to have you aboard! We're about to take you on a training programme so you know how to use this super weapon that we've created." href="{{ url('/dashboard') }}"></a>
-                                                <a class="fa fa-plus-circle triple" data-open="completed-status" aria-controls="completed-status" aria-haspopup="true"></a>
+                                                    @if (!str_contains(Route::current()->getUri(), 'objective'))
+                                                    <a class="fa fa-plus-circle triple" data-open="completed-status" aria-controls="completed-status" aria-haspopup="true"></a>
+                                                    @endif
                                                 @endif
                                             </div>
                                         </div>
@@ -155,8 +172,8 @@
 				</header>
             </div>
             @yield('content')
-        </div>
 
+        </div>
 
 
     </body>

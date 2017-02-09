@@ -100,12 +100,8 @@ class MissionsContoller extends Controller
              $relatedOpenObjectives      = $relatedObjectives
                                        ->where('done', 0);
 
-
-
              $relatedCompletedObjectives = $relatedObjectives
                                          ->where('done', 1);
-
-
 
          } else {
              $totalObjectives = 0;

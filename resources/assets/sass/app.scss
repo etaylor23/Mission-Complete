@@ -227,6 +227,19 @@ body {
             }
         }
     }
+
+    footer {
+        background: #807c79;
+        color: white;
+        height: 115px;
+        > div {
+            position: relative;
+            top: 45%;
+        }
+        a {
+            color: white;
+        }
+    }
 }
 
 

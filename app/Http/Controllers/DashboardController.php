@@ -27,6 +27,7 @@ class DashboardController extends Controller
         array_push($missions, $mission);
       }
 
+
       $nextMaintenceInstanceDate = Carbon::now()->addDays(1)->toDateString().' 00:00:00';
 
       return view('dashboard')
@@ -36,13 +37,13 @@ class DashboardController extends Controller
 
     }
 
+    /*
+    *   Update maintenance date for a particular objective
+    */
     public function maintenanceComplete($objective_slug) {
       $objective = Objective::all()->where('objective_slug', $objective_slug)->first();
       $alertDate = new Carbon($objective->next_maintenance_instance_date);
-      $resetDate = $alertDate->addDays(3)->toDateString().' 00:00:00';
-      /**
-      * The above should be aggressiontime
-      */
+      $resetDate = $alertDate->addDays($objective->maintenance_aggression)->toDateString().' 00:00:00';
       $objective->next_maintenance_instance_date = $resetDate;
       $objective->save();
       return redirect('dashboard');

@@ -13,7 +13,7 @@
                                             <li>I should build an eCommerce store as a side business in my spare time</li>
                                         </ul>
                                         If you think that the strokes are still too broad then its time to tell you about your objectives.">{{ $mission->name }}</h1>
-            <div class="reveal" id="completed-status" data-reveal>
+            <div class="reveal" id="completed-status" data-reveal data-animation-in="slide-in-down" data-animation-out="slide-out-down">
                 <div class="row">
                         {!! Form::open(['action' => 'ObjectivesController@store', 'class' => 'row']) !!}
                             <div class="column small-12 medium-12 large-12">

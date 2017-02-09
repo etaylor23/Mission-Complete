@@ -4645,6 +4645,16 @@ body .listing {
         body .listing > li > .card .summary .plan {
           margin-bottom: 20px; }
 
+body footer {
+  background: #807c79;
+  color: white;
+  height: 115px; }
+  body footer > div {
+    position: relative;
+    top: 45%; }
+  body footer a {
+    color: white; }
+
 .cover {
   position: absolute;
   top: 0;

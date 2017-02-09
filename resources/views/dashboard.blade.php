@@ -20,20 +20,11 @@
                                     {!! Form::text('name') !!}
                                 </div>
                                 <div class="column small-12 medium-12 large-12">
-                                    {!! Form::label('description', 'About this mission') !!}
+                                    {!! Form::label('description', 'About this campaign') !!}
                                     {!! Form::textarea('description', null, ['size' => '30x5']) !!}
                                 </div>
-                                <div class="column small-12 medium-12 large-12">
-                                    <p>Create as a completed campaign?</p>
-                                </div>
-                                <div class="column small-12 medium-1 large-1">
-                                    {!! Form::label('done', 'Yes') !!}
-                                    {!! Form::radio('done', '1', true) !!}
-                                </div>
-                                <div class="column small-12 medium-1 large-1">
-                                    {!! Form::label('done', 'No') !!}
-                                    {!! Form::radio('done', '0', true) !!}
-                                </div>
+
+                                    {!! Form::hidden('done', '0') !!}
                                 <div class="column small-12 medium-4 large-4">
                                     {!! Form::submit('Create new campaign', ['class' => 'button']) !!}
                                 </div>
