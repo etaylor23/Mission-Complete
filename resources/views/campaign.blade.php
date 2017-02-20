@@ -149,7 +149,7 @@
         .link {
           fill: none;
           stroke: #ccc;
-          stroke-width: 1.5px;
+          stroke-width: 3.5px;
         }
 
         </style>
