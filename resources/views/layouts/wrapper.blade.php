@@ -28,7 +28,7 @@
         <script src="{{{ asset('js/parallax.js') }}}"></script>
         <script src="{{{ asset('js/main.js') }}}"></script>
 
-        <script src="{{{ asset('js/d3.v3.min.js') }}}"></script>
+        <script src="{{{ asset('js/d3.js') }}}"></script>
         <script src="{{{ asset('js/d3pie.js') }}}"></script>
 
         <script>

@@ -7,6 +7,8 @@ use Request;
 use Auth;
 use App\URLParser\URLParserMain;
 use App\AssetCreatedDate\AssetCreatedDateCore;
+use Illuminate\Support\Facades\Route;
+
 
 class MissionsContoller extends Controller
 {
@@ -109,6 +111,16 @@ class MissionsContoller extends Controller
              $relatedCompletedObjectives = null;
          }
 
+         $requestType = Route::getCurrentRoute()->getPath();
+
+         if (strpos($requestType, 'api') !== false) {
+             header("Content-Type: application/json");
+             return array(
+                 'mission' => $mission,
+                 'campaign' => $campaign,
+                 'relatedObjectives' => $relatedObjectives,
+                 'timeSinceCreation' => $assetCreatedRelative);
+         }
 
         if(is_null($mission)) {
            return view('404')->with('notFoundType', 'mission');

@@ -383,7 +383,7 @@ body {
   font-weight: normal;
   line-height: 1.5;
   color: #0a0a0a;
-  background: #e9e8e4;
+  background: #fefefe;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
@@ -2102,7 +2102,7 @@ legend {
   padding: 1.25rem;
   margin: 1.125rem 0; }
   .fieldset legend {
-    background: #e9e8e4;
+    background: #fefefe;
     padding: 0 0.1875rem;
     margin: 0;
     margin-left: -0.1875rem; }
@@ -2535,21 +2535,21 @@ select {
   border-radius: 0;
   position: relative;
   color: #0a0a0a;
-  background-color: rgba(242, 255, 233, 0.75); }
+  background-color: #e9e9e9; }
   .callout > :first-child {
     margin-top: 0; }
   .callout > :last-child {
     margin-bottom: 0; }
   .callout.primary {
-    background-color: #f2ffe9; }
+    background-color: #173701; }
   .callout.secondary {
-    background-color: #f7faf3; }
+    background-color: #5b7632; }
   .callout.success {
-    background-color: #f5fdf8; }
+    background-color: #3adb76; }
   .callout.warning {
-    background-color: #fffbf2; }
+    background-color: #ffae00; }
   .callout.alert {
-    background-color: #fef7f5; }
+    background-color: #ec5840; }
   .callout.small {
     padding-top: 0.5rem;
     padding-right: 0.5rem;
@@ -2759,7 +2759,7 @@ select {
   margin-right: 0.75rem; }
 
 .dropdown-pane {
-  background-color: #e9e8e4;
+  background-color: #fefefe;
   border: 1px solid #cacaca;
   border-radius: 0;
   display: block;
@@ -3113,7 +3113,7 @@ body {
 .off-canvas-content,
 .off-canvas-content {
   min-height: 100%;
-  background: #e9e8e4;
+  background: #fefefe;
   transition: transform 0.5s ease;
   backface-visibility: hidden;
   z-index: 1;
@@ -4483,7 +4483,6 @@ body .white {
   color: #fefefe; }
 
 body .callout {
-  border-radius: 6px;
   box-shadow: 0 10px 6px -6px #777; }
 
 body .hidden {
@@ -4640,8 +4639,12 @@ body .listing {
         position: absolute; }
       body .listing > li > .card .summary {
         margin-left: 10px;
-        top: 15px;
-        position: relative; }
+        padding-top: 14px;
+        position: relative;
+        padding-bottom: 14px;
+        transition: all 0.3s ease; }
+        body .listing > li > .card .summary:hover {
+          margin-left: 17px; }
         body .listing > li > .card .summary .plan {
           margin-bottom: 20px; }
 

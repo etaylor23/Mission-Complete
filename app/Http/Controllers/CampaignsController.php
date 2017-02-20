@@ -7,6 +7,8 @@ use App\Mission;
 use Auth;
 use Request;
 use App\AssetCreatedDate\AssetCreatedDateCore;
+use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -85,6 +87,27 @@ class CampaignsController extends Controller
                     ->where('slug', $slug)
                     ->first();
 
+        $campaignArr = $campaign
+                        ->toArray();
+
+
+        $everything = Auth::user()
+                    ->Campaign
+                    ->where('slug', $slug)
+                    ->first()
+                    ->Mission;
+
+
+        $campaignArr['children'] = [];
+        foreach ($everything as $index => $mission) {
+            $testMission = $everything[$index]->toArray();
+            $testMission['children'] = $everything[$index]->Objective->toArray();
+
+            array_push($campaignArr['children'], $testMission);
+        }
+
+
+
         /*
          * Get all of the missions that are related to the current campaign
          * Returns: Array of unfiltered missions
@@ -128,6 +151,19 @@ class CampaignsController extends Controller
 
         $assetCreated = new AssetCreatedDateCore();
         $assetCreatedRelative = $assetCreated->AssetCreatedRelative($campaign->created_at);
+
+
+
+
+        $requestType = Route::getCurrentRoute()->getPath();
+        if (strpos($requestType, 'api') !== false) {
+            header("Content-Type: application/json");
+            return array(
+                'campaign' => $campaignArr,
+                'relatedMissions' => $relatedMissions,
+                'timeSinceCreation' => $assetCreatedRelative,
+                'missionClosestToCompletion' => $missionClosestToCompletion);
+        }
 
         return view('campaign')
                 ->with('campaign', $campaign)

@@ -94,39 +94,34 @@
     <div data-step="6" data-intro="Here are all of the objectives in this mission, but what are objectives? Well, they're the nuts and bolts behind this super weapon. Lets take a look at them together." class="row">
         <div class="column small-12 medium-6 large-6">
             <div class="callout">
-                <h2>Open objectives</h2>
+                <h2>Objectives</h2>
                 <ul class="open-objectives listing">
                     @foreach ($relatedObjectives as $objective)
-                        @if($objective->done !== 1)
                             <li>
                                 <div class="card">
                                     <div class="summary">
                                         <a href="/campaign/{{$objective->Mission->Campaign->slug}}/mission/{{$objective->mission->mission_slug}}/objective/{{$objective->objective_slug}}">{{ $objective->name }}</a>
+                                        @if($objective->done === 1)
+                                            <span class="awesome double"></span>
+                                        @endif
                                     </div>
                                 </div>
                             </li>
-                        @endif
                     @endforeach
                 </ul>
             </div>
         </div>
         <div class="column small-12 medium-6 large-6">
             <div class="callout">
-                <h2>Completed objectives</h2>
-                <ul class="completed-objectives listing">
-                  @foreach ($relatedObjectives as $objective)
-                      @if($objective->done === 1)
-                          <li>
-                              <div class="card">
-                                  <div class="summary">
-                                      <a href="/campaign/{{$objective->Mission->Campaign->slug}}/mission/{{$objective->mission->mission_slug}}/objective/{{$objective->objective_slug}}">{{ $objective->name }}</a>
-                                  </div>
-                              </div>
-                          </li>
-                      @endif
-                  @endforeach
-                </ul>
+                <h2>Completed</h2>
+                <div id="pie"></div>
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column small-12 medium-12 large-6">
+            <div class="callout" id="pie"></div>
         </div>
     </div>
 

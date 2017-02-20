@@ -21,9 +21,13 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('dashboard', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
 
-    //Route::get('dashboard', 'DashboardController@index');
+    Route::resource('api/campaign', 'CampaignsController');
     Route::resource('campaign', 'CampaignsController');
+
+
+    Route::resource('api/campaign.mission', 'MissionsContoller');
     Route::resource('campaign.mission', 'MissionsContoller');
+
     Route::resource('campaign.mission.objective', 'ObjectivesController');
 
 

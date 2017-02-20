@@ -1,71 +1,306 @@
 {
- "name": "I want to earn more money",
- "children": [
-  {
-   "name": "I need to work towards the open management role",
-   "children": [
-    {
-     "name": "Learn management 101"
-    },
-    {
-     "name": "Learn agile"
-    },
-    {
-     "name": "Write a new CV"
-    }
-   ]
-  },
-  {
-   "name": "I should create a portfolio site to promote part time free lance work",
-   "children": [
-    {"name": "Easing", "size": 17010},
-    {"name": "FunctionSequence", "size": 5842},
-    {
-     "name": "interpolate",
-     "children": [
-      {"name": "ArrayInterpolator", "size": 1983},
-      {"name": "ColorInterpolator", "size": 2047},
-      {"name": "DateInterpolator", "size": 1375},
-      {"name": "Interpolator", "size": 8746},
-      {"name": "MatrixInterpolator", "size": 2202},
-      {"name": "NumberInterpolator", "size": 1382},
-      {"name": "ObjectInterpolator", "size": 1629},
-      {"name": "PointInterpolator", "size": 1675},
-      {"name": "RectangleInterpolator", "size": 2042}
-     ]
-    },
-    {"name": "ISchedulable", "size": 1041},
-    {"name": "Parallel", "size": 5176},
-    {"name": "Pause", "size": 449},
-    {"name": "Scheduler", "size": 5593},
-    {"name": "Sequence", "size": 5534},
-    {"name": "Transition", "size": 9201},
-    {"name": "Transitioner", "size": 19975},
-    {"name": "TransitionEvent", "size": 1116},
-    {"name": "Tween", "size": 6006}
-   ]
-  },
-  {
-   "name": "I should build an online app that connects recruitment candidates to companies",
-   "children": [
-    {
-     "name": "I should build an online app that connects recruitment candidates to companies",
-     "children": [
-      {"name": "Converters", "size": 721},
-      {"name": "DelimitedTextConverter", "size": 4294},
-      {"name": "GraphMLConverter", "size": 9800},
-      {"name": "IDataConverter", "size": 1314},
-      {"name": "JSONConverter", "size": 2220}
-     ]
-    },
-    {"name": "DataField", "size": 1759},
-    {"name": "DataSchema", "size": 2165},
-    {"name": "DataSet", "size": 586},
-    {"name": "DataSource", "size": 3331},
-    {"name": "DataTable", "size": 772},
-    {"name": "DataUtil", "size": 3322}
-   ]
-  }
+    "campaign":{
+        "id":14,
+        "user_id":12,
+        "percent_complete":75,
+        "name":"I want to earn more money",
+        "slug":"i-want-to-earn-more-money",
+        "description":"I've been earning the same wage for 4 years now, its time to start improving that!",
+        "done":0,
+        "created_at":"2017-02-02 09:06:58",
+        "updated_at":"2017-02-02 09:06:58",
+        "children":[
+            {
+                "id":15,
+                "campaign_id":14,
+                "percent_complete":100,
+                "name":"I need to work towards the open management role",
+                "mission_slug":"i-need-to-work-towards-the-open-management-role",
+                "description":"There is currently a vacant HR management role at GKHL that I could fill",
+                "done":0,
+                "created_at":"2017-02-06 18:15:49",
+                "updated_at":"2017-02-06 18:15:49",
+                "children":[
+                    {
+                        "id":7,
+                        "mission_id":15,
+                        "name":"Write a new CV",
+                        "description":"",
+                        "proof_of_completion":"Test",
+                        "maintenance_plan":"Test",
+                        "maintenance_aggression":1,
+                        "maintenance_length":"2018-01-01 00:00:00",
+                        "next_maintenance_instance_date":"2017-02-08 00:00:00",
+                        "done":1,
+                        "objective_slug":"write-a-new-cv",
+                        "created_at":"2017-02-06 18:25:40",
+                        "updated_at":"2017-02-14 18:11:10"
+                    },
+                    {
+                        "id":8,
+                        "mission_id":15,
+                        "name":"Learn management 101",
+                        "description":"",
+                        "proof_of_completion":"Test",
+                        "maintenance_plan":"Test",
+                        "maintenance_aggression":1,
+                        "maintenance_length":"2018-01-01 00:00:00",
+                        "next_maintenance_instance_date":"2017-02-10 00:00:00",
+                        "done":1,
+                        "objective_slug":"learn-management-101",
+                        "created_at":"2017-02-06 18:26:15",
+                        "updated_at":"2017-02-09 22:56:18"
+                    },
+                    {
+                        "id":9,
+                        "mission_id":15,
+                        "name":"Learn agile",
+                        "description":"",
+                        "proof_of_completion":"Test",
+                        "maintenance_plan":"Test",
+                        "maintenance_aggression":1,
+                        "maintenance_length":"2018-01-01 00:00:00",
+                        "next_maintenance_instance_date":"2017-02-10 00:00:00",
+                        "done":1,
+                        "objective_slug":"learn-agile",
+                        "created_at":"2017-02-06 18:26:25",
+                        "updated_at":"2017-02-09 22:56:02"
+                    }
+                ]
+            },
+            {
+                "id":16,
+                "campaign_id":14,
+                "percent_complete":50,
+                "name":"I should create a portfolio site to promote part time free lance work",
+                "mission_slug":"i-should-create-a-portfolio-site-to-promote-part-time-free-lance-work",
+                "description":"I have too much spare time that I could put to good use. I can use this time to do part time contracting work to help build experience.",
+                "done":0,
+                "created_at":"2017-02-06 18:17:18",
+                "updated_at":"2017-02-06 18:17:18",
+                "children":[
+                    {
+                        "id":10,
+                        "mission_id":16,
+                        "name":"I should find a good hosting provided",
+                        "description":"I should find a good hosting provided",
+                        "proof_of_completion":"Test",
+                        "maintenance_plan":"Test",
+                        "maintenance_aggression":1,
+                        "maintenance_length":"2018-01-01 00:00:00",
+                        "next_maintenance_instance_date":"2017-02-17 00:00:00",
+                        "done":1,
+                        "objective_slug":"i-should-find-a-good-hosting-provided",
+                        "created_at":"2017-02-09 22:50:27",
+                        "updated_at":"2017-02-16 08:12:23"
+                    },
+                    {
+                        "id":11,
+                        "mission_id":16,
+                        "name":"Find a web designer",
+                        "description":"Find a web designer",
+                        "proof_of_completion":null,
+                        "maintenance_plan":null,
+                        "maintenance_aggression":null,
+                        "maintenance_length":null,
+                        "next_maintenance_instance_date":null,
+                        "done":0,
+                        "objective_slug":"find-a-web-designer",
+                        "created_at":"2017-02-09 22:51:03",
+                        "updated_at":"2017-02-09 22:51:03"
+                    }
+                ]
+            },
+            {
+                "id":17,
+                "campaign_id":14,
+                "percent_complete":null,
+                "name":"I should build an online app that connects recruitment candidates to companies",
+                "mission_slug":"i-should-build-an-online-app-that-connects-recruitment-candidates-to-companies",
+                "description":"A side project would be to build an online application that people can use to link themselves with new companies",
+                "done":0,
+                "created_at":"2017-02-06 18:19:42",
+                "updated_at":"2017-02-06 18:19:42",
+                "children":[
 
- ]
+                ]
+            }
+        ]
+    },
+    "relatedMissions":[
+        {
+            "id":15,
+            "campaign_id":14,
+            "percent_complete":100,
+            "name":"I need to work towards the open management role",
+            "mission_slug":"i-need-to-work-towards-the-open-management-role",
+            "description":"There is currently a vacant HR management role at GKHL that I could fill",
+            "done":0,
+            "created_at":"2017-02-06 18:15:49",
+            "updated_at":"2017-02-06 18:15:49",
+            "objective":[
+                {
+                    "id":7,
+                    "mission_id":15,
+                    "name":"Write a new CV 2",
+                    "description":"",
+                    "proof_of_completion":"Test",
+                    "maintenance_plan":"Test",
+                    "maintenance_aggression":1,
+                    "maintenance_length":"2018-01-01 00:00:00",
+                    "next_maintenance_instance_date":"2017-02-08 00:00:00",
+                    "done":1,
+                    "objective_slug":"write-a-new-cv",
+                    "created_at":"2017-02-06 18:25:40",
+                    "updated_at":"2017-02-14 18:11:10"
+                },
+                {
+                    "id":8,
+                    "mission_id":15,
+                    "name":"Learn management 101",
+                    "description":"",
+                    "proof_of_completion":"Test",
+                    "maintenance_plan":"Test",
+                    "maintenance_aggression":1,
+                    "maintenance_length":"2018-01-01 00:00:00",
+                    "next_maintenance_instance_date":"2017-02-10 00:00:00",
+                    "done":1,
+                    "objective_slug":"learn-management-101",
+                    "created_at":"2017-02-06 18:26:15",
+                    "updated_at":"2017-02-09 22:56:18"
+                },
+                {
+                    "id":9,
+                    "mission_id":15,
+                    "name":"Learn agile",
+                    "description":"",
+                    "proof_of_completion":"Test",
+                    "maintenance_plan":"Test",
+                    "maintenance_aggression":1,
+                    "maintenance_length":"2018-01-01 00:00:00",
+                    "next_maintenance_instance_date":"2017-02-10 00:00:00",
+                    "done":1,
+                    "objective_slug":"learn-agile",
+                    "created_at":"2017-02-06 18:26:25",
+                    "updated_at":"2017-02-09 22:56:02"
+                }
+            ]
+        },
+        {
+            "id":16,
+            "campaign_id":14,
+            "percent_complete":50,
+            "name":"I should create a portfolio site to promote part time free lance work",
+            "mission_slug":"i-should-create-a-portfolio-site-to-promote-part-time-free-lance-work",
+            "description":"I have too much spare time that I could put to good use. I can use this time to do part time contracting work to help build experience.",
+            "done":0,
+            "created_at":"2017-02-06 18:17:18",
+            "updated_at":"2017-02-06 18:17:18",
+            "objective":[
+                {
+                    "id":10,
+                    "mission_id":16,
+                    "name":"I should find a good hosting provided",
+                    "description":"I should find a good hosting provided",
+                    "proof_of_completion":"Test",
+                    "maintenance_plan":"Test",
+                    "maintenance_aggression":1,
+                    "maintenance_length":"2018-01-01 00:00:00",
+                    "next_maintenance_instance_date":"2017-02-17 00:00:00",
+                    "done":1,
+                    "objective_slug":"i-should-find-a-good-hosting-provided",
+                    "created_at":"2017-02-09 22:50:27",
+                    "updated_at":"2017-02-16 08:12:23"
+                },
+                {
+                    "id":11,
+                    "mission_id":16,
+                    "name":"Find a web designer",
+                    "description":"Find a web designer",
+                    "proof_of_completion":null,
+                    "maintenance_plan":null,
+                    "maintenance_aggression":null,
+                    "maintenance_length":null,
+                    "next_maintenance_instance_date":null,
+                    "done":0,
+                    "objective_slug":"find-a-web-designer",
+                    "created_at":"2017-02-09 22:51:03",
+                    "updated_at":"2017-02-09 22:51:03"
+                }
+            ]
+        },
+        {
+            "id":17,
+            "campaign_id":14,
+            "percent_complete":null,
+            "name":"I should build an online app that connects recruitment candidates to companies",
+            "mission_slug":"i-should-build-an-online-app-that-connects-recruitment-candidates-to-companies",
+            "description":"A side project would be to build an online application that people can use to link themselves with new companies",
+            "done":0,
+            "created_at":"2017-02-06 18:19:42",
+            "updated_at":"2017-02-06 18:19:42",
+            "objective":[
+
+            ]
+        }
+    ],
+    "timeSinceCreation":"2 weeks ago",
+    "missionClosestToCompletion":{
+        "id":15,
+        "campaign_id":14,
+        "percent_complete":100,
+        "name":"I need to work towards the open management role",
+        "mission_slug":"i-need-to-work-towards-the-open-management-role",
+        "description":"There is currently a vacant HR management role at GKHL that I could fill",
+        "done":0,
+        "created_at":"2017-02-06 18:15:49",
+        "updated_at":"2017-02-06 18:15:49",
+        "objective":[
+            {
+                "id":7,
+                "mission_id":15,
+                "name":"Write a new CV",
+                "description":"",
+                "proof_of_completion":"Test",
+                "maintenance_plan":"Test",
+                "maintenance_aggression":1,
+                "maintenance_length":"2018-01-01 00:00:00",
+                "next_maintenance_instance_date":"2017-02-08 00:00:00",
+                "done":1,
+                "objective_slug":"write-a-new-cv",
+                "created_at":"2017-02-06 18:25:40",
+                "updated_at":"2017-02-14 18:11:10"
+            },
+            {
+                "id":8,
+                "mission_id":15,
+                "name":"Learn management 101",
+                "description":"",
+                "proof_of_completion":"Test",
+                "maintenance_plan":"Test",
+                "maintenance_aggression":1,
+                "maintenance_length":"2018-01-01 00:00:00",
+                "next_maintenance_instance_date":"2017-02-10 00:00:00",
+                "done":1,
+                "objective_slug":"learn-management-101",
+                "created_at":"2017-02-06 18:26:15",
+                "updated_at":"2017-02-09 22:56:18"
+            },
+            {
+                "id":9,
+                "mission_id":15,
+                "name":"Learn agile",
+                "description":"",
+                "proof_of_completion":"Test",
+                "maintenance_plan":"Test",
+                "maintenance_aggression":1,
+                "maintenance_length":"2018-01-01 00:00:00",
+                "next_maintenance_instance_date":"2017-02-10 00:00:00",
+                "done":1,
+                "objective_slug":"learn-agile",
+                "created_at":"2017-02-06 18:26:25",
+                "updated_at":"2017-02-09 22:56:02"
+            }
+        ]
+    }
 }

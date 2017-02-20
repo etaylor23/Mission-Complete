@@ -8,11 +8,11 @@
 
 /// Default background color.
 /// @type Color
-$callout-background: $white !default;
+$callout-background: $lightGrey;
 
 /// Default fade value for callout backgrounds.
 /// @type Number
-$callout-background-fade: 85% !default;
+$callout-background-fade: 0%;
 
 /// Default border style for callouts.
 /// @type List

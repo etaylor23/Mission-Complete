@@ -31,7 +31,6 @@ body {
         color: $white;
     }
     .callout {
-        border-radius:6px;
         box-shadow: 0 10px 6px -6px #777;
     }
     .hidden {
@@ -218,8 +217,13 @@ body {
                 }
                 .summary {
                     margin-left: 10px;
-                    top: 15px;
+                    padding-top: 14px;
                     position: relative;
+                    padding-bottom: 14px;
+                    transition: all 0.3s ease;
+                    &:hover {
+                        margin-left: 17px;
+                    }
                     .plan {
                         margin-bottom:20px;
                     }
