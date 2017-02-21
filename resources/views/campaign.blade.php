@@ -86,7 +86,7 @@
         </div>
 
         <div data-step="7" data-intro="Here you can see all of your missions for this campaign, lets look at a mission together right now." class="row">
-            <div class="column small-12 medium-6 large-6">
+            <div class="column small-12 medium-8 large-8">
                 <div class="callout">
                     <h2>Missions</h2>
                     <ul class="open-missions listing">
@@ -108,7 +108,7 @@
                 </div>
             </div>
 
-            <div class="column small-12 medium-6 large-6">
+            <div class="column small-12 medium-4 large-4">
                 <div class="callout">
                     <h2>Complete</h2>
                         <div id="pie"></div>
@@ -116,7 +116,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row tree-container">
             <div class="column small-12 medium-12 large-12">
                 <div class="callout tree">
                 </div>
