@@ -38,9 +38,9 @@ body {
     }
     .expand {
         cursor:pointer;
-        position: absolute;
-        right: 24px;
-        top: -6px;
+        float: right;
+        margin-right: 10px;
+        margin-top: -8px;
         background: #5b7632;
         border-radius: 5px;
         font-size: 1.4em;
@@ -211,7 +211,7 @@ body {
                 }
                 .maintenance-complete {
                     display: block;
-                    right: 24px;
+                    right: 12px;
                     bottom: 0;
                     position: absolute;
                 }
@@ -226,6 +226,11 @@ body {
                     }
                     .plan {
                         margin-bottom:20px;
+                    }
+                    span.awesome {
+                        float: right;
+                        margin-top: -10px;
+                        margin-right: 15px;
                     }
                 }
             }

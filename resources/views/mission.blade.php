@@ -92,7 +92,7 @@
     </div>
 
     <div data-step="6" data-intro="Here are all of the objectives in this mission, but what are objectives? Well, they're the nuts and bolts behind this super weapon. Lets take a look at them together." class="row">
-        <div class="column small-12 medium-6 large-6">
+        <div class="column small-12 medium-6 large-8">
             <div class="callout">
                 <h2>Objectives</h2>
                 <ul class="open-objectives listing">
@@ -111,7 +111,7 @@
                 </ul>
             </div>
         </div>
-        <div class="column small-12 medium-6 large-6">
+        <div class="column small-12 medium-6 large-4">
             <div class="callout">
                 <h2>Completed</h2>
                 <div id="pie"></div>
@@ -119,11 +119,7 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="column small-12 medium-12 large-6">
-            <div class="callout" id="pie"></div>
-        </div>
-    </div>
+
 
 
     @else

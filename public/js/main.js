@@ -176,26 +176,62 @@ function App() {
             }).done(function(data) {
                 var totalPie = 100,
                     type = data.mission || data.campaign,
-                    incomplete = totalPie - type.percent_complete;
+                    incomplete = totalPie - type.percent_complete,
+                    children =  type.objective || type.children,
+                    pieId = 'pie';
 
-                var pie = new d3pie("pie", {
-                    header: {
-                        //title: {
-                        //  text: $('h1').text()
-                        //},
-                        location: "pie-center"
-                    },
-                    size: {
-                        pieInnerRadius: "50%"
-                    },
-                    data: {
-                        sortOrder: "label-asc",
-                        content: [
-                          { label: "Complete", value: type.percent_complete},
-                          { label: "Incomplete", value: incomplete},
-                        ]
-                    }
-                });
+                if(children.length > 0) {
+                    var pie = new d3pie(pieId, {
+                        header: {
+                            //title: {
+                            //  text: $('h1').text()
+                            //},
+                            location: "pie-center"
+                        },
+                        size: {
+                            pieInnerRadius: "50%",
+                            canvasHeight: 300,
+                            canvasWidth: 340
+                        },
+                        data: {
+                            sortOrder: "label-asc",
+                            content: [
+                              { label: "Complete", value: type.percent_complete},
+                              { label: "Incomplete", value: incomplete},
+                            ]
+                        },
+                        labels: {
+                    		outer: {
+                    			format: "none",
+                    			pieDistance: 32
+                    		},
+                    		inner: {
+                    			format: "label-percentage2",
+                    			hideWhenLessThanPercentage: 3
+                    		},
+                    		mainLabel: {
+                    			fontSize: 11
+                    		},
+                    		percentage: {
+                    			color: "#ffffff",
+                    			decimalPlaces: 0
+                    		},
+                    		value: {
+                    			color: "#adadad",
+                    			fontSize: 11
+                    		},
+                    		lines: {
+                    			enabled: true
+                    		},
+                    		truncation: {
+                    			enabled: true
+                    		}
+                    	}
+                    });
+                } else {
+                    debugger;
+                    $('#'+pieId).html('We\'ll build your report as you add new missions and objectives');
+                }
             })
         }
 
@@ -289,6 +325,7 @@ function App() {
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         d3.json('/api' + window.location.pathname, function(error, flare) {
+
           if (error) throw error;
 
           root = flare.campaign;
@@ -303,8 +340,14 @@ function App() {
             }
           }
 
-          root.children.forEach(collapse);
-          update(root);
+          debugger;
+          if(root.children.length > 1) {
+              root.children.forEach(collapse);
+              update(root);
+          } else {
+              debugger;
+              $('.tree-container').remove();
+          }
         });
 
         d3.select(self.frameElement).style("height", "800px");

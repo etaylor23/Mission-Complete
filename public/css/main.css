@@ -4490,9 +4490,9 @@ body .hidden {
 
 body .expand {
   cursor: pointer;
-  position: absolute;
-  right: 24px;
-  top: -6px;
+  float: right;
+  margin-right: 10px;
+  margin-top: -8px;
   background: #5b7632;
   border-radius: 5px;
   font-size: 1.4em;
@@ -4634,7 +4634,7 @@ body .listing {
         border-radius: 5px; }
       body .listing > li > .card .maintenance-complete {
         display: block;
-        right: 24px;
+        right: 12px;
         bottom: 0;
         position: absolute; }
       body .listing > li > .card .summary {
@@ -4647,6 +4647,10 @@ body .listing {
           margin-left: 17px; }
         body .listing > li > .card .summary .plan {
           margin-bottom: 20px; }
+        body .listing > li > .card .summary span.awesome {
+          float: right;
+          margin-top: -10px;
+          margin-right: 15px; }
 
 body footer {
   background: #807c79;
