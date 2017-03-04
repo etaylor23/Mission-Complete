@@ -59,14 +59,18 @@
             </div>
             <div class="columns small-12 medium-3 large-3">
                 <div data-step="4" data-intro="This pane shows you how complete your campaign is, based on all of its missions and objectives." class="callout">
-                    @if(count($relatedMissions) === 0)
-                        <strong>You have no missions in this campaign, create one now</strong>
-                    @else
+                    @if(count($relatedMissions) !== 0 && $campaign->percent_complete !== null)
                         <div class="percent-complete text-center">
                             <div>{{ $campaign->name }} is:</div>
                             <div><strong>{{$campaign->percent_complete}}%</strong></div>
                             <div>complete</div>
                         </div>
+                    @else
+                        @if($campaign->percent_complete === null)
+                            <strong>Now just create an objective for your new mission</strong>
+                        @else
+                            <strong>You have no missions in this campaign, create one now</strong>
+                        @endif
                     @endif
                 </div>
             </div>
