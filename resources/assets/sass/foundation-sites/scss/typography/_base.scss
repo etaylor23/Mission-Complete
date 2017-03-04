@@ -121,7 +121,7 @@ $code-padding: rem-calc(2 5 1) !default;
 
 /// Default color for links.
 /// @type Color
-$anchor-color: $primary-color !default;
+$anchor-color: $anchorColor;
 
 /// Default color for links on hover.
 /// @type Color

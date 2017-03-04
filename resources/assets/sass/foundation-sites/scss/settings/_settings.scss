@@ -49,8 +49,8 @@ $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: $darkGreen,
-  secondary: $lightGreen,
+  primary: $textColor,
+  secondary: $textColor,
   success: #3adb76,
   warning: #ffae00,
   alert: #ec5840,
@@ -60,7 +60,7 @@ $medium-gray: #cacaca;
 $dark-gray: #8a8a8a;
 $black: #0a0a0a;
 $white: #fefefe;
-$body-background: $lightGrey;
+$body-background: $bodyBackgroundColor;
 $body-font-color: $black;
 $body-font-family: 'Roboto Condensed', sans-serif;
 $body-antialiased: true;
@@ -124,7 +124,7 @@ $header-sizes: (
     'h6': 16,
   ),
 );
-$header-color: $darkGreen;
+$header-color: $textColor;
 $header-lineheight: 1.4;
 $header-margin-bottom: 0.5rem;
 $header-text-rendering: optimizeLegibility;
@@ -139,7 +139,7 @@ $code-font-weight: $global-weight-normal;
 $code-background: $light-gray;
 $code-border: 1px solid $medium-gray;
 $code-padding: rem-calc(2 5 1);
-$anchor-color: $darkGreen;
+$anchor-color: $anchorColor;
 $anchor-color-hover: scale-color($anchor-color, $lightness: -14%);
 $anchor-text-decoration: none;
 $anchor-text-decoration-hover: none;
@@ -238,8 +238,8 @@ $breadcrumbs-item-slash: true;
 $button-padding: 0.85em 1em;
 $button-margin: none;
 $button-fill: solid;
-$button-background: $lightGreen;
-$button-background-hover: scale-color($lightGreen, $lightness: -45%);
+$button-background: $hintColor;
+$button-background-hover: scale-color($hintColor, $lightness: -45%);
 $button-color: $white;
 $button-color-alt: $black;
 $button-radius: $global-radius;
@@ -264,7 +264,7 @@ $buttongroup-expand-max: 6;
 // 13. Callout
 // -----------
 
-$callout-background: $darkGreenTransparent;
+$callout-background: $hintColor;
 $callout-background-fade: 95%;
 $callout-border: 1px solid rgba($black, 0.25);
 $callout-margin: 0 0 1rem 0;

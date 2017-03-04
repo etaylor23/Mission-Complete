@@ -37,13 +37,74 @@
 // $panel-default-heading-bg: #fff;
 
 /*
- * Camouflague greens from light to dark
+ * Green scheme
  */
 
+// $currentBackgroundColor: #CFDBC5;
+// $currentNavigationBackgroundColor: #807c79;
+// $currentTextColour: rgb(23, 55, 1);
+// $currentTextColorActive: #fff;
+// $currentAnchorColor: rgb(23, 55, 1);
+// $currentHintColor: rgb(23, 55, 1);
+// $currentTopLevelPaneHeaderBackgroundColor: #807c79;
+// $currentTopLevelPaneBodyBackgroundColor: #e9e9e9;
+// $currentTopLevelPaneBorderColor: #fff;
+// $currentSecondLevelPaneHeaderBackgroundColor: #807c79;
+// // $currentThirdLevelPaneHeaderBackgroundColor: #000 //Not currently set
+// $currentThirdLevelPaneBodyBackgroundColor: #c2baaf;
+// $titleBarOffset: #807c79;
+// $currentPlanBackGroundColor: #CFDBC5;
 
-$darkGreen: rgb(23, 55, 1);
-$darkGreenTransparent:  rgba(23, 55, 1, 0.75);
-$lightGreen: #5b7632;
-$lightGrey: #e9e9e9;
-$lightNeutral: #c2baaf;
-$darkNeutral: #807c79;
+
+
+/* Cobalt Blue Scheme */
+$currentBackgroundColor: #6091D5;
+$currentNavigationBackgroundColor: #204980;
+$currentTextColour: #fff;
+$currentTextColorActive: #fff;
+$currentAnchorColor: #fff;
+$currentHintColor: #002F6F;
+$currentTopLevelPaneHeaderBackgroundColor: #002F6F;
+$currentTopLevelPaneBodyBackgroundColor: #0048AB;
+$currentTopLevelPaneBorderColor: #fff;
+$currentSecondLevelPaneHeaderBackgroundColor: #002F6F;
+// $currentThirdLevelPaneHeaderBackgroundColor: #000 //Not currently set
+$currentThirdLevelPaneBodyBackgroundColor: #204980;
+$titleBarOffset: #807c79;
+$currentPlanBackGroundColor: #6091D5;
+
+
+
+/* Types of coloured elements */
+$bodyBackgroundColor: $currentBackgroundColor;
+$navigationBackgroundColor: $currentNavigationBackgroundColor;
+$textColor: $currentTextColour;
+$textColorActive: $currentTextColorActive;
+$anchorColor: $currentAnchorColor;
+$hintColor: $currentHintColor;
+
+$topLevelPaneHeaderBackgroundColor: $currentTopLevelPaneHeaderBackgroundColor;
+//$topLevelPaneHeaderTextColor: #000; Not currently set
+$topLevelPaneBodyBackgroundColor: $currentTopLevelPaneBodyBackgroundColor;
+// $topLevelPaneBodyTextColor: #000; Not currently set
+// $topLevelPaneBodyBackgroundColorActive: #000; Not currently set
+// $topLevelPaneBodyBackgroundColorActive: #000; Not currently set
+$topLevelPaneBorderColor: $currentTopLevelPaneBorderColor;
+
+
+$secondLevelPaneHeaderBackgroundColor: $currentSecondLevelPaneHeaderBackgroundColor;
+//$secondLevelPaneHeaderTextColor: #000; Not currently set
+$secondLevelPaneBodyBackgroundColor: $currentTopLevelPaneBodyBackgroundColor;
+// $secondLevelPaneBodyTextColor: #000; Not currently set
+// $secondLevelPaneBodyBackgroundColorActive: #000; Not currently set
+// $secondLevelPaneBodyBackgroundColorActive: #000; Not currently set
+
+
+$thirdLevelPaneHeaderBackgroundColor: $currentSecondLevelPaneHeaderBackgroundColor;
+//$thirdLevelPaneHeaderTextColor: #000; Not currently set
+$thirdLevelPaneBodyBackgroundColor: $currentThirdLevelPaneBodyBackgroundColor;
+// $thirdLevelPaneBodyTextColor: #000; Not currently set
+// $thirdLevelPaneBodyBackgroundColorActive: #000; Not currently set
+// $thirdLevelPaneBodyBackgroundColorActive: #000; Not currently set
+
+$planBackgroundColor: $currentPlanBackGroundColor;

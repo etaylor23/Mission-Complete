@@ -229,7 +229,6 @@ function App() {
                     	}
                     });
                 } else {
-                    debugger;
                     $('#'+pieId).html('We\'ll build your report as you add new missions and objectives');
                 }
             })
@@ -340,12 +339,10 @@ function App() {
             }
           }
 
-          debugger;
           if(root.children.length > 1) {
               root.children.forEach(collapse);
               update(root);
           } else {
-              debugger;
               $('.tree-container').remove();
           }
         });
@@ -457,7 +454,46 @@ function App() {
 
 
 
+        $('.inner-column').hover(function() {
+            function slideObjectives() {
+                if($(this).find('.objectives').find('li').length > 0) {
+                    $(this).find('.objectives').slideToggle();
+                }
+            }
+            setTimeout(slideObjectives.bind($(this)), 700);
+        })
 
+        $('.missions .inner-column').each(function() {
+          if(typeof $(this).attr('parent') !== 'undefined') {
+            $(this).hover(function() {
+                // var $self = $(this);
+                function addActiveChild() {
+
+                    var $this = this,
+                         parentSlug = $this.attr('parent'),
+                         campaignInnerColumn = $('.campaigns').find('.inner-column[top="' + parentSlug + '"]'),
+                         aCampaign = campaignInnerColumn.toggleClass('active-child');
+
+                }
+
+                setTimeout(addActiveChild.bind($(this)), 700);
+            })
+          }
+        })
+
+
+
+
+        var options = {
+          useEasing : true,
+          useGrouping : true,
+          separator : ',',
+          decimal : '.',
+          prefix : '',
+          suffix : ''
+        };
+        var demo = new CountUp("myTargetElement", 0, 100, 0, 2.5, options);
+        demo.start();
 
 
 

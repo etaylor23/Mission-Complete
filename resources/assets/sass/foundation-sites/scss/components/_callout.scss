@@ -8,7 +8,7 @@
 
 /// Default background color.
 /// @type Color
-$callout-background: $lightGrey;
+$callout-background: $topLevelPaneBodyBackgroundColor;
 
 /// Default fade value for callout backgrounds.
 /// @type Number
@@ -28,7 +28,7 @@ $callout-padding: 1rem !default;
 
 /// Default font color for callouts.
 /// @type Color
-$callout-font-color: $body-font-color !default;
+$callout-font-color: $textColor;
 
 /// Default font color for callouts, if the callout has a dark background.
 /// @type Color
