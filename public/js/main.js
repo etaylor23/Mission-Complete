@@ -190,14 +190,14 @@ function App() {
                         },
                         size: {
                             pieInnerRadius: "50%",
-                            canvasHeight: 300,
-                            canvasWidth: 340
+                            canvasHeight: 400,
+                            canvasWidth: 400
                         },
                         data: {
                             sortOrder: "label-asc",
                             content: [
-                              { label: "Complete", value: type.percent_complete},
-                              { label: "Incomplete", value: incomplete},
+                              { label: "Complete", value: type.percent_complete, color: '#6091D5'},
+                              { label: "Incomplete", value: incomplete, color: '#002F6F'},
                             ]
                         },
                         labels: {
@@ -210,7 +210,8 @@ function App() {
                     			hideWhenLessThanPercentage: 3
                     		},
                     		mainLabel: {
-                    			fontSize: 11
+                    			fontSize: 11,
+                                color: "#ffffff"
                     		},
                     		percentage: {
                     			color: "#ffffff",
@@ -254,6 +255,36 @@ function App() {
         return {
             logout : logout
         }
+    }
+
+    function Counter() {
+
+        function init() {
+            var options = {
+              useEasing : true,
+              useGrouping : true,
+              separator : ',',
+              decimal : '.',
+              prefix : '',
+              suffix : '%'
+            };
+
+
+            $('[counter]').each(function() {
+                var noToCountTo = parseInt($(this).find('.end').html()),
+                    start = $(this).find('.counter-container').attr('id'),
+                    speed = noToCountTo / 9;
+
+
+                var counter = new CountUp(start, 0, noToCountTo, 0, speed, options);
+                counter.start();
+            });
+        }
+
+        return {
+            init : init
+        }
+
     }
 
     this.init = function() {
@@ -386,7 +417,7 @@ function App() {
 
           nodeUpdate.select("circle")
               .attr("r", 10)
-              .style("fill", function(d) { return d._children ? "#5b7632" : "#fff"; });
+              .style("fill", function(d) { return d._children ? "#002F6F" : "#fff"; });
 
           nodeUpdate.select("text")
               .style("fill-opacity", 1);
@@ -456,8 +487,8 @@ function App() {
 
         $('.inner-column').hover(function() {
             function slideObjectives() {
-                if($(this).find('.objectives').find('li').length > 0) {
-                    $(this).find('.objectives').slideToggle();
+                if($(this).find('.listing-wrapper').find('li').length > 0) {
+                    $(this).find('.listing-wrapper').slideToggle();
                 }
             }
             setTimeout(slideObjectives.bind($(this)), 700);
@@ -482,18 +513,11 @@ function App() {
         })
 
 
+        var counter = new Counter();
+        counter.init();
 
 
-        var options = {
-          useEasing : true,
-          useGrouping : true,
-          separator : ',',
-          decimal : '.',
-          prefix : '',
-          suffix : ''
-        };
-        var demo = new CountUp("myTargetElement", 0, 100, 0, 2.5, options);
-        demo.start();
+
 
 
 

@@ -91,24 +91,33 @@
         </div>
     </div>
 
-    <div data-step="6" data-intro="Here are all of the objectives in this mission, but what are objectives? Well, they're the nuts and bolts behind this super weapon. Lets take a look at them together." class="row">
+    <div data-step="6" data-intro="Here are all of the objectives in this mission, but what are objectives? Well, they're the nuts and bolts behind this super weapon. Lets take a look at them together." class="row panes">
         <div class="column small-12 medium-6 large-8">
             <div class="callout">
                 <h2>Objectives</h2>
-                <ul class="open-objectives listing">
+
+                <ol class="objectives listing">
                     @foreach ($relatedObjectives as $objective)
-                            <li>
-                                <div class="card">
+                        <li>
+                            <div class="card">
+                                <div class="card-inner">
                                     <div class="summary">
-                                        <a href="/campaign/{{$objective->Mission->Campaign->slug}}/mission/{{$objective->mission->mission_slug}}/objective/{{$objective->objective_slug}}">{{ $objective->name }}</a>
-                                        @if($objective->done === 1)
-                                            <span class="awesome double"></span>
-                                        @endif
+
+                                        <div class="objective-title">
+                                            <a href="/campaign/{{$objective->Mission->Campaign->slug}}/mission/{{$objective->mission->mission_slug}}/objective/{{$objective->objective_slug}}">{{$objective->name}}</a>
+                                            @if($objective->done === 1)
+                                                <span class="awesome double maintenance-complete complete"></span>
+                                            @endif
+
+                                        </div>
+
                                     </div>
                                 </div>
-                            </li>
+                            </div>
+                        </li>
                     @endforeach
-                </ul>
+                </ol>
+
             </div>
         </div>
         <div class="column small-12 medium-6 large-4">

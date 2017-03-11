@@ -89,26 +89,32 @@
             </div>
         </div>
 
-        <div data-step="7" data-intro="Here you can see all of your missions for this campaign, lets look at a mission together right now." class="row">
+        <div data-step="7" data-intro="Here you can see all of your missions for this campaign, lets look at a mission together right now." class="row panes">
             <div class="column small-12 medium-8 large-8">
                 <div class="callout">
                     <h2>Missions</h2>
-                    <ul class="open-missions listing">
+
+                    <ol class="objectives listing">
                         @foreach ($relatedMissions as $mission)
                             <li>
                                 <div class="card">
-                                    <div class="summary">
-                                        <a href="/campaign/{{$mission->Campaign->slug}}/mission/{{$mission->mission_slug}}">{{ $mission->name }}</a>
-                                        @if($mission->percent_complete  === 100)
-                                            <span class="awesome double"></span>
-                                        @endif
+                                    <div class="card-inner">
+                                        <div class="summary">
+
+                                            <div class="objective-title">
+                                                <a href="/campaign/{{$mission->Campaign->slug}}/mission/{{$mission->mission_slug}}">{{$mission->name}}</a>
+                                                @if($mission->percent_complete  === 100)
+                                                    <span class="awesome double maintenance-complete complete"></span>
+                                                @endif
+
+                                            </div>
+
+                                        </div>
                                     </div>
-
-
                                 </div>
                             </li>
                         @endforeach
-                    </ul>
+                    </ol>
                 </div>
             </div>
 
@@ -122,7 +128,10 @@
 
         <div class="row tree-container">
             <div class="column small-12 medium-12 large-12">
-                <div class="callout tree">
+                <div class="callout">
+                    <div class="callout-inner tree">
+
+                    </div>
                 </div>
             </div>
 

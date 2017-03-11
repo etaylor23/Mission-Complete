@@ -30,6 +30,7 @@
 
         <script src="{{{ asset('js/d3.js') }}}"></script>
         <script src="{{{ asset('js/d3pie.js') }}}"></script>
+        <script src="{{{ asset('js/countUp.js') }}}"></script>
 
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

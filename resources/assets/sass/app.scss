@@ -168,63 +168,63 @@ body {
         }
     }
 
-    .listing {
-        margin-left: 0;
-        list-style-type: none;
-        > li {
-            border: 1px solid $topLevelPaneBorderColor;
-            margin-bottom: 20px;
-            padding: 10px;
-            background: $topLevelPaneHeaderBackgroundColor;
-            &.alert {
-                position: relative;
-                top: -35px;
-                margin-bottom: 0;
-                background: $thirdLevelPaneBodyBackgroundColor;
-                //color: white;
-                border: white 1px solid;
-                &.overdue {
-                    background-color: $secondLevelPaneHeaderBackgroundColor;
-                }
-            }
-
-            > .card {
-                border-left: 5px solid $topLevelPaneBorderColor;
-                min-height: 50px;
-                .plan {
-                    margin-top: 10px;
-                    background: $planBackgroundColor;
-                    width: 80%;
-                }
-                .plan-inner {
-                    margin-left: 10px;
-                    width: 80%;
-                    padding: 15px;
-                }
-                .maintenance-complete {
-                    display: block;
-                    right: 0px;
-                    bottom: 15px;
-                    position: absolute;
-                }
-                .summary {
-                    margin-left: 10px;
-                    padding-top: 14px;
-                    position: relative;
-                    padding-bottom: 14px;
-                    transition: all 0.3s ease;
-                    &:hover {
-                        margin-left: 17px;
-                    }
-                    span.awesome {
-                        float: right;
-                        margin-top: -10px;
-                        margin-right: 15px;
-                    }
-                }
-            }
-        }
-    }
+    // .listing {
+    //     margin-left: 0;
+    //     list-style-type: none;
+    //     > li {
+    //         border: 1px solid $topLevelPaneBorderColor;
+    //         margin-bottom: 20px;
+    //         padding: 10px;
+    //         background: $topLevelPaneHeaderBackgroundColor;
+    //         &.alert {
+    //             position: relative;
+    //             top: -35px;
+    //             margin-bottom: 0;
+    //             background: $thirdLevelPaneBodyBackgroundColor;
+    //             //color: white;
+    //             border: white 1px solid;
+    //             &.overdue {
+    //                 background-color: $secondLevelPaneHeaderBackgroundColor;
+    //             }
+    //         }
+    //
+    //         > .card {
+    //             border-left: 5px solid $topLevelPaneBorderColor;
+    //             min-height: 50px;
+    //             .plan {
+    //                 margin-top: 10px;
+    //                 background: $planBackgroundColor;
+    //                 width: 80%;
+    //             }
+    //             .plan-inner {
+    //                 margin-left: 10px;
+    //                 width: 80%;
+    //                 padding: 15px;
+    //             }
+    //             .maintenance-complete {
+    //                 display: block;
+    //                 right: 0px;
+    //                 bottom: 15px;
+    //                 position: absolute;
+    //             }
+    //             .summary {
+    //                 margin-left: 10px;
+    //                 padding-top: 14px;
+    //                 position: relative;
+    //                 padding-bottom: 14px;
+    //                 transition: all 0.3s ease;
+    //                 &:hover {
+    //                     margin-left: 17px;
+    //                 }
+    //                 span.awesome {
+    //                     float: right;
+    //                     margin-top: -10px;
+    //                     margin-right: 15px;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     footer {
         background: #807c79;
@@ -239,22 +239,28 @@ body {
         }
     }
 
+    .callout-inner {
+        border: 1px solid rgba(10, 10, 10, 0.25);
+    }
+
     .panes {
         .column {
             margin-bottom: 2rem;
         }
-        .listing:not(.missions) {
-            margin-bottom: 0;
-        }
-        li {
-            border: 1px solid #173701;
-            padding: 10px;
-            background: #fefefe;
-            margin-bottom: 0;
-            border-radius: 0;
-        }
+
+
+        // .listing:not(.missions) {
+        //     margin-bottom: 0;
+        // }
+        // li {
+        //     border: 1px solid #173701;
+        //     padding: 10px;
+        //     background: #fefefe;
+        //     margin-bottom: 0;
+        //     border-radius: 0;
+        // }
         .inner-column {
-            border: 1px solid $topLevelPaneBorderColor;
+            border: 1px solid $cobaltBlue4;
             border-radius: 0;
             position: relative;
             transition: all 400ms ease;
@@ -278,19 +284,104 @@ body {
             font-size:6rem;
             padding:1rem;
         }
-        .objectives {
-            display: none;
+
+        .listing-wrapper {
+            padding:15px;
+            background: $white;
         }
-        li.alert {
-            background-color: $thirdLevelPaneBodyBackgroundColor;
-            top: 0;
-            &.overdue {
-                background-color: $secondLevelPaneHeaderBackgroundColor;
-                top: 0;
+        .listing {
+            counter-reset: li;
+            margin-left: 0;
+            padding-left: 0;
+            padding:15px;
+            background-color:$globalBackgroundColor;
+            margin-bottom: 0;
+            border: 1px solid rgba(10, 10, 10, 0.25);
+        }
+
+        .listing {
+            > li {
+                position: relative;
+                margin: 0 0 6px 2em;
+                padding: 4px 8px;
+                list-style: none;
+                border-bottom: 2px solid $globalBorderColor;
+            }
+            > li:last-child {
+                border-bottom: none;
             }
         }
+
+        .card {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            .objective-title {
+                line-height: 1rem;
+                a {
+                    color: #000;
+                }
+            }
+            .plan {
+                color: $darkGrey;
+            }
+        }
+
+        .maintenance-complete-form {
+            float: right;
+        }
+
+        .maintenance-complete {
+            background: transparent;
+            border: none;
+            font-size: 2.5rem;
+            color: $hintColor;
+            float: right;
+        }
+
+        .listing > li:before {
+            content:counter(li);
+            counter-increment:li;
+            position:absolute;
+            top:-2px;
+            left: -2.3em;
+            box-sizing:border-box;
+            width:2em;
+            margin-right:8px;
+            padding: 4px;
+            border: 2px solid $globalBorderColor;
+            color: $numberColor;
+            background: $white;
+            font-weight:bold;
+            text-align: center;
+            border-radius:20px;
+            top: 26%;
+            width: 37px;
+        }
+
+        .alert {
+            .fa {
+                color: $darkGrey;
+                float: right;
+                font-size: 2.5em;
+                margin-right: 3px;
+            }
+            &.overdue {
+                .fa {
+                    color: red;
+
+                }
+            }
+        }
+
+
         .start {
             font-size: 2rem;
+        }
+        .end {
+            display: none;
+        }
+        .complete {
+            color: $complete;
         }
 
 

@@ -61,7 +61,7 @@ $header-sizes: (
 
 /// Color of headers.
 /// @type Color
-$header-color: inherit !default;
+$header-color: $currentHeaderColor;
 
 /// Line height of headers.
 /// @type Number

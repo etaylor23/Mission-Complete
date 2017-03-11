@@ -20,7 +20,7 @@ $breadcrumbs-item-color: $primary-color !default;
 
 /// Color of the active breadcrumb link.
 /// @type Color
-$breadcrumbs-item-color-current: $textColor;
+$breadcrumbs-item-color-current: $breadcrumbColor;
 
 /// Opacity of disabled breadcrumb links.
 /// @type Number

@@ -54,13 +54,20 @@
                 @if(!$campaigns->isEmpty())
                     @foreach ($campaigns as $campaign)
                     <div class="column small-12 medium-12 large-12">
-                        <div class="inner-column" top="{{ $campaign->slug }}">
+                        <div class="inner-column" counter top="{{ $campaign->slug }}">
                             <div class="title">
                                 <a href="/campaign/{{ $campaign->slug }}">{{ $campaign->name }}</a>
                             </div>
                             <div class="completeness">
                                 @if(!is_null($campaign->percent_complete))
-                                {{ $campaign->percent_complete }}%
+
+                                <div id="{{ $campaign->slug }}"  class="counter-container">
+
+                                </div>
+                                <div class="end">
+                                    {{ $campaign->percent_complete }}
+                                </div>
+
                                 @else
                                     <span class="start">Start campaign</start>
                                 @endif
@@ -82,42 +89,48 @@
                 @foreach($missions as $missionsInstance)
                     @foreach($missionsInstance as $mission)
                         <div class="column small-12 medium-12 large-6">
-                            <div class="inner-column" parent="{{ $mission->Campaign->slug }}">
+                            <div class="inner-column" counter parent="{{ $mission->Campaign->slug }}">
                                 <div class="title">
                                     <a href="campaign/{{$mission->Campaign->slug}}/mission/{{$mission->mission_slug}}">
                                       {{$mission->name}}
                                     </a>
                                 </div>
-                                <ul class="objectives listing">
-                                    @foreach($mission->Objective
-                                                      ->where('done', 1)
-                                                      ->where('next_maintenance_instance_date', '<=', $nextMaintenceInstanceDate)
-                                                      as $objective)
-                                        <li class="alert @if($objective->next_maintenance_instance_date < $nextMaintenceInstanceDate) overdue @endif">
-                                            <div class="card">
-                                                <div class="card-inner">
-                                                    <div class="summary">
-                                                        <a href="/campaign/{{$objective->Mission->Campaign->slug}}/mission/{{$objective->Mission->mission_slug}}/objective/{{$objective->objective_slug}}">{{$objective->name}}</a><br />
-                                                        <div class="plan">
-                                                            <div class="plan-inner">
-                                                                <div>
-                                                                    {{ date("l d F Y", strtotime($objective->next_maintenance_instance_date)) }}
-                                                                </div>
-                                                                {!! Form::open(['method' => 'PUT', 'action' => ['DashboardController@maintenanceComplete', $objective->objective_slug], 'class'=>'row']) !!}
-                                                                    {!! Form::submit('&#xf058;', ['class' => 'button awesome double maintenance-complete']) !!}
-                                                                {!! Form::close() !!}
+                                <div class="listing-wrapper hidden">
+                                    <ol class="objectives listing">
+                                        @foreach($mission->Objective
+                                                          ->where('done', 1)
+                                                          ->where('next_maintenance_instance_date', '<=', $nextMaintenceInstanceDate)
+                                                          as $objective)
+                                            <li class="alert @if($objective->next_maintenance_instance_date < $nextMaintenceInstanceDate) overdue @endif">
+                                                <div class="card">
+                                                    <div class="card-inner">
+                                                        <div class="summary">
+                                                            {!! Form::open(['method' => 'PUT', 'action' => ['DashboardController@maintenanceComplete', $objective->objective_slug], 'class'=>'row maintenance-complete-form']) !!}
+                                                                {!! Form::submit('&#xf058;', ['class' => 'awesome double maintenance-complete']) !!}
+                                                            {!! Form::close() !!}
+                                                            <div class="objective-title">
+                                                                <a href="/campaign/{{$objective->Mission->Campaign->slug}}/mission/{{$objective->Mission->mission_slug}}/objective/{{$objective->objective_slug}}">{{$objective->name}}</a>
+                                                                <div class="fa-exclamation-circle fa"></div>
                                                             </div>
-                                                        </div>
+                                                            <div class="plan">
+                                                                {{ date("l d F Y", strtotime($objective->next_maintenance_instance_date)) }}
+                                                            </div>
 
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                            </li>
+                                        @endforeach
+                                    </ol>
+                                </div>
                                 <div class="completeness">
                                     @if(!is_null($mission->percent_complete))
-                                        {{ $mission->percent_complete }}%
+                                        <div id="{{ $mission->mission_slug }}"  class="counter-container">
+
+                                        </div>
+                                        <div class="end">
+                                            {{ $mission->percent_complete }}
+                                        </div>
                                     @else
                                         <span class="start">Start mission</start>
                                     @endif

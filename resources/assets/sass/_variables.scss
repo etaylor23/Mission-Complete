@@ -56,22 +56,45 @@
 // $currentPlanBackGroundColor: #CFDBC5;
 
 
+/* Colours */
+$white: #fff;
+$lightGrey: #e9e9e9;
+$midGrey: #d3d3d3;
+$darkGrey: #807c79;
+$green: #008000;
+
+$cobaltBlue1: #6091D5;
+$cobaltBlue2: #0048AB;
+$cobaltBlue3: #204980;
+$cobaltBlue4: #002F6F;
+
+
+/* Globals */
+$globalBackgroundColor: $lightGrey;
+
+
 
 /* Cobalt Blue Scheme */
-$currentBackgroundColor: #6091D5;
-$currentNavigationBackgroundColor: #204980;
-$currentTextColour: #fff;
-$currentTextColorActive: #fff;
-$currentAnchorColor: #fff;
-$currentHintColor: #002F6F;
-$currentTopLevelPaneHeaderBackgroundColor: #002F6F;
-$currentTopLevelPaneBodyBackgroundColor: #0048AB;
-$currentTopLevelPaneBorderColor: #fff;
-$currentSecondLevelPaneHeaderBackgroundColor: #002F6F;
+$currentBackgroundColor: $globalBackgroundColor;
+$currentNavigationBackgroundColor: $cobaltBlue3;
+$currentTextColour: $white;
+$currentTextColorActive: $white;
+$currentAnchorColor: $white;
+$currentHintColor: $cobaltBlue4;
+$currentHeaderColor: $cobaltBlue4;
+$currentTopLevelPaneHeaderBackgroundColor: $cobaltBlue4;
+$currentTopLevelPaneBodyBackgroundColor: $cobaltBlue2;
+$currentTopLevelPaneBorderColor: $white;
+$currentSecondLevelPaneHeaderBackgroundColor: $cobaltBlue4;
+$currentSecondLevelPaneBodyBackgroundColor: $globalBackgroundColor;
 // $currentThirdLevelPaneHeaderBackgroundColor: #000 //Not currently set
-$currentThirdLevelPaneBodyBackgroundColor: #204980;
-$titleBarOffset: #807c79;
-$currentPlanBackGroundColor: #6091D5;
+$currentThirdLevelPaneBodyBackgroundColor: $cobaltBlue3;
+$titleBarOffset: $darkGrey;
+$currentPlanBackGroundColor: $cobaltBlue1;
+$currentGlobalBorderColor: $midGrey;
+$currentNumberColor: $darkGrey;
+$currentBreadcrumbColor: $cobaltBlue4;
+$complete: $green;
 
 
 
@@ -82,6 +105,9 @@ $textColor: $currentTextColour;
 $textColorActive: $currentTextColorActive;
 $anchorColor: $currentAnchorColor;
 $hintColor: $currentHintColor;
+$globalBorderColor: $currentGlobalBorderColor;
+$numberColor: $currentNumberColor;
+$breadcrumbColor: $currentBreadcrumbColor;
 
 $topLevelPaneHeaderBackgroundColor: $currentTopLevelPaneHeaderBackgroundColor;
 //$topLevelPaneHeaderTextColor: #000; Not currently set
@@ -94,7 +120,7 @@ $topLevelPaneBorderColor: $currentTopLevelPaneBorderColor;
 
 $secondLevelPaneHeaderBackgroundColor: $currentSecondLevelPaneHeaderBackgroundColor;
 //$secondLevelPaneHeaderTextColor: #000; Not currently set
-$secondLevelPaneBodyBackgroundColor: $currentTopLevelPaneBodyBackgroundColor;
+$secondLevelPaneBodyBackgroundColor: $currentSecondLevelPaneBodyBackgroundColor;
 // $secondLevelPaneBodyTextColor: #000; Not currently set
 // $secondLevelPaneBodyBackgroundColorActive: #000; Not currently set
 // $secondLevelPaneBodyBackgroundColorActive: #000; Not currently set
