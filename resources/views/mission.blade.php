@@ -46,30 +46,18 @@
         </div>
     </div>
     <div class="row">
-        <div class="column">
+        <div class="column small-11 medium-11 large-11">
             {!! Breadcrumbs::render('campaign.mission.show', $campaign, $mission) !!}
+        </div>
+        <div class="column small-1 medium-1 large-1 delete">
+            {!! Form::open(['method' => 'DELETE', 'action' => ['MissionsContoller@destroy', $campaign->slug, $mission->mission_slug]]) !!}
+              {!! Form::submit('&#xf1f8;', ['class' => 'button full-width fa']) !!}
+            {!! Form::close() !!}
         </div>
     </div>
     <div class="row">
-        <div class="columns small-12 medium-4 large-4">
-            <div data-step="3" data-intro="Remove missions at your will, but don't forget all of the hard work you put into it. Consider why you're choosing to stop attacking on this front, what's changed?" class="callout">
-                <div class="row">
-                    <div class="column small-12 medium-12 large-12">
-                        {!! Form::open(['method' => 'DELETE', 'action' => ['MissionsContoller@destroy', $campaign->slug, $mission->mission_slug]]) !!}
-                          {!! Form::submit('Delete this mission', ['class' => 'button full-width']) !!}
-                        {!! Form::close() !!}
-                    </div>
-                    @if(session('deletedObjective'))
-                        <div class="column small-12 medium-12 large-12">
-                            <strong>{{session('deletedObjective')}}</strong>
-                        </div>
-                    @endif
 
-                </div>
-            </div>
-        </div>
-
-        <div class="columns small-12 medium-4 large-4">
+        <div class="columns small-12 medium-6 large-6">
             <div data-step="4" data-intro="This pane shows you how your mission has progressed. Your progression is based on the completion of each objective in this mission." class="callout">
                 @if(count($relatedObjectives) === 0)
                     <strong>You have no objectives in this mission, create one now</strong>
@@ -84,7 +72,7 @@
         </div>
 
 
-        <div class="columns small-12 medium-4 large-4 text-center">
+        <div class="columns small-12 medium-6 large-6 text-center">
             <div data-step="5" data-intro="Lastly, this pane will tell you when you first created this mission, it'll give you some idea into how much work you've put into it." class="callout">
                 <strong>You started this mission {{ $timeSinceCreation }}</strong>
             </div>

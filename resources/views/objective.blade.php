@@ -12,8 +12,13 @@
     </div>
 
     <div data-step="3" data-intro="This section lets you know exactly where you are, use it to traverse the playing field" class="row">
-        <div class="column">
+        <div class="column small-11 medium-11 large-11">
             {!! Breadcrumbs::render('campaign.mission.objective.show', $campaign, $mission, $objective) !!}
+        </div>
+        <div class="column small-1 medium-1 large-1 delete">
+            {!! Form::open(['method' => 'DELETE', 'action' => ['ObjectivesController@destroy', $campaign->slug, $mission->mission_slug, $objective->objective_slug]]) !!}
+              {!! Form::submit('&#xf1f8;', ['class' => 'button full-width fa']) !!}
+            {!! Form::close() !!}
         </div>
     </div>
 
@@ -21,11 +26,6 @@
         <div class="columns small-12 medium-4 large-4">
             <div class="callout">
                 <div class="row">
-                  <div data-step="4" data-intro="Just like before, this lets you remove an objective." class="columns small-6 medium-6 large-6">
-                      {!! Form::open(['method' => 'DELETE', 'action' => ['ObjectivesController@destroy', $campaign->slug, $mission->mission_slug, $objective->objective_slug]]) !!}
-                        {!! Form::submit('Delete this objective', ['class' => 'button']) !!}
-                      {!! Form::close() !!}
-                  </div>
                     <div class="columns small-6 medium-6 large-6">
 
                             <button data-step="5" data-intro="Here we can mark an objective as completed, you'll have to provide some proof of completion and come up with a maintenance plan." data-open="completed-status" type="button" name="button" class="button">Change Status</button>

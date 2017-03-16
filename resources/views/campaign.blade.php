@@ -35,29 +35,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="column">
+            <div class="column small-11 medium-11 large-11">
                 {!! Breadcrumbs::render('campaign.show', $campaign) !!}
+            </div>
+            <div class="column small-1 medium-1 large-1 delete">
+                {!! Form::open(['method' => 'DELETE', 'action' => ['CampaignsController@destroy', $campaign->slug]]) !!}
+                  {!! Form::submit('&#xf1f8;', ['class' => 'button full-width fa']) !!}
+                {!! Form::close() !!}
             </div>
         </div>
         <div class="row">
-            <div class="columns small-12 medium-3 large-3">
-                <div data-step="3" data-intro="Just like you can create a campaign, you can delete one if you feel that its just not you anymore. But before you do, ask yourself what's changed? <br />
-                                                Did you take this task on too lightly? Was the aim slightly misplaced?" class="callout">
-                    <div class="row">
-                        <div class="column small-12 medium-12 large-12">
-                        {!! Form::open(['method' => 'DELETE', 'action' => ['CampaignsController@destroy', $campaign->slug]]) !!}
-                          {!! Form::submit('Delete this campaign', ['class' => 'button full-width']) !!}
-                        {!! Form::close() !!}
-                        </div>
-                        @if(session('deletedMission'))
-                            <div class="column small-12 medium-12 large-12">
-                                <strong>{{session('deletedMission')}}</strong>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-            <div class="columns small-12 medium-3 large-3">
+
+        </div>
+        <div class="row">
+            <div class="columns small-12 medium-4 large-4">
                 <div data-step="4" data-intro="This pane shows you how complete your campaign is, based on all of its missions and objectives." class="callout">
                     @if(count($relatedMissions) !== 0 && $campaign->percent_complete !== null)
                         <div class="percent-complete text-center">
@@ -75,14 +66,14 @@
                 </div>
             </div>
             @if(!is_null($missionClosestToCompletion))
-            <div class="columns small-12 medium-3 large-3 text-center">
+            <div class="columns small-12 medium-4 large-4 text-center">
                 <div data-step="5" data-intro="This area tells you your closest mission to completion, just incase you needed that extra boost to finish it." class="callout">
                     <strong>Mission Closest To Completion:<br />{{$missionClosestToCompletion->name}}</strong>
                 </div>
             </div>
             @endif
 
-            <div class="columns small-12 medium-3 large-3 text-center">
+            <div class="columns small-12 medium-4 large-4 text-center">
                 <div data-step="6" data-intro="Lastly, this pane will tell you when you first created the campaign, it'll give you some idea into how much work you've put into it." class="callout">
                     <strong>You started this campaign {{ $timeSinceCreation }}</strong>
                 </div>

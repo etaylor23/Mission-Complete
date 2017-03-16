@@ -77,6 +77,7 @@ $globalBackgroundColor: $lightGrey;
 /* Cobalt Blue Scheme */
 $currentBackgroundColor: $globalBackgroundColor;
 $currentNavigationBackgroundColor: $cobaltBlue3;
+$currentNavigationBackgroundItemActiveColor: $cobaltBlue3;
 $currentTextColour: $white;
 $currentTextColorActive: $white;
 $currentAnchorColor: $white;
@@ -101,6 +102,7 @@ $complete: $green;
 /* Types of coloured elements */
 $bodyBackgroundColor: $currentBackgroundColor;
 $navigationBackgroundColor: $currentNavigationBackgroundColor;
+$navigationBackgroundItemActiveColor: $currentNavigationBackgroundItemActiveColor;
 $textColor: $currentTextColour;
 $textColorActive: $currentTextColorActive;
 $anchorColor: $currentAnchorColor;

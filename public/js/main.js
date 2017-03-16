@@ -519,6 +519,10 @@ function App() {
 
 
 
+        $('.parallax-window').hover(function() {
+        	$(this).children('.overlay').fadeToggle(400)
+        })
+
 
 
     }
