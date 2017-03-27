@@ -32,6 +32,30 @@
         <script src="{{{ asset('js/d3pie.js') }}}"></script>
         <script src="{{{ asset('js/countUp.js') }}}"></script>
 
+        <script src="//js.pusher.com/4.0/pusher.min.js"></script>
+
+        <script src="{{{ asset('js/echo.js') }}}"></script>
+
+        <script type="text/javascript">
+            window.Echo = new Echo({
+                broadcaster: 'pusher',
+                key: '4eb1e04947d0e9832e22'
+            });
+
+            Echo.channel('chat-room.1')
+                .listen('ObjectiveComplete', function(e) {
+                    console.log(e);
+            });
+
+
+            // var pusher = new Pusher('4eb1e04947d0e9832e22');
+            // var channel = pusher.subscribe('chat-room.1');
+            // channel.bind("ObjectiveComplete", function(data) {
+            //   console.log('An event was triggered with message: ' + JSON.stringify(data));
+            // });
+        </script>
+
+
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

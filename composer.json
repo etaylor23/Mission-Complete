@@ -11,7 +11,9 @@
         "laravelcollective/html" : "5.3",
         "nesbot/carbon": "^1.21",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
-        "laravelcollective/html": "^5.3"
+        "laravelcollective/html": "^5.3",
+        "pusher/pusher-php-server": "^2.6",
+        "vinkla/pusher": "^2.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -9,6 +9,8 @@ use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Events\ObjectiveComplete;
+
 
 
 class DashboardController extends Controller
@@ -30,6 +32,20 @@ class DashboardController extends Controller
 
       $nextMaintenceInstanceDate = Carbon::now()->addDays(1)->toDateString().' 00:00:00';
 
+
+    //   $user = Auth::user();
+    //   $message = \App\ObjectiveComplete::create([
+    //       'user_id' => $user->id,
+    //       'message' => "Big test"
+    //   ]);
+
+      $user = \App\User::first();
+      $message = \App\ObjectiveComplete::create([
+          'user_id' => $user->id,
+          'message' => "Hello you Chloe"
+      ]);
+
+      event(new ObjectiveComplete($message, $user));
       return view('dashboard')
               ->with('campaigns', $campaigns)
               ->with('missions', $missions)
