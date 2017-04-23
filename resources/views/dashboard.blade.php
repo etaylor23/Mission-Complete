@@ -149,6 +149,9 @@
     </div>
 
 
+    <!-- See unsaved doc for followPosts -->
+    <!-- Removed all 4 old tables, regenerating new model names correctly Posts -> Post. Need to work out why migration wont recreate, where is it stored?
+        Old files on desktop -->
 
 </div>
 

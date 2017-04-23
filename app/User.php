@@ -31,4 +31,24 @@ class User extends Authenticatable
     public function Campaign() {
       return $this->hasMany('App\Campaign');
     }
+
+    public function Follows() {
+      return $this->hasMany('App\Follows');
+    }
+
+    public function Posts() {
+      return $this->hasMany('App\Post');
+    }
+
+    public function UserSkill() {
+      return $this->hasMany('App\UserSkill');
+    }
+
+    public function Skills() {
+        return $this->hasMany('App\Skills');
+    }
+
+    public function PostSkills() {
+        return $this->hasMany('App\PostSkills');
+    }
 }
