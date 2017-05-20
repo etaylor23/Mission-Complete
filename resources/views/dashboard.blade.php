@@ -148,10 +148,151 @@
         </div>
     </div>
 
+    <div class="posts">
 
-    <!-- See unsaved doc for followPosts -->
-    <!-- Removed all 4 old tables, regenerating new model names correctly Posts -> Post. Need to work out why migration wont recreate, where is it stored?
-        Old files on desktop -->
+
+
+        <div class="portfolioFilter row">
+            <a href="#" data-filter="*" class="current">
+              #AllCategories
+            </a>
+            @foreach($currentUserSkillsName as $skillName => $skillValue)
+                <a href="#" data-filter=".{{ $skillValue }}">
+                    #{{ $skillValue }}
+                </a>
+            @endforeach
+
+        	<!-- <a href="#" data-filter=".people">People</a>
+        	<a href="#" data-filter=".places">Places</a>
+        	<a href="#" data-filter=".food">Food</a>
+            <a href="#" data-filter=".objects">Objects</a>
+            <a href="#" data-filter=".tests">Tests</a> -->
+
+        </div>
+
+        <div class="portfolioContainer row posts">
+
+            @foreach($followPosts->Follows as $followed => $followedValue)
+                @foreach ($followedValue->User->Posts as $post => $postValue)
+                    <?php
+                      $a=array("67DB88", "7CCB93", "4D9E69");
+                      $random_keys=array_rand($a,1);
+                    ?>
+                    <div style="background-color: #<?php echo $a[$random_keys] ?>;" class="objects tests columns large-3
+                    @foreach ($postValue->PostSkill as $postSkill => $postSkillValue)
+                        {{ $postSkillValue->Skill->skill_name }}
+                    @endforeach
+                    ">
+                        <div class="post-inner">
+                            <h3>{{ $followedValue->User->name }}</h3>
+                            {{ $postValue->post_content }}<br />
+                            You also have
+                            @foreach ($postValue->PostSkill as $postSkill => $postSkillValue)
+                              {{ $postSkillValue->Skill->skill_name }} |
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            @endforeach
+
+
+        	<!-- <div class="objects columns large-3">
+        		<img src="images/images/watch.jpg" alt="image">
+        	</div>
+
+        	<div class="people places columns large-3">
+        		<img src="images/images/surf.jpg" alt="image">
+        	</div>
+
+        	<div class="food columns large-3">
+        		<img src="images/images/burger.jpg" alt="image">
+        	</div>
+
+        	<div class="people places columns large-3">
+        		<img src="images/images/subway.jpg" alt="image">
+        	</div>
+
+        	<div class="places objects columns large-3">
+        		<img src="images/images/trees.jpg" alt="image">
+        	</div>
+
+        	<div class="people food objects columns large-3">
+        		<img src="images/images/coffee.jpg" alt="image">
+        	</div>
+
+        	<div class="food objects columns large-3">
+        		<img src="images/images/wine.jpg" alt="image">
+        	</div>
+
+        	<div class="food columns large-3">
+        		<img src="images/images/salad.jpg" alt="image">
+        	</div> -->
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+    $(window).load(function(){
+        var $container = $('.portfolioContainer');
+        $container.isotope({
+            filter: '*',
+            animationOptions: {
+                duration: 750,
+                easing: 'linear',
+                queue: false
+            }
+        });
+
+        $('.portfolioFilter a').click(function(){
+            $('.portfolioFilter .current').removeClass('current');
+            $(this).addClass('current');
+
+            var selector = $(this).attr('data-filter');
+            $container.isotope({
+                filter: selector,
+                animationOptions: {
+                    duration: 750,
+                    easing: 'linear',
+                    queue: false
+                }
+             });
+             return false;
+        });
+    });
+
+    </script>
+
+    <script type="text/javascript">
+        window.Echo = new Echo({
+            broadcaster: 'pusher',
+            key: '4eb1e04947d0e9832e22'
+        });
+
+        /*
+        * Add the current user's skills to an array
+        * For each of the current user's skills:
+        * - Create an Echo channel using the skill and the current user's id
+        * - Listen on 'ObjectiveComplete'
+        * - Add an isotope container to the view when the web socket sends new data
+        */
+        window.currentUserSkills = [
+          @foreach($currentUserSkillsName as $skillName => $skillValue)
+            "{{ $skillValue }}",
+          @endforeach
+        ];
+
+        currentUserSkills.forEach(function(skill) {
+          Echo.channel('chat-room.' + skill + '.' + {{ $userId }})
+          .listen('ObjectiveComplete', function(e) {
+            var test = $('<div class="objects tests columns large-3 ' + e.message.skill_name + '"><div class="post-inner"><h3>' + e.user.name + '</h3>' + e.message.post_content + '</div></div>');
+            $('.portfolioContainer')
+            .append(test)
+            .isotope('appended', test);
+          });
+        })
+
+    </script>
 
 </div>
 

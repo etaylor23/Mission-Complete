@@ -17,7 +17,12 @@ class CreateFollowsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('description');
-            $table->integer('follow_id');
+            $table->integer('follow_id')->unsigned();
+            $table->foreign('follow_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

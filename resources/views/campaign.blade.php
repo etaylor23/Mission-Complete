@@ -5,13 +5,7 @@
     <div class="main-content">
         <div class="row">
             <div class="column small-12 medium-6 large-9">
-                <h1 data-step="2" data-intro="Okay, this is your first campaign. The idea of a campaign is to create a long term aim, this might last a couple of months or even a couple of years or more.
-                                            It has to mean a lot to you, (you'll be focussing on it for a long time) but it doesn't have to be too specific. Good examples are:
-                                            <ul>
-                                                <li>I want to earn more money</li>
-                                                <li>I want to get fitter and stronger</li>
-                                            </ul>
-                                            See, not too specifc - some may say that its not very measurable, its okay we'll cover the specifics in just a second.">{{ $campaign->name }}</h1>
+                <h1>{{ $campaign->name }}</h1>
                 <div class="reveal" id="completed-status" data-reveal data-animation-in="slide-in-down" data-animation-out="slide-out-down">
                     <div class="row">
                           {!! Form::open(['action' => 'MissionsContoller@store', 'class' => 'row']) !!}
@@ -49,7 +43,7 @@
         </div>
         <div class="row">
             <div class="columns small-12 medium-4 large-4">
-                <div data-step="4" data-intro="This pane shows you how complete your campaign is, based on all of its missions and objectives." class="callout">
+                <div class="callout">
                     @if(count($relatedMissions) !== 0 && $campaign->percent_complete !== null)
                         <div class="percent-complete text-center">
                             <div>{{ $campaign->name }} is:</div>
@@ -67,20 +61,20 @@
             </div>
             @if(!is_null($missionClosestToCompletion))
             <div class="columns small-12 medium-4 large-4 text-center">
-                <div data-step="5" data-intro="This area tells you your closest mission to completion, just incase you needed that extra boost to finish it." class="callout">
+                <div class="callout">
                     <strong>Mission Closest To Completion:<br />{{$missionClosestToCompletion->name}}</strong>
                 </div>
             </div>
             @endif
 
             <div class="columns small-12 medium-4 large-4 text-center">
-                <div data-step="6" data-intro="Lastly, this pane will tell you when you first created the campaign, it'll give you some idea into how much work you've put into it." class="callout">
+                <div class="callout">
                     <strong>You started this campaign {{ $timeSinceCreation }}</strong>
                 </div>
             </div>
         </div>
 
-        <div data-step="7" data-intro="Here you can see all of your missions for this campaign, lets look at a mission together right now." class="row panes">
+        <div class="row panes">
             <div class="column small-12 medium-8 large-8">
                 <div class="callout">
                     <h2>Missions</h2>

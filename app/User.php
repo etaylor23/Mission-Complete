@@ -36,6 +36,13 @@ class User extends Authenticatable
       return $this->hasMany('App\Follows');
     }
 
+    /*
+    * Used for reverse look up of all followers for the currently logged in user
+    */
+    public function FollowedBy() {
+      return $this->hasMany('App\Follows', 'follow_id');
+    }
+
     public function Posts() {
       return $this->hasMany('App\Post');
     }

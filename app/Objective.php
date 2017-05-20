@@ -19,4 +19,12 @@ class Objective extends Model
     public function Mission() {
       return $this->belongsTo('App\Mission');
     }
+
+    public function Post() {
+        return $this->hasOne('App\Post');
+    }
+
+    public function UserSkill() {
+        return $this->hasMany('App\UserSkill');
+    }
 }

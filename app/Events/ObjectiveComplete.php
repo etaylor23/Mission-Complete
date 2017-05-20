@@ -34,22 +34,11 @@ class ObjectiveComplete implements ShouldBroadcast
      * @return Channel|array
      */
      public function broadcastOn()
-    //  {
-    //      return new PrivateChannel('chat-room.2');
-    //  }
-    //public function broadcastOn()
+
     {
-        return new Channel("chat-room.1");
+        /*
+        * Use the incoming skill name and the user that follows the currently logged in user
+        */
+        return new Channel("chat-room.".$this->message['skill_name'].".".$this->message['followed_id']);
     }
-    // public function broadcastOn()
-    // {
-    //     return [
-    //         "chat-room.12"
-    //     ];
-    // }
-    // {
-    //     return [
-    //         "chat-room.2"
-    //     ];
-    // }
 }

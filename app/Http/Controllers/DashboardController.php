@@ -20,61 +20,35 @@ class DashboardController extends Controller
         $currentUser = Auth::user();
 
         $currentUserSkills = array();
-        // $currentUser->UserSkills->each(function($skill, $key) use(&$currentUserSkills) {
-        //     $newSkill = array();
-        //     echo $skill . "<br />";
-        //     echo $skill ->Skill. "<br />";
-        //     dd($skill->Skill);
-        //     array_push($currentUserSkills, $skill->Skill->id);
-        // });
+        $currentUserSkillsName = array();
 
-        $currentUser->UserSkill->each(function($skill, $key) use(&$currentUserSkills) {
+        $currentUser->UserSkill->each(function($skill, $key) use(&$currentUserSkills, &$currentUserSkillsName) {
             array_push($currentUserSkills, $skill->Skill->id);
+            array_push($currentUserSkillsName, $skill->Skill->skill_name);
         });
 
-        //dd($currentUserSkills);
-
-
-        // // dd($currentUserSkills);
-        // $currentUserId = Auth::user()->id;
-        //
-        // $followPosts = \App\User
-        //             ::with(['Follows.User.Posts' => function($query) use(&$currentUserSkills) {
-        //                 $query
-        //                     ->with(['PostSkills' => function($postSkills) {
-        //                         $postSkills
-        //                             ->with('Skill');
-        //                     }])
-        //                     ->has('PostSkills')
-        //                     ->whereHas('PostSkills', function($subQuery) use(&$currentUserSkills) {
-        //                         $subQuery
-        //                             ->whereIn('skill_id', $currentUserSkills);
-        //                     })
-        //                     ->get();
-        //             }])
-        //             ->where('users.id', '=', $currentUserId)
-        //             ->first();
         $currentUserId = Auth::user()->id;
         $followPosts = \App\User
-                    ::with(['Follows.User.Posts' => function($query) use(&$currentUserSkills) {
+                    ::with(['Follows' => function($query) use(&$currentUserSkills) {
                         $query
-                            ->with(['PostSkill' => function($postSkills) use(&$currentUserSkills) {
-                                $postSkills
-                                    ->whereIn('skill_id', $currentUserSkills)
-                                    ->with('Skill')
-                                    ->get();
+                            ->with(['User.Posts' => function($postSkills) use(&$currentUserSkills) {
+                                    $postSkills
+                                    ->whereHas('PostSkill', function($subQuery) use(&$currentUserSkills) {
+                                        $subQuery
+                                            ->whereIn('skill_id', $currentUserSkills);
+                                    })
+                                    ->with(['PostSkill' => function($testSub) use(&$currentUserSkills) {
+                                        $testSub
+                                            ->with('Skill')
+                                            ->get();
+                                    }]);
                             }])
-                            ->has('PostSkill')
-                            ->whereHas('PostSkill', function($subQuery) use(&$currentUserSkills) {
-                                $subQuery
-                                    ->whereIn('skill_id', $currentUserSkills);
-                            })
+                            ->has('User.Posts.PostSkill')
                             ->get();
                     }])
                     ->where('users.id', '=', $currentUserId)
                     ->first();
 
-                    dd($followPosts);
       $campaigns = Auth::user()
                   ->Campaign;
 
@@ -87,22 +61,15 @@ class DashboardController extends Controller
         array_push($missions, $mission);
       }
 
-
       $nextMaintenceInstanceDate = Carbon::now()->addDays(1)->toDateString().' 00:00:00';
-
-      $user = \App\User::first();
-    //   $message = \App\ObjectiveComplete::create([
-    //       'user_id' => $user->id,
-    //       'message' => "Hello you Chloe"
-    //   ]);
-      //
-    //   event(new ObjectiveComplete($message, $user));
 
       return view('dashboard')
               ->with('campaigns', $campaigns)
               ->with('missions', $missions)
-              ->with('nextMaintenceInstanceDate', $nextMaintenceInstanceDate);
-            //   ->with('followPosts', $followPosts);
+              ->with('nextMaintenceInstanceDate', $nextMaintenceInstanceDate)
+              ->with('followPosts', $followPosts)
+              ->with('currentUserSkillsName', $currentUserSkillsName)
+              ->with('userId', Auth::user()->id);
 
     }
 

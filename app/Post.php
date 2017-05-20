@@ -12,18 +12,20 @@ class Post extends Model
 	  'name',
 	  'description',
 	  'done',
-	  'slug'
+	  'slug',
+	  "post_content",
+	  "objective_id"
 	];
 
 	public function User() {
       return $this->belongsTo('App\User');
     }
 
-    // public function UserSkills() {
-    //   return $this->hasMany('App\UserSkills');
-    // }
-	//
     public function PostSkill() {
         return $this->hasMany('App\PostSkill');
     }
+
+	public function Objective() {
+		return $this->belongsTo('App\Objective');
+	}
 }

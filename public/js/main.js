@@ -13,46 +13,6 @@ function App() {
         }
     }
 
-    function Tour() {
-        this.init = function() {
-            if(localStorage.getItem('tour-complete') !== null) {
-                localStorage.removeItem('tour');
-                $('#header-bar').find('[data-step]').attr('data-intro', 'Good job, now that your training is complete I dare say you have earned a promotion.')
-            }
-            if(localStorage.getItem('tour') !== null) {
-                $('#header-bar').find('[data-step]').each(function() {
-                    $(this).removeAttr('data-step').removeAttr('data-intro');
-                })
-            }
-
-            if(localStorage.getItem('tour-complete') === null) {
-                var intro = introJs()
-                intro.setOption('doneLabel', 'Next page')
-                intro.start();
-
-                if(window.location.pathname.indexOf('objective') > 0) {
-                    intro.oncomplete(function() {
-                        localStorage.setItem("tour-complete", "true");
-                        window.location.href = '/dashboard';
-                    })
-                } else if(window.location.pathname.indexOf('mission') > 0) {
-                    intro.oncomplete(function() {
-                        window.location.href = '/campaign/your-very-first-campaign/mission/your-very-first-mission/objective/your-very-first-objective';
-                    })
-                } else if(window.location.pathname.indexOf('campaign') > 0) {
-                    intro.oncomplete(function() {
-                        window.location.href = '/campaign/your-very-first-campaign/mission/your-very-first-mission';
-                    });
-                } else {
-                    intro.oncomplete(function() {
-                        localStorage.setItem("tour", "true");
-                        window.location.href = '/campaign/your-very-first-campaign';
-                    });
-                }
-            }
-        }
-    }
-
     function TransparencyModifier() {
         this.init = function(element, transparencyClass, distFromTop) {
             var defaults = {
@@ -290,9 +250,6 @@ function App() {
     this.init = function() {
         var objective = new Objective();
         objective.slideMaintenance();
-
-        var tour = new Tour();
-        tour.init();
 
         var authentication = new Authentication();
         authentication.logout('.logout');

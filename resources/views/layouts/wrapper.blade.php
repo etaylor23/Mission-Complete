@@ -4,7 +4,6 @@
         <meta charset="utf-8">
         <title></title>
         <link href="{{{ asset('css/main.css') }}}" rel="stylesheet">
-        <link href="{{{ asset('css/introjs.css') }}}" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
         <link rel="stylesheet" href="{{{ asset('css/font-awesome.css') }}}">
 
@@ -20,7 +19,6 @@
         <script src="{{{ asset('js/foundation.util.motion.js') }}} "></script>
 
 
-        <script src="{{{ asset('js/intro.js') }}}"></script>
         <script src="{{{ asset('js/typed.js')}}}"></script>
 
 
@@ -31,30 +29,11 @@
         <script src="{{{ asset('js/d3.js') }}}"></script>
         <script src="{{{ asset('js/d3pie.js') }}}"></script>
         <script src="{{{ asset('js/countUp.js') }}}"></script>
+        <script src="{{{ asset('js/isotope.js') }}}"></script>
 
         <script src="//js.pusher.com/4.0/pusher.min.js"></script>
 
         <script src="{{{ asset('js/echo.js') }}}"></script>
-
-        <script type="text/javascript">
-            window.Echo = new Echo({
-                broadcaster: 'pusher',
-                key: '4eb1e04947d0e9832e22'
-            });
-
-            Echo.channel('chat-room.1')
-                .listen('ObjectiveComplete', function(e) {
-                    console.log(e);
-            });
-
-
-            // var pusher = new Pusher('4eb1e04947d0e9832e22');
-            // var channel = pusher.subscribe('chat-room.1');
-            // channel.bind("ObjectiveComplete", function(data) {
-            //   console.log('An event was triggered with message: ' + JSON.stringify(data));
-            // });
-        </script>
-
 
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -66,8 +45,6 @@
           ga('send', 'pageview');
 
         </script>
-
-
 
         <script type="text/javascript">
             if(window.location.pathname === '/') {
@@ -151,7 +128,7 @@
         <div class="page-wrapper">
 			<div id="header-bar" class="@if(Request::is('/')) homepage @endif">
 				<header class="header" role="banner">
-                    <nav>
+            <nav>
     					<div class="title-bar @if(Request::is('/')) transparent @endif">
     						<div class="row">
     							<div class="text-left small-5 columns main-nav nav">
@@ -180,7 +157,7 @@
                                                     {{ csrf_field() }}
                                                     <a href="#" class="logout triple fa fa-sign-out"></a>
                                                 </form>
-                                                <a class="fa fa-tachometer triple" data-step="1" data-intro="Welcome Soldier, good to have you aboard! We're about to take you on a training programme so you know how to use this super weapon that we've created." href="{{ url('/dashboard') }}"></a>
+                                                <a class="fa fa-tachometer triple" href="{{ url('/dashboard') }}"></a>
                                                     @if (!str_contains(Route::current()->getUri(), 'objective'))
                                                     <a class="fa fa-plus-circle triple" data-open="completed-status" aria-controls="completed-status" aria-haspopup="true"></a>
                                                     @endif
@@ -189,11 +166,11 @@
                                         </div>
                                     @endif
                                 </div>
-    						</div>
-    					</div>
-                        <div class="secondary-nav hidden" style="">Lipsum
-                        </div>
-                    </nav>
+              						</div>
+              					</div>
+                    <div class="secondary-nav hidden" style="">Lipsum
+                </div>
+            </nav>
 				</header>
             </div>
             @yield('content')

@@ -11,6 +11,11 @@ use Auth;
 use App\URLParser\URLParserMain;
 use App\AssetCreatedDate\AssetCreatedDateCore;
 use Carbon\Carbon;
+use App\Post;
+use App\PostSkill;
+use App\Skill;
+use App\UserSkill;
+use App\Events\ObjectiveComplete;
 
 
 
@@ -76,6 +81,29 @@ class ObjectivesController extends Controller
         $newObjective['objective_slug'] = str_slug($newObjective['name']);
 
         $objectiveCreated = Objective::create($newObjective);
+
+        if (strpos($newObjective['name'], '#') !== false) {
+            preg_match_all("/(#\w+)/", $newObjective['name'], $matches);
+            foreach ($matches[0] as $key => $skill) {
+                $skillExists = Skill
+                ::firstOrCreate(
+                    ['skill_name' => str_replace('#', '', $skill)]
+                );
+
+                $newUserSkill = new UserSkill(['user_id' => Auth::user()->id, 'skill_id' => $skillExists->id, 'objective_id' => $objectiveCreated->id]);
+                $newUserSkill::create($newUserSkill->toArray());
+            }
+
+        }
+
+        // $user = \App\User::first();
+        // $message = \App\ObjectiveComplete::create([
+        //     'user_id' => $user->id,
+        //     'message' => "Hello you Ellis",
+        //     'test' => "This is a test"
+        // ]);
+
+        // event(new ObjectiveComplete($message, $user));
 
         return redirect('campaign/'.$campaignSlug.'/mission/'.$missionSlug);
     }
@@ -155,8 +183,6 @@ class ObjectivesController extends Controller
 
         $request = Request::all();
 
-
-
         $objective = Objective
                     ::where('objective_slug', $objective_slug)
                     ->first();
@@ -164,16 +190,80 @@ class ObjectivesController extends Controller
                     $objectiveName = $objective
                                     ->name;
 
-
         if($request['done'] !== "0") {
-            //$maintenance_aggression = $request['maintenance_aggression'];
+            /**
+            * Create and configure a new objective
+            **/
             $next_maintenance_instance_date = Carbon::now()->addDays($request['maintenance_aggression'])->toDateString();
-            //dd($next_maintenance_instance_date);
             $objective->proof_of_completion = $request['proof_of_completion'];
             $objective->maintenance_plan = $request['maintenance_plan'];
             $objective->maintenance_aggression = $request['maintenance_aggression'];
             $objective->next_maintenance_instance_date = $next_maintenance_instance_date;
             $objective->maintenance_length = $request['maintenance_length'];
+
+            /**
+            * Check for all hashtags in the objective name
+            * For each hashtag:
+            * - Get the skill appropriate for that hashtag
+            * - Create a new post with a user_id (from the current user), post_content (from the objective's name), and objective_id (from the objective's id)
+            * - Create a new post skill with a skill_id (from the appropriate skill), and a post_id (from the newly created post)
+            **/
+            preg_match_all("/(#\w+)/", $objective->name, $matches);
+            foreach ($matches[0] as $key => $hashtag) {
+                $skill = Skill::where('skill_name', str_replace('#', '', $hashtag))->first();
+                $newPost = new Post(['user_id' => Auth::user()->id, 'post_content' => $objective->name, 'objective_id' => $objective->id]);
+                $createdPost = $newPost::create($newPost->toArray());
+
+                $newPostSkill = new PostSkill(['skill_id' => $skill->id, 'post_id' => $createdPost->id]);
+                $completedPostSkill = $newPostSkill::create($newPostSkill->toArray());
+
+                /*
+                * - Do a reverse look up for all users that follow the currently logged in user
+                * - For each user, send a broadcast event adding the skill name and the user_id
+                * - This constrains push events to only those who follow this user
+                */
+                $followedBy = Auth::user()
+                                ->FollowedBy;
+
+                foreach ($followedBy as $followedByKey => $followedByValue) {
+                  event(new ObjectiveComplete(['user_id' => Auth::user()->id, 'skill_name' => $skill->skill_name, 'post_content' => $objective->name, 'followed_id' => $followedByValue->user_id], Auth::user()));
+                }
+            }
+        }
+
+        if($request['done'] !== "1") {
+
+
+            /**
+            * Check for all hashtags in the objective name
+            * For each hashtag:
+            * - Get the skill appropriate for that hashtag
+            * - Create a new post with a user_id (from the current user), post_content (from the objective's name), and objective_id (from the objective's id)
+            * - Create a new post skill with a skill_id (from the appropriate skill), and a post_id (from the newly created post)
+            **/
+            preg_match_all("/(#\w+)/", $objective->name, $matches);
+            foreach ($matches[0] as $key => $hashtag) {
+                $skill = Skill::where('skill_name', str_replace('#', '', $hashtag))->first();
+                $postToDelete = Post
+                    ::where('user_id', Auth::user()->id)
+                    ->where('post_content', $objective->name)
+                    ->first();
+                if (!is_null($postToDelete)) {
+                    $postToDelete->delete();
+                }
+            }
+
+
+
+
+
+            // look up skills for skill names passed
+            // delete posts where these skills exist and are routed to this user_id
+            // this should remove post_skill via cascaded foreign key deletion
+            // user_skills should also be deleted when a user deletes an objective
+            // test all data cascades correctly
+            // update trello with these tasks, as well as web sockets done (once data is mapped)
+            // add to trello a follow lookup as a new card
         }
 
         $objective->done = $request['done'];

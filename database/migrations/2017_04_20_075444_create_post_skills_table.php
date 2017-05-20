@@ -17,6 +17,10 @@ class CreatePostSkillsTable extends Migration
             $table->increments('id');
             $table->integer('skill_id')->unsigned();
             $table->integer('post_id')->unsigned();
+            $table->foreign('post_id')
+                  ->references('id')
+                  ->on('posts')
+                  ->onDelete('cascade');
             $table->timestamps();
         });
     }

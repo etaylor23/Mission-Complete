@@ -98,8 +98,8 @@ body {
             margin-top: 1rem;
             padding-top: 1rem;
             padding-bottom: 1rem;
-            border-bottom-color: $cobaltBlue1;
-            border-top-color: $cobaltBlue1;
+            border-bottom-color: $pastilleGreen1;
+            border-top-color: $pastilleGreen1;
             border-bottom-width: 5px;
             border-top-width: 5px;
             color: $white;
@@ -113,8 +113,7 @@ body {
     }
 
     .title-bar.not-top {
-        background:$titleBarOffset;
-
+        background: $titleBarOffset;
     }
 
     .secondary-nav {
@@ -144,7 +143,6 @@ body {
     }
 
     .header {
-
         .home-logo {
             a {
                 display: block;
@@ -245,7 +243,7 @@ body {
         }
 
         .inner-column {
-            border: 1px solid $cobaltBlue4;
+            border: 1px solid $pastilleGreen3;
             border-radius: 0;
             position: relative;
             transition: all 400ms ease;
@@ -253,7 +251,7 @@ body {
                 transform: scale(1.1,1.1);
                 color: $textColorActive;
                 .completeness {
-                    background: $cobaltBlue1;
+                    background: $pastilleGreen1;
                 }
             }
         }
@@ -368,8 +366,100 @@ body {
         .complete {
             color: $complete;
         }
+    }
+
+    .posts {
+
+        .portfolioFilter {
+          margin-bottom: 15px;
+        }
+
+        .portfolioFilter a {
+            margin-right: 10px;
+        	color:#666;
+        	text-decoration:none;
+          transition: all 0.5s ease;
+          font-size: 2rem;
+        }
+
+        .portfolioFilter a:link, a:visited {
+          background-color: $pastilleGreen1;
+          color: white;
+          padding: 14px 25px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+        }
+
+        .portfolioFilter a:hover {
+          box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+          background-color: $pastilleGreen3;
+          color: $white;
+        }
 
 
+        .portfolioFilter a.current {
+            font-weight:bold;
+        }
+
+
+        img {
+            margin:5px;
+        }
+
+        .isotope-item {
+            z-index: 2;
+        }
+        .isotope-hidden.isotope-item {
+            pointer-events: none;
+            z-index: 1;
+        }
+        .isotope,
+        .isotope .isotope-item {
+          /* change duration value to whatever you like */
+
+            -webkit-transition-duration: 0.8s;
+            -moz-transition-duration: 0.8s;
+            transition-duration: 0.8s;
+        }
+        .isotope {
+            -webkit-transition-property: height, width;
+            -moz-transition-property: height, width;
+            transition-property: height, width;
+        }
+        .isotope .isotope-item {
+            -webkit-transition-property: -webkit-transform, opacity;
+            -moz-transition-property: -moz-transform, opacity;
+            transition-property: transform, opacity;
+        }
+
+        .columns {
+            background: $pastilleGreen3;
+            padding: 0;
+        }
+
+        .post-inner {
+            padding: 15px;
+        }
+
+        .post-inner h3 {
+            color: white;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid $pastilleGreen3;
+        }
+
+
+        .listing {
+            list-style-type: none;
+            margin-left: 0;
+        }
+        .post {
+            .post-inner {
+                background: $postBackgroundColor;
+                padding: 15px;
+            }
+        }
     }
 }
 
