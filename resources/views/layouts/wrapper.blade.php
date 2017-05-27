@@ -122,28 +122,36 @@
                 });
             }
         </script>
+
     </head>
     <body>
 
-        <div class="page-wrapper">
+    <div class="page-wrapper">
 			<div id="header-bar" class="@if(Request::is('/')) homepage @endif">
 				<header class="header" role="banner">
             <nav>
     					<div class="title-bar @if(Request::is('/')) transparent @endif">
     						<div class="row">
-    							<div class="text-left small-5 columns main-nav nav">
-                                    <!--
-                                    <a id="our-mission" href="#our-mission" class="global-spacing left">Our Mission</a>
-                                    <a id="your-mission" href="#your-mission" class="global-spacing left">Your Mission</a>-->
-    							</div>
+
+                  @if(Auth::check())
+    							<div class="text-left small-5 columns follow-search">
+                    <form action="/follow/search" method="get">
+                        <input type="text" name="find-user" id="find-user" placeholder="Search user">
+                    </form>
+                  </div>
+                  @else
+                  <div class="text-left small-5 columns main-nav nav"></div>
+                  @endif
+
+
     							<div class="home-logo text-center small-2 columns">
-                                    @if(Auth::check())
-    								    <a href="/dashboard">
-                                    @else
-                                        <a href="/">
-                                    @endif
-                                        <img src="{{{ asset('images/mission-complete.png') }}}" />
-                                    </a>
+                    @if(Auth::check())
+                    <a href="/dashboard">
+                    @else
+                        <a href="/">
+                    @endif
+                        <img src="{{{ asset('images/mission-complete.png') }}}" />
+                    </a>
     							</div>
     							<div class="text-right small-5 columns">
                                     @if (Route::has('login'))
@@ -177,6 +185,50 @@
 
         </div>
 
+        <script type="text/javascript">
+          function addFollowers(details) {
+            if($('.followers').length > 0) {
+              var newFollow = "<h2>" +
+                  details.followedUser.name +
+                  "<a href='/follow/" + details.followId.follow_id + "' class='delete-follow'>" +
+                    "<span class='fa fa-remove'></span>" +
+                  "</a>" +
+              "</h2>";
+              $('.followers').append(newFollow);
+            }
+          }
+
+          $('#find-user').keyup(function(data) {
+              if($(this).val() !== '') {
+                  $.ajax({
+                    url: '/follow/search?find-user=' + $(this).val(),
+                    context: $(this)
+                  }).done(function(data) {
+                    var usersFound = data;
+                    console.log(usersFound);
+                    var userString = "<ul class='users'>";
+                    usersFound.forEach(function(user) {
+                       console.log(user)
+                       userString += '<li data-id="' + user.id + '">' + user.name + '</li>';
+                    })
+                    userString += "</ul>"
+                    $(this).siblings('.users').remove();
+                    $(this).after(userString);
+                  })
+              } else {
+                  $(this).siblings('.users').remove();
+              }
+          })
+
+          $('body').on('click', '.users li', function() {
+            $.ajax({
+              url: '/follow/create?follow-id=' + $(this).data('id')
+            }).done(function(data) {
+              console.log(data);
+              addFollowers(data);
+            })
+          })
+        </script>
 
     </body>
 </html>

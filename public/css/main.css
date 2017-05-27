@@ -4810,4 +4810,21 @@ body {
     .tv .screen.active {
       opacity: 1; }
 
+.follow-search #find-user {
+  margin-bottom: 2px; }
+
+.follow-search form {
+  position: relative; }
+
+.follow-search ul {
+  position: absolute;
+  list-style-type: none;
+  background: white;
+  color: grey;
+  margin-left: 0;
+  width: 100%;
+  padding: 10px; }
+  .follow-search ul li {
+    cursor: pointer; }
+
 /*# sourceMappingURL=main.css.map */

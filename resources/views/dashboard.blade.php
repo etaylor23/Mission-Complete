@@ -82,8 +82,18 @@
         </div>
         <div class="column small-12 medium-9 large-9 missions">
             <div class="row">
-                <div class="column small-12 medium-12 large-12">
+                <div class="column small-12 medium-6 large-6">
                     <h2>Missions</h2>
+                </div>
+                <div class="column small-12 medium-3 large-3">
+                    <a href="/follow/following">
+                        <h2>Following: {{ $following }}</h2>
+                    </a>
+                </div>
+                <div class="column small-12 medium-3 large-3">
+                    <a href="/follow/followers">
+                    <h2>Followers: {{ $followers }}</h2>
+                  </a>
                 </div>
                 @if(count($missions) !== 0)
                 @foreach($missions as $missionsInstance)

@@ -22,7 +22,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('dashboard/maintenance-complete/{objective_slug}', 'DashboardController@maintenanceComplete');
 
     Route::get('dashboard', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
-    Route::resource('follow', 'FollowController@index');
+
+    Route::get('follow/search', 'FollowController@searchUser');
+    Route::get('follow/following', 'FollowController@showFollowing');
+    Route::get('follow/followers', 'FollowController@showFollowers');
+    Route::resource('follow', 'FollowController');
 
     Route::resource('api/campaign', 'CampaignsController');
     Route::resource('campaign', 'CampaignsController');

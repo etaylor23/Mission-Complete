@@ -69,7 +69,9 @@ class DashboardController extends Controller
               ->with('nextMaintenceInstanceDate', $nextMaintenceInstanceDate)
               ->with('followPosts', $followPosts)
               ->with('currentUserSkillsName', $currentUserSkillsName)
-              ->with('userId', Auth::user()->id);
+              ->with('userId', Auth::user()->id)
+              ->with('following', count(Auth::user()->Follows))
+              ->with('followers', count(Auth::user()->FollowedBy));
 
     }
 

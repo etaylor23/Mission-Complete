@@ -2,8 +2,13 @@
 @section('content')
 
 <div class="main-content">
-    <h1>Test</h1>
+    <h1>Find followers</h1>
 
+    <form class="" action="/follow/search" method="get">
+        <input type="text" name="find-user" id="find-user" placeholder="Search user">
+    </form>
 
 </div>
+
+
 @endsection

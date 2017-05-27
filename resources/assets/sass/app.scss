@@ -534,3 +534,24 @@ body {
     }
   }
 }
+
+.follow-search {
+  #find-user {
+    margin-bottom: 2px;
+  }
+  form {
+    position: relative;
+  }
+  ul {
+    position: absolute;
+    list-style-type: none;
+    background: white;
+    color: grey;
+    margin-left: 0;
+    width: 100%;
+    padding: 10px;
+    li {
+      cursor: pointer;
+    }
+  }
+}
