@@ -29,6 +29,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('follow', 'FollowController');
 
     Route::resource('api/campaign', 'CampaignsController');
+    
+    Route::get('campaign/list', 'CampaignsController@listCampaigns');
     Route::resource('campaign', 'CampaignsController');
 
 

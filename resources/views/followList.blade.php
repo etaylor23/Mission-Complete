@@ -9,9 +9,14 @@
 						@foreach ($following as $key => $follow)
 						<h2>
 								{{$follow->getAttribute($userLinkType)->name}}
+
+
+									<!--  do if showicon -->
+								@if ($showIcon)
 								<a href="/follow/{{$follow->id}}" class="delete-follow">
 									<span class="fa fa-remove"></span>
 								</a>
+								@endif
 						</h2>
 						@endforeach
 				</div>

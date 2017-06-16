@@ -131,7 +131,8 @@ class FollowController extends Controller
       return view('followList')
                 ->with('following', $following)
                 ->with('title', 'People You\'re Following')
-                ->with('userLinkType', 'User');
+                ->with('userLinkType', 'User')
+                ->with('showIcon', true);
     }
 
     public function showFollowers()
@@ -148,6 +149,7 @@ class FollowController extends Controller
       return view('followList')
                 ->with('following', $followers)
                 ->with('title', 'Followers')
-                ->with('userLinkType', 'FollowingUser');
+                ->with('userLinkType', 'FollowingUser')
+                ->with('showIcon', false);
     }
 }

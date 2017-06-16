@@ -3,16 +3,27 @@
 
 <div class="main-content">
 
+  <!-- <div class="tv">
+        <div class="screen mute" id="tv"></div>
+  </div> -->
+  <div class="parallax-window extra large" data-parallax="scroll" data-ios-fix="true" data-image-src="http://localhost:8888/images/tank-1.jpg">
     <div class="cover">
       <div class="hi"></div>
+      <div class="play-container">
+        <a href="#" class="fa fa-play-circle-o" data-open="introduction-video"></a>
+      </div>
+
+
+      <div class="reveal" id="introduction-video" data-reveal data-animation-in="slide-in-down" data-animation-out="slide-out-down">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/B0VXudy-2UI" frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
-  <div class="tv">
-        <div class="screen mute" id="tv"></div>
   </div>
+
 
   <div class="homepage-content">
       <div name="our-mission" class="our-mission" data-level="primary">
-          <div class="parallax-window" data-parallax="scroll">
+          <div class="parallax-window" data-parallax="scroll" data-ios-fix="true">
               <div class="icon-container primary">
                   <img src="{{{ asset('images/mission-complete.png') }}}" />
               </div>
@@ -38,7 +49,7 @@
 
 
       <div name="effort-output-vs-feedback" data-level="secondary">
-          <div class="parallax-window" data-parallax="scroll" data-image-src="{{{ asset('images/old-planes.jpg') }}}">
+          <div class="parallax-window" data-parallax="scroll" data-ios-fix="true" data-image-src="{{{ asset('images/old-planes.jpg') }}}">
               <div class="icon-container">
                   <div class="fa fa-superpowers"></div>
               </div>
@@ -53,7 +64,7 @@
                                <p>
                                    <strong>Whats it worth?</strong>
                                </p>
-                               <p>Hours of work, and for what? We'll tell you exactly what.</p>
+                               <p>Hours of work, and for what? We'll tell you exactly what</p>
                                <p>We provide you your very own structured self improvement plan that grows as you do</p>
                            </div>
                        </div>
@@ -85,8 +96,8 @@
         </div>
     </div>
 
-    <div name="completion-and-self-maintenance" data-level="secondary">
-        <div class="parallax-window" data-parallax="scroll"  data-image-src="{{{ asset('images/old-planes.jpg') }}}">
+    <div name="completion-and-maintenance" data-level="secondary">
+        <div class="parallax-window" data-parallax="scroll" data-ios-fix="true"  data-image-src="{{{ asset('images/war-2.jpg') }}}">
             <div class="icon-container">
                 <div class="fa fa-check"></div>
             </div>
@@ -131,7 +142,7 @@
 
           <!--</div>-->
   </div>
-      <div class="parallax-window" data-parallax="scroll" data-image-src="{{{ asset('images/old-planes.jpg') }}}"></div>
+      <div class="parallax-window" data-parallax="scroll" data-ios-fix="true" data-image-src="{{{ asset('images/war-1.jpg') }}}"></div>
       <!--<div name="your-mission" class="your-mission" data-level="primary">
           <div class="row">
               <div class="column small-12 medium-4 large-4 text-center large-offset-4 global-spacing top bottom">

@@ -216,4 +216,14 @@ class CampaignsController extends Controller
         return redirect('dashboard');
 
     }
+
+    public function listCampaigns(Request $request)
+    {
+      $queryString = Request::input('q');
+      $matchingCampaigns = Campaign::where('name', 'like', '%'.$queryString.'%')
+                              ->get()
+                              ->toArray();
+      header("Content-Type: application/json");
+      return $matchingCampaigns;
+    }
 }

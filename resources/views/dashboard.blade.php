@@ -195,10 +195,10 @@
                     ">
                         <div class="post-inner">
                             <h3>{{ $followedValue->User->name }}</h3>
-                            {{ $postValue->post_content }}<br />
+                            just completed {{ $postValue->post_content }}<br />
                             You also have
                             @foreach ($postValue->PostSkill as $postSkill => $postSkillValue)
-                              {{ $postSkillValue->Skill->skill_name }} |
+                              {{ $postSkillValue->Skill->skill_name }}
                             @endforeach
                         </div>
                     </div>
