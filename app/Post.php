@@ -28,4 +28,12 @@ class Post extends Model
 	public function Objective() {
 		return $this->belongsTo('App\Objective');
 	}
+
+	public function Thread() {
+		return $this->hasOne('App\Thread');
+	}
+
+	public function ThreadAll() {
+		return $this->hasMany('App\Thread');
+	}
 }

@@ -188,18 +188,45 @@
                       $a=array("67DB88", "7CCB93", "4D9E69");
                       $random_keys=array_rand($a,1);
                     ?>
-                    <div style="background-color: #<?php echo $a[$random_keys] ?>;" class="objects tests columns large-3
+
+                    <div data-thread-id="
+                        @if(!is_null($postValue->ThreadAll))
+                            @if(!$postValue->ThreadAll->where('user_id', Auth::user()->id)->isEmpty())
+                              {{ $postValue->ThreadAll->where('user_id', Auth::user()->id)->first()->id }}
+                            @else
+                              0
+                            @endif
+                        @else
+                            0
+                        @endif
+                    " data-post-id="{{ $postValue->id }}" style="background-color: #<?php echo $a[$random_keys] ?>;" class="objects tests columns large-3
                     @foreach ($postValue->PostSkill as $postSkill => $postSkillValue)
                         {{ $postSkillValue->Skill->skill_name }}
                     @endforeach
                     ">
                         <div class="post-inner">
-                            <h3>{{ $followedValue->User->name }}</h3>
-                            just completed {{ $postValue->post_content }}<br />
-                            You also have
+                            <h3>{{ $followedValue->User->name }}</h3> just completed {{ $postValue->post_content }}<br><br>
+                            {{ $followedValue->User->name }} might be able to help you with
                             @foreach ($postValue->PostSkill as $postSkill => $postSkillValue)
                               {{ $postSkillValue->Skill->skill_name }}
                             @endforeach
+                            too
+                        </div>
+                        @if($postValue->Thread)
+                            @if($postValue->Thread->where([['post_id', '=', $postValue->id], ['user_id', '=', Auth::user()->id]])->first())
+                                  @foreach ($postValue->Thread->where([['post_id', '=', $postValue->id], ['user_id', '=', Auth::user()->id]])->first()->Message as $message => $messageValue)
+                                      <p>{{ $messageValue->message }}</p>
+                                  @endforeach
+
+                            @endif
+                        @endif
+
+                        <div class="contact">
+                          <a class="ask" href="#">Ask how she did it.</a>
+                          <!-- <form style="display:none;">
+                            <textarea name="contact" rows="8" cols="80"></textarea>
+                            <input type="submit" class="submit" name="" value="Contact">
+                          </form> -->
                         </div>
                     </div>
                 @endforeach
@@ -240,6 +267,26 @@
 
         </div>
     </div>
+
+
+
+
+    <script type="text/javascript">
+
+    var baseContactForm = '{!! Form::open(["action" => "ChatsController@sendMessage", "class"=>"row", "style"=>"display:none"]) !!}' +
+          '<div class="column small-12 medium-12 large-12">' +
+              '{!! Form::label("message", "Message here") !!}' +
+              '{!! Form::textarea("message", null, ["size" => "30x5"]) !!}' +
+          '</div>' +
+
+          '<div class="column small-12 medium-4 large-4">' +
+              '{!! Form::submit("Create new campaign", ["class" => "button submit"]) !!}' +
+          '</div>' +
+      '{!! Form::close() !!}';
+
+      </script>
+
+
 
     <script type="text/javascript">
 

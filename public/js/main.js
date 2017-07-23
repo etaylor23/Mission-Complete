@@ -523,6 +523,21 @@ function App() {
           tags: true
         });
 
+        $('.contact .ask').on('click', function(e) {
+          e.preventDefault();
+          var formExists = $(this).siblings('form').length > 0;
+          if (!formExists) {
+              $(this).parent().append(baseContactForm);
+              var postId = $(this).parents('[data-post-id]').data('post-id');
+              var threadId = $(this).parents('[data-post-id]').data('thread-id').trim();
+              $(this).parent().find('textarea').after('<input type="hidden" name="thread" value="'+threadId+'" />')
+              $(this).parent().find('textarea').after('<input type="hidden" name="post" value="'+postId+'" />')
+
+              $(this).siblings('form').slideDown();
+          }
+
+        });
+
 
 
 

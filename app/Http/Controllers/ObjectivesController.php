@@ -144,6 +144,33 @@ class ObjectivesController extends Controller
      $assetCreated = new AssetCreatedDateCore();
      $assetCreatedRelative = $assetCreated->AssetCreatedRelative($objective->created_at);
 
+     $test = $objective
+                ->Post
+                ->ThreadAll
+                ->where('user_id', Auth::user()->id);
+                // user_id needs filling to match this
+    //  dd($test);
+
+    //  ::with(['Follows' => function($query) use(&$currentUserSkills) {
+    //      $query
+    //          ->with(['User.Posts' => function($postSkills) use(&$currentUserSkills) {
+    //                  $postSkills
+    //                  ->whereHas('PostSkill', function($subQuery) use(&$currentUserSkills) {
+    //                      $subQuery
+    //                          ->whereIn('skill_id', $currentUserSkills);
+    //                  })
+    //                  ->with(['PostSkill' => function($testSub) use(&$currentUserSkills) {
+    //                      $testSub
+    //                          ->with('Skill')
+    //                          ->get();
+    //                  }]);
+    //          }])
+    //          ->has('User.Posts.PostSkill')
+    //          ->get();
+    //  }])
+    //  ->where('users.id', '=', $currentUserId)
+    //  ->first();
+
       /*
        * If an objective has been received then move to an objective view and pass the objective information
        */

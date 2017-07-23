@@ -109,6 +109,19 @@
             <div class="callout">
                 <h2>{{ $objective->name }}</h2>
                 <p>{{ $objective->description }}</p>
+
+                {!! Form::open(["action" => "ChatsController@sendMessage", "class"=>"row"]) !!}
+                      <div class="column small-12 medium-12 large-12">
+                          {!! Form::label("message", "Message here") !!}
+                          {!! Form::textarea("message", null, ["size" => "30x5"]) !!}
+                      </div>
+
+                      <div class="column small-12 medium-4 large-4">
+                          {!! Form::submit("Create new campaign", ["class" => "button submit"]) !!}
+                      </div>
+                  {!! Form::close() !!}
+                
+
             </div>
         </div>
     </div>
