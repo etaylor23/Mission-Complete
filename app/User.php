@@ -58,4 +58,12 @@ class User extends Authenticatable
     public function PostSkills() {
         return $this->hasMany('App\PostSkills');
     }
+
+    // public function messages() {
+    //   return $this->hasMany(Message::class);
+    // }
+    // ^ may become redundant now thread introduced
+    public function Threads() {
+      return $this->hasOne(Thread::class);
+    }
 }

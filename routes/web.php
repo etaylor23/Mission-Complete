@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('follow', 'FollowController');
 
     Route::resource('api/campaign', 'CampaignsController');
-    
+
     Route::get('campaign/list', 'CampaignsController@listCampaigns');
     Route::resource('campaign', 'CampaignsController');
 
@@ -39,12 +39,23 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::resource('campaign.mission.objective', 'ObjectivesController');
 
+
+
+
+    Route::get('messages', 'ChatsController@fetchMessages');
+    Route::post('messages', 'ChatsController@sendMessage');
+
+
+
+
     Route::post('campaign/create', 'CampaignsController@store');
     Route::post('mission/create', 'MissionsContoller@store');
     Route::post('objective/create', 'ObjectivesController@store');
     Route::get('campaign/{slug}', 'CampaignsController@showCampaign');
 
     Route::get('/home', 'HomeController@index');
+
+
 
 });
 
