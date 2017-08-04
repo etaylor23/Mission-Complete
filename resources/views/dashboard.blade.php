@@ -208,7 +208,13 @@
                                 <h1>{{ $followedValue->User->name }}</h1>
                                 <h2>just completed {{ $postValue->post_content }}</h2>
                                 <figure class="avatar">
-                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" />
+                                    <img src="
+                                        @if(!is_null($followedValue->User->image))
+                                          {{{ asset('images/profiles/'.$followedValue->User->image) }}}
+                                        @else
+                                          {{{ asset('images/profiles/wine.jpg') }}}
+                                        @endif
+                                    " />
                                 </figure>
                             </div>
                       <div class="chat-title">
@@ -225,14 +231,20 @@
                                   @if($postValue->Thread->where([['post_id', '=', $postValue->id], ['user_id', '=', Auth::user()->id]])->first())
                                         @foreach ($postValue->Thread->where([['post_id', '=', $postValue->id], ['user_id', '=', Auth::user()->id]])->first()->Message as $message => $messageValue)
                                             <div class="message
-                                              @if($messageValue->user_id === Auth::user()->id)
-                                                message-personal
-                                              @endif">
-                                              @if($messageValue->user_id !== Auth::user()->id)
-                                              <figure class="avatar">
-                                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg">
-                                              </figure>
-                                              @endif
+                                                @if($messageValue->user_id === Auth::user()->id)
+                                                  message-personal
+                                                @endif">
+                                                <figure class="avatar">
+                                                  <img src="
+                                                      @if($messageValue->user_id === Auth::user()->id)
+                                                        {{{ asset('images/profiles/'.Auth::user()->image) }}}
+                                                      @elseif(!is_null($messageValue->User->image))
+                                                        {{{ asset('images/profiles/'.$messageValue->User->image) }}}
+                                                      @else
+                                                        {{{ asset('images/profiles/wine.jpg') }}}
+                                                      @endif
+                                                  ">
+                                                </figure>
                                                 {{ $messageValue->message }}
                                             </div>
                                         @endforeach
