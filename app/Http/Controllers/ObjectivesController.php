@@ -96,15 +96,6 @@ class ObjectivesController extends Controller
 
         }
 
-        // $user = \App\User::first();
-        // $message = \App\ObjectiveComplete::create([
-        //     'user_id' => $user->id,
-        //     'message' => "Hello you Ellis",
-        //     'test' => "This is a test"
-        // ]);
-
-        // event(new ObjectiveComplete($message, $user));
-
         return redirect('campaign/'.$campaignSlug.'/mission/'.$missionSlug);
     }
 
@@ -140,36 +131,20 @@ class ObjectivesController extends Controller
 
       $objective->maintenance_length = date('Y-m-d', strtotime($objective->maintenance_length));
 
+      $assetCreated = new AssetCreatedDateCore();
+      $assetCreatedRelative = $assetCreated->AssetCreatedRelative($objective->created_at);
 
-     $assetCreated = new AssetCreatedDateCore();
-     $assetCreatedRelative = $assetCreated->AssetCreatedRelative($objective->created_at);
-
-     $test = $objective
-                ->Post
-                ->ThreadAll
-                ->where('user_id', Auth::user()->id);
-                // user_id needs filling to match this
-    //  dd($test);
-
-    //  ::with(['Follows' => function($query) use(&$currentUserSkills) {
-    //      $query
-    //          ->with(['User.Posts' => function($postSkills) use(&$currentUserSkills) {
-    //                  $postSkills
-    //                  ->whereHas('PostSkill', function($subQuery) use(&$currentUserSkills) {
-    //                      $subQuery
-    //                          ->whereIn('skill_id', $currentUserSkills);
-    //                  })
-    //                  ->with(['PostSkill' => function($testSub) use(&$currentUserSkills) {
-    //                      $testSub
-    //                          ->with('Skill')
-    //                          ->get();
-    //                  }]);
-    //          }])
-    //          ->has('User.Posts.PostSkill')
-    //          ->get();
-    //  }])
-    //  ->where('users.id', '=', $currentUserId)
-    //  ->first();
+      $threads = array();
+      if(!is_null($objective->Post)) {
+          $threads = $objective
+                    ->Post
+                    ->ThreadAll()
+                    ->with(['Message' => function($query) {
+                        $query
+                            ->get();
+                    }])
+                    ->get();
+      }
 
       /*
        * If an objective has been received then move to an objective view and pass the objective information
@@ -179,7 +154,8 @@ class ObjectivesController extends Controller
                 ->with('objective', $objective)
                 ->with('mission', $mission)
                 ->with('campaign', $campaign)
-                ->with('timeSinceCreation', $assetCreatedRelative);
+                ->with('timeSinceCreation', $assetCreatedRelative)
+                ->with('threads', $threads);
       } else {
         return view('404')->with('notFoundType', 'mission');
       }
@@ -259,8 +235,6 @@ class ObjectivesController extends Controller
         }
 
         if($request['done'] !== "1") {
-
-
             /**
             * Check for all hashtags in the objective name
             * For each hashtag:
@@ -279,18 +253,6 @@ class ObjectivesController extends Controller
                     $postToDelete->delete();
                 }
             }
-
-
-
-
-
-            // look up skills for skill names passed
-            // delete posts where these skills exist and are routed to this user_id
-            // this should remove post_skill via cascaded foreign key deletion
-            // user_skills should also be deleted when a user deletes an objective
-            // test all data cascades correctly
-            // update trello with these tasks, as well as web sockets done (once data is mapped)
-            // add to trello a follow lookup as a new card
         }
 
         $objective->done = $request['done'];

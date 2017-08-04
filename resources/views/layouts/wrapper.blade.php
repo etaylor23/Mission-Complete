@@ -7,6 +7,7 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
         <link rel="stylesheet" href="{{{ asset('css/font-awesome.css') }}}">
         <link rel="stylesheet" href="{{{ asset('css/select2.min.css') }}}">
+        <link rel="stylesheet" href="{{{ asset('css/jquery.mCustomScrollbar.min.css') }}}">
 
         <script src="{{{ asset('js/jquery-2.2.4.js') }}}"></script>
         <script src="{{{ asset('js/foundation.core.js') }}} "></script>
@@ -32,7 +33,7 @@
         <script src="{{{ asset('js/countUp.js') }}}"></script>
         <script src="{{{ asset('js/isotope.js') }}}"></script>
         <script src="{{{ asset('js/select2.min.js') }}}"></script>
-
+        <script src="{{{ asset('js/jquery.mCustomScrollbar.concat.min.js') }}}"></script>
 
         <script src="//js.pusher.com/4.0/pusher.min.js"></script>
 
@@ -125,6 +126,7 @@
                 });
             }
         </script>
+
 
     </head>
     <body>

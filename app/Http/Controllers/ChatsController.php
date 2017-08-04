@@ -67,19 +67,17 @@ class ChatsController extends Controller
 
 		}
 
-
 		$message = \App\Message::create(
 			['user_id' => $user->id, 'thread_id' => $newThread->id, 'message' => $request->input('message')]
 		);
 
+		// event(new MessageSent($message, $newThread, Auth::user()));
+		broadcast(new MessageSent($message, $newThread, Auth::user()))->toOthers();
 
-		// event(new ObjectiveComplete(['user_id' => Auth::user()->id, 'skill_name' => $skill->skill_name, 'post_content' => $objective->name, 'followed_id' => $followedByValue->user_id], Auth::user()));
-
-
-		//create thread new or existing
-		//create message bound to that thread
-
-		return redirect('dashboard');
+		return array(
+			'message' => $message,
+			'thread'	=> $newThread
+		);
 
 	}
 

@@ -11,12 +11,13 @@ class Thread extends Model
 		"post_id",
 		"user_id"
 	];
-	// public function user() {
-	// 	return $this->belongsTo(User::class);
-	// }
-	// ^ may become redundant now thread introduced
+
 	public function User() {
 		return $this->belongsTo(User::class);
+	}
+
+	public function Post() {
+		return $this->belongsTo('App\Post');
 	}
 
 	public function Message() {
