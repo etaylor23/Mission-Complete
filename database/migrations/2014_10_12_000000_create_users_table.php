@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('firstLogin');
             $table->boolean('vip');
+            $table->string('image');
             $table->rememberToken();
             $table->timestamps();
         });

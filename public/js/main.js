@@ -525,8 +525,97 @@ function App() {
 
 
 
+    if($('.posts').length > 0) {
+        var $messages = $('.messages-content'),
+            d, h, m,
+            i = 0;
 
+        function updateScrollbar() {
+          $messages.mCustomScrollbar("update").mCustomScrollbar('scrollTo', 'bottom', {
+            scrollInertia: 10,
+            timeout: 0
+          });
+        }
 
+        function setDate(){
+            d = new Date()
+            m = d.getMinutes();
+            return $('<div class="timestamp">' + d.getHours() + ':' + m + '</div>').appendTo($('.message:last'));
+        }
+
+        function insertMessage(_this, message) {
+          var chatContainer = _this.parents('.chat').find('.messages-content')
+          var date = setDate();
+          var message = $('<div class="message message-personal">' + message + '</div>')
+          var fullMessage = date.appendTo(message);
+          chatContainer.append(message).addClass('new');
+          message.append(date);
+          $('.message-input').val(null);
+          updateScrollbar();
+        }
+
+        function insertAjaxMessage() {
+            var _this = this;
+            _this.parents('form').submit(function(e) {
+              var url = $(this).attr('action');
+
+              $.ajax({
+                type: "POST",
+                url: url,
+                data: _this.parents('form').serialize(),
+                context: _this,
+                success: function(data) {
+                  insertMessage(this, data.message.message);
+                }
+              })
+              e.preventDefault();
+            })
+
+        }
+
+        $('.message-submit').each(function() {
+          insertAjaxMessage.apply($(this));
+        });
+
+        $('.message-input').on('keydown', function(e) {
+          if (e.which == 13) {
+            $(this).parents('form').submit();
+            return false;
+          }
+        })
+
+      }
+
+      if($('.portfolioContainer').length > 0) {
+          var $container = $('.portfolioContainer');
+          $container.isotope({
+              filter: '*',
+              animationOptions: {
+                  duration: 750,
+                  easing: 'linear',
+                  queue: false
+              },
+              masonry: {
+                gutter: 10
+              }
+          });
+
+          $('.portfolioFilter a').click(function(){
+              $('.portfolioFilter .current').removeClass('current');
+              $(this).addClass('current');
+
+              var selector = $(this).attr('data-filter');
+              $container.isotope({
+                  filter: selector,
+                  animationOptions: {
+                      duration: 750,
+                      easing: 'linear',
+                      queue: false
+                  }
+               });
+               return false;
+          });
+      }
 
     }
 }
