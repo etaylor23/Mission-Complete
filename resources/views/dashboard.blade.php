@@ -57,6 +57,7 @@
                         <div class="inner-column" counter top="{{ $campaign->slug }}">
                             <div class="title">
                                 <a href="/campaign/{{ $campaign->slug }}">{{ $campaign->name }}</a>
+                                <a data-filter=".{{ $campaign->slug }}"class="campaign-filter fa-filter fa"></a>
                             </div>
                             <div class="completeness">
                                 @if(!is_null($campaign->percent_complete))
@@ -68,6 +69,10 @@
                                     {{ $campaign->percent_complete }}
                                 </div>
 
+                                <div class="container">
+                                  <div id="percent"></div>
+                                  <svg id="svg-{{ $campaign->id }}"></svg>
+                                </div>
                                 @else
                                     <span class="start">Start campaign</start>
                                 @endif
@@ -80,7 +85,7 @@
                 @endif
             </div>
         </div>
-        <div class="column small-12 medium-9 large-9 missions">
+        <div class="column small-12 medium-9 large-9">
             <div class="row">
                 <div class="column small-12 medium-6 large-6">
                     <h2>Missions</h2>
@@ -95,16 +100,40 @@
                     <h2>Followers: {{ $followers }}</h2>
                   </a>
                 </div>
+            </div>
+
+            <div class="row missions">
+                <div class="grid-sizer"></div>
+                <div class="grid-item"></div>
                 @if(count($missions) !== 0)
-                @foreach($missions as $missionsInstance)
-                    @foreach($missionsInstance as $mission)
-                        <div class="column small-12 medium-12 large-6">
+                @foreach($missions as $missionInstanceKey => $missionsInstance)
+                    @foreach($missionsInstance as $missionKey => $mission)
+                        <div style="z-index: {{$loop->count - $loop->iteration}}" class="mission {{ $mission->Campaign->slug }}">
                             <div class="inner-column" counter parent="{{ $mission->Campaign->slug }}">
-                                <div class="title">
-                                    <a href="campaign/{{$mission->Campaign->slug}}/mission/{{$mission->mission_slug}}">
-                                      {{$mission->name}}
-                                    </a>
-                                </div>
+                              <div class="panel-main-container">
+                                  <div class="completeness">
+                                      @if(!is_null($mission->percent_complete))
+                                          <div id="{{ $mission->mission_slug }}"  class="counter-container">
+                                          </div>
+                                          <div class="end">
+                                              {{ $mission->percent_complete }}
+                                          </div>
+                                          <div class="title">
+                                              <a href="campaign/{{$mission->Campaign->slug}}/mission/{{$mission->mission_slug}}">
+                                                {{$mission->name}}
+                                              </a>
+                                          </div>
+                                          <div class="container">
+                                            <div id="percent"></div>
+                                            <svg id="svg-{{ $mission->id }}"></svg>
+                                          </div>
+                                      @else
+                                          <span class="start">Start mission</start>
+                                      @endif
+                                  </div>
+
+                              </div>
+
                                 <div class="listing-wrapper hidden">
                                     <ol class="objectives listing">
                                         @foreach($mission->Objective
@@ -133,18 +162,6 @@
                                         @endforeach
                                     </ol>
                                 </div>
-                                <div class="completeness">
-                                    @if(!is_null($mission->percent_complete))
-                                        <div id="{{ $mission->mission_slug }}"  class="counter-container">
-
-                                        </div>
-                                        <div class="end">
-                                            {{ $mission->percent_complete }}
-                                        </div>
-                                    @else
-                                        <span class="start">Start mission</start>
-                                    @endif
-                                </div>
                             </div>
                         </div>
                     @endforeach
@@ -152,8 +169,6 @@
                 @else
                     <strong>You have no missions</strong>
                 @endif
-
-
             </div>
         </div>
     </div>
@@ -171,21 +186,9 @@
                     #{{ $skillValue }}
                 </a>
             @endforeach
-
-        	<!-- <a href="#" data-filter=".people">People</a>
-        	<a href="#" data-filter=".places">Places</a>
-        	<a href="#" data-filter=".food">Food</a>
-            <a href="#" data-filter=".objects">Objects</a>
-            <a href="#" data-filter=".tests">Tests</a> -->
-
         </div>
 
-
-
-
-
         <div class="portfolioContainer row posts">
-
             @foreach($followPosts->Follows as $followed => $followedValue)
                 @foreach ($followedValue->User->Posts as $post => $postValue)
                     <div
@@ -253,11 +256,6 @@
                           </div>
                       </div>
                       <div class="message-box">
-                          <!-- <textarea type="text" class="message-input" placeholder="Type message..."></textarea>
-                          <button type="submit" class="message-submit">Send</button> -->
-
-
-
                           {!! Form::open(["action" => "ChatsController@sendMessage"]) !!}
                                     {!! Form::textarea("message", null, ["class" => "message-input", "placeholder" => "Type message..."]) !!}
                                     @if(!is_null($postValue->ThreadAll))
@@ -333,10 +331,6 @@
         })
 
     </script>
-
-
-
-
 
 </div>
 
