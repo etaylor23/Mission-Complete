@@ -30,10 +30,10 @@
 
         <script src="{{{ asset('js/d3.js') }}}"></script>
         <script src="{{{ asset('js/d3pie.js') }}}"></script>
-        <script src="{{{ asset('js/countUp.js') }}}"></script>
         <script src="{{{ asset('js/isotope.js') }}}"></script>
         <script src="{{{ asset('js/select2.min.js') }}}"></script>
         <script src="{{{ asset('js/jquery.mCustomScrollbar.concat.min.js') }}}"></script>
+        <script src="{{{ asset('js/snap.svg-min.js') }}}"></script>
 
         <script src="//js.pusher.com/4.0/pusher.min.js"></script>
 
