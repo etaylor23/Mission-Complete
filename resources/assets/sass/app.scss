@@ -264,77 +264,7 @@ body {
 
     .panes {
 
-
-
-
-
-
-      $color: #e55454;
-
-      .cross__svg {
-          border-radius: 50%;
-          display: block;
-          height: 100%;
-          stroke-width: 4;
-          width: 100%;
-      }
-
-      .cross__circle {
-          animation: 1.6s ease 0s normal forwards 1 running stroke;
-          fill: none;
-          margin: 0 auto;
-          stroke: $color;
-          stroke-dasharray: 166;
-          stroke-dashoffset: 166;
-          stroke-width: 3;
-      }
-
-      .cross__path {
-          stroke: $color;
-          stroke-dasharray: 48;
-          stroke-dashoffset: 48;
-          transform-origin: 50% 50% 0;
-          &--right {
-            animation: 0.8s ease 1.3s normal forwards 1 running stroke;
-          }
-          &--left {
-            animation: 1s ease 1.3s normal forwards 1 running stroke;
-          }
-      }
-
-      @keyframes stroke {
-        100% {
-          stroke-dashoffset: 0;
-        }
-      }
-
-
-
-
-
-        .circ{
-          opacity: 0;
-          stroke-dasharray: 130;
-          stroke-dashoffset: 130;
-          -webkit-transition: all 3s;
-          -moz-transition: all 3s;
-          -ms-transition: all 3s;
-          -o-transition: all 3s;
-          transition: all 3s;
-        }
-        .tick{
-          stroke-dasharray: 50;
-          stroke-dashoffset: 50;
-          -webkit-transition: stroke-dashoffset 3s 0.5s ease-out;
-          -moz-transition: stroke-dashoffset 3s 0.5s ease-out;
-          -ms-transition: stroke-dashoffset 3s 0.5s ease-out;
-          -o-transition: stroke-dashoffset 3s 0.5s ease-out;
-          transition: stroke-dashoffset 3s 0.5s ease-out;
-        }
-        .drawn + svg .path{
-          opacity: 1;
-          stroke-dashoffset: 0;
-        }
+        @import "panes/paneSVG";
 
         .grid-sizer, .grid-item {
           width: 49%;
