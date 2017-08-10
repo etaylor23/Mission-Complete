@@ -74,39 +74,36 @@
             </div>
         </div>
 
-        <div class="row panes">
+        <div class="row">
             <div class="column small-12 medium-8 large-8">
-                <div class="callout">
-                    <h2>Missions</h2>
-
-                    <ol class="objectives listing">
-                        @foreach ($relatedMissions as $mission)
-                            <li>
-                                <div class="card">
-                                    <div class="card-inner">
-                                        <div class="summary">
-
-                                            <div class="objective-title">
-                                                <a href="/campaign/{{$mission->Campaign->slug}}/mission/{{$mission->mission_slug}}">{{$mission->name}}</a>
-                                                @if($mission->percent_complete  === 100)
-                                                    <span class="awesome double maintenance-complete complete"></span>
-                                                @endif
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ol>
+                <h2>Missions</h2>
+                <div class="row missions panes">
+                		<div class="grid-sizer"></div>
+                		<div class="grid-item"></div>
+                		@foreach ($relatedMissions as $pane)
+                			@include('partials.pane',
+                								array(
+                									'pane' => $pane,
+                									'url' => '/campaign/'.$pane->Campaign->slug.'/mission/'.$pane->mission_slug,
+                									'containerClasses' => "mission ".$pane->Campaign->slug,
+                                  'showObjectives' => false,
+                                  'parentAttribute' => $pane->Campaign->slug,
+                                  'completeness' => true
+                								)
+                							)
+                		@endforeach
                 </div>
             </div>
 
             <div class="column small-12 medium-4 large-4">
                 <div class="callout">
                     <h2>Complete</h2>
-                        <div id="pie"></div>
+                    <div class="panes">
+                        <div class="container">
+                            <div class="svg-pie-percent" id="campaignPercent"></div>
+                            <svg id="pieSVG"></svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

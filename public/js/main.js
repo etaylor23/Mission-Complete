@@ -127,76 +127,23 @@ function App() {
         }
     }
 
-    function D3Pie() {
-        var self = this;
-
-        self.init = function init() {
+    function SVGPie() {
+        var init = function init() {
             $.ajax({
                 url: '/api' + window.location.pathname
             }).done(function(data) {
-                var totalPie = 100,
-                    type = data.mission || data.campaign,
-                    incomplete = totalPie - type.percent_complete,
-                    children =  type.objective || type.children,
-                    pieId = 'pie';
-
-                if(children.length > 0) {
-                    var pie = new d3pie(pieId, {
-                        header: {
-                            //title: {
-                            //  text: $('h1').text()
-                            //},
-                            location: "pie-center"
-                        },
-                        size: {
-                            pieInnerRadius: "50%",
-                            canvasHeight: 400,
-                            canvasWidth: 400
-                        },
-                        data: {
-                            sortOrder: "label-asc",
-                            content: [
-                              { label: "Complete", value: type.percent_complete, color: '#6091D5'},
-                              { label: "Incomplete", value: incomplete, color: '#002F6F'},
-                            ]
-                        },
-                        labels: {
-                    		outer: {
-                    			format: "none",
-                    			pieDistance: 32
-                    		},
-                    		inner: {
-                    			format: "label-percentage2",
-                    			hideWhenLessThanPercentage: 3
-                    		},
-                    		mainLabel: {
-                    			fontSize: 11,
-                                color: "#ffffff"
-                    		},
-                    		percentage: {
-                    			color: "#ffffff",
-                    			decimalPlaces: 0
-                    		},
-                    		value: {
-                    			color: "#adadad",
-                    			fontSize: 11
-                    		},
-                    		lines: {
-                    			enabled: true
-                    		},
-                    		truncation: {
-                    			enabled: true
-                    		}
-                    	}
-                    });
-                } else {
-                    $('#'+pieId).html('We\'ll build your report as you add new missions and objectives');
-                }
+                var type = data.mission || data.campaign,
+                    path = "",
+                    campaignPercent = $('#campaignPercent'),
+                    snap = Snap("#pieSVG"),
+                    arc = snap.path(path),
+                    outOfOneHundred = type.percent_complete,
+                    panes = new Panes();
+                panes.run(outOfOneHundred/100.1, campaignPercent[0], snap, arc, "#67DB88", 24);
             })
         }
-
         return {
-            init : self.init
+            init : init
         }
     }
 
@@ -250,9 +197,10 @@ function App() {
                      });
                      return false;
                 });
+            }
 
-
-                var missionContainer = $('.missions');
+            var missionContainer = $('.missions');
+            if(missionContainer.length > 0) {
                 missionContainer.isotope({
                     filter: '*',
                     animationOptions: {
@@ -445,36 +393,37 @@ function App() {
     function Panes() {
         var self = this;
 
+        var canvasSize = 250,
+            centre = canvasSize/2,
+            radius = canvasSize*0.8/2,
+            path = "";
+            startY = centre-radius;
+
+        function run(percent, el, snap, arc, strokeColour, strokeWidth) {
+            var endpoint = percent*360;
+            Snap.animate(0, endpoint,   function (val) {
+                arc.remove();
+
+                var d = val,
+                    dr = d-90;
+                    radians = Math.PI*(dr)/180,
+                    endx = centre + radius*Math.cos(radians),
+                    endy = centre + radius * Math.sin(radians),
+                    largeArc = d>180 ? 1 : 0;
+                    var path = "M"+centre+","+startY+" A"+radius+","+radius+" 0 "+largeArc+",1 "+endx+","+endy;
+
+                arc = snap.path(path);
+                arc.attr({
+                  stroke: strokeColour || '#4D9E69',
+                  fill: 'none',
+                  strokeWidth: strokeWidth || 12
+                });
+                el.innerHTML =    Math.round(val/360*100) +'%';
+
+            }, 2000);
+        }
+
         function drawArcs() {
-          function run(percent, el, snap, arc) {
-              var endpoint = percent*360;
-              Snap.animate(0, endpoint,   function (val) {
-                  arc.remove();
-
-                  var d = val,
-                      dr = d-90;
-                      radians = Math.PI*(dr)/180,
-                      endx = centre + radius*Math.cos(radians),
-                      endy = centre + radius * Math.sin(radians),
-                      largeArc = d>180 ? 1 : 0;
-                      var path = "M"+centre+","+startY+" A"+radius+","+radius+" 0 "+largeArc+",1 "+endx+","+endy;
-
-                  arc = snap.path(path);
-                  arc.attr({
-                    stroke: '#4D9E69',
-                    fill: 'none',
-                    strokeWidth: 12
-                  });
-                  el.innerHTML =    Math.round(val/360*100) +'%';
-
-              }, 2000);
-          }
-          
-          var canvasSize = 250,
-              centre = canvasSize/2,
-              radius = canvasSize*0.8/2,
-              path = "";
-              startY = centre-radius;
 
           $('.completeness svg').each(function() {
             var snapId = "#"+$(this).attr('id');
@@ -489,7 +438,6 @@ function App() {
         }
 
         function init() {
-
             $('.inner-column').hover(function() {
                 function slideObjectives() {
                     if($(this).find('.listing-wrapper').find('li').length > 0) {
@@ -524,7 +472,9 @@ function App() {
         }
 
         return {
-            init : init
+            init : init,
+            drawArcs : drawArcs,
+            run : run
         }
     }
 
@@ -682,8 +632,8 @@ function App() {
         var transparenyModifier = new TransparencyModifier();
         transparenyModifier.init();
 
-        var d3Pie = new D3Pie();
-        d3Pie.init();
+        var svgPie = new SVGPie();
+        svgPie.init();
 
         var isotopes = new Isotopes();
         isotopes.init();
@@ -700,6 +650,9 @@ function App() {
         var chat = new Chat();
         chat.init();
 
+        if($(".trigger").length > 0) {
+            $(".trigger").toggleClass("drawn");
+        }
 
         $('.parallax-window').hover(function() {
         	$(this).children('.overlay').fadeToggle(400)

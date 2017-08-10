@@ -105,78 +105,25 @@
             <div class="row missions">
                 <div class="grid-sizer"></div>
                 <div class="grid-item"></div>
-                @if(count($missions) !== 0)
                 @foreach($missions as $missionInstanceKey => $missionsInstance)
-                    @foreach($missionsInstance as $missionKey => $mission)
-                        <div style="z-index: {{$loop->count - $loop->iteration}}" class="mission {{ $mission->Campaign->slug }}">
-                            <div class="inner-column" counter parent="{{ $mission->Campaign->slug }}">
-                              <div class="panel-main-container">
-                                  <div class="completeness">
-                                      @if(!is_null($mission->percent_complete))
-                                          <div id="{{ $mission->mission_slug }}"  class="counter-container">
-                                          </div>
-                                          <div class="end">
-                                              {{ $mission->percent_complete }}
-                                          </div>
-                                          <div class="title">
-                                              <a href="campaign/{{$mission->Campaign->slug}}/mission/{{$mission->mission_slug}}">
-                                                {{$mission->name}}
-                                              </a>
-                                          </div>
-                                          <div class="container">
-                                            <div id="percent"></div>
-                                            <svg id="svg-{{ $mission->id }}"></svg>
-                                          </div>
-                                      @else
-                                          <span class="start">Start mission</start>
-                                      @endif
-                                  </div>
-
-                              </div>
-
-                                <div class="listing-wrapper hidden">
-                                    <ol class="objectives listing">
-                                        @foreach($mission->Objective
-                                                          ->where('done', 1)
-                                                          ->where('next_maintenance_instance_date', '<=', $nextMaintenceInstanceDate)
-                                                          as $objective)
-                                            <li class="alert @if($objective->next_maintenance_instance_date < $nextMaintenceInstanceDate) overdue @endif">
-                                                <div class="card">
-                                                    <div class="card-inner">
-                                                        <div class="summary">
-                                                            {!! Form::open(['method' => 'PUT', 'action' => ['DashboardController@maintenanceComplete', $objective->objective_slug], 'class'=>'row maintenance-complete-form']) !!}
-                                                                {!! Form::submit('&#xf058;', ['class' => 'awesome double maintenance-complete']) !!}
-                                                            {!! Form::close() !!}
-                                                            <div class="objective-title">
-                                                                <a href="/campaign/{{$objective->Mission->Campaign->slug}}/mission/{{$objective->Mission->mission_slug}}/objective/{{$objective->objective_slug}}">{{$objective->name}}</a>
-                                                                <div class="fa-exclamation-circle fa"></div>
-                                                            </div>
-                                                            <div class="plan">
-                                                                {{ date("l d F Y", strtotime($objective->next_maintenance_instance_date)) }}
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        @endforeach
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
+                    @foreach($missionsInstance as $missionKey => $pane)
+                        @include('partials.pane',
+                                  array(
+                                    'pane' => $pane,
+                                    'url' => '/campaign/'.$pane->Campaign->slug.'/mission/'.$pane->mission_slug,
+                                    'containerClasses' => "mission ".$pane->Campaign->slug,
+                                    'showObjectives' => true,
+                                    'parentAttribute' => $pane->Campaign->slug,
+                                    'completeness' => true
+                                  )
+                                )
                     @endforeach
                 @endforeach
-                @else
-                    <strong>You have no missions</strong>
-                @endif
             </div>
         </div>
     </div>
 
     <div class="posts">
-
-
-
         <div class="portfolioFilter row">
             <a href="#" data-filter="*" class="current">
               #AllCategories

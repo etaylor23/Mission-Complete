@@ -216,7 +216,6 @@ class ObjectivesController extends Controller
                 $skill = Skill::where('skill_name', str_replace('#', '', $hashtag))->first();
                 $newPost = new Post(['user_id' => Auth::user()->id, 'post_content' => $objective->name, 'objective_id' => $objective->id]);
                 $createdPost = $newPost::create($newPost->toArray());
-
                 $newPostSkill = new PostSkill(['skill_id' => $skill->id, 'post_id' => $createdPost->id]);
                 $completedPostSkill = $newPostSkill::create($newPostSkill->toArray());
 
