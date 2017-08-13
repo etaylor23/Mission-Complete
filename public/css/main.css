@@ -4634,9 +4634,56 @@ body {
     margin-bottom: 1rem; }
   body .delete form {
     margin-top: -45px; }
+  body .panes .cross__svg {
+    border-radius: 50%;
+    display: block;
+    height: 100%;
+    stroke-width: 4;
+    width: 100%; }
+  body .panes .cross__circle {
+    animation: 1.6s ease 0s normal forwards 1 running stroke;
+    fill: none;
+    margin: 0 auto;
+    stroke: #e55454;
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 3; }
+  body .panes .cross__path {
+    stroke: #e55454;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    transform-origin: 50% 50% 0; }
+    body .panes .cross__path--right {
+      animation: 0.8s ease 1.3s normal forwards 1 running stroke; }
+    body .panes .cross__path--left {
+      animation: 1s ease 1.3s normal forwards 1 running stroke; }
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0; } }
+  body .panes .circ {
+    opacity: 0;
+    stroke-dasharray: 130;
+    stroke-dashoffset: 130;
+    -webkit-transition: all 3s;
+    -moz-transition: all 3s;
+    -ms-transition: all 3s;
+    -o-transition: all 3s;
+    transition: all 3s; }
+  body .panes .tick {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    -webkit-transition: stroke-dashoffset 3s 0.5s ease-out;
+    -moz-transition: stroke-dashoffset 3s 0.5s ease-out;
+    -ms-transition: stroke-dashoffset 3s 0.5s ease-out;
+    -o-transition: stroke-dashoffset 3s 0.5s ease-out;
+    transition: stroke-dashoffset 3s 0.5s ease-out; }
+  body .panes .drawn + svg .path {
+    opacity: 1;
+    stroke-dashoffset: 0; }
   body .panes .grid-sizer, body .panes .grid-item {
     width: 49%; }
-  body .panes .mission {
+  body .panes .pane {
     width: 49%;
     margin-bottom: 1rem;
     background: white; }
@@ -4649,13 +4696,13 @@ body {
     color: #444;
     margin-top: 2rem;
     margin-bottom: 3rem; }
-  body .panes #percent, body .panes svg, body .panes #title {
+  body .panes #percent, body .panes svg, body .panes #title, body .panes .svg-pie-percent {
     width: 260px;
     height: 260px;
     position: absolute;
     top: 0;
     left: 0; }
-  body .panes #percent, body .panes #title {
+  body .panes #percent, body .panes #title, body .panes .svg-pie-percent {
     line-height: 20px;
     height: 20px;
     width: 100%;
@@ -5126,7 +5173,7 @@ Message Box
     padding: 6px 10px;
     border-radius: 10px;
     outline: none !important;
-    transition: background .2s ease; }
+    transition: background .3s ease; }
     .message-box .message-submit:hover {
       background: #1D7745; }
 

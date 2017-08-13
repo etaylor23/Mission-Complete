@@ -263,10 +263,13 @@ body {
     }
 
     .panes {
+
+        @import "panes/paneSVG";
+
         .grid-sizer, .grid-item {
           width: 49%;
         }
-        .mission {
+        .pane {
           width: 49%;
           margin-bottom: 1rem;
           background: white;
@@ -282,7 +285,7 @@ body {
           margin-bottom: 3rem;
         }
 
-        #percent, svg, #title {
+        #percent, svg, #title, .svg-pie-percent {
           width: 260px;
           height: 260px;
           position: absolute;
@@ -290,7 +293,7 @@ body {
           left: 0;
         }
 
-        #percent, #title {
+        #percent, #title, .svg-pie-percent {
           line-height: 20px;
           height: 20px;
           width: 100%;
@@ -921,7 +924,7 @@ Message Box
     padding: 6px 10px;
     border-radius: 10px;
     outline: none!important;
-    transition: background .2s ease;
+    transition: background .3s ease;
 
     &:hover {
       background: #1D7745;

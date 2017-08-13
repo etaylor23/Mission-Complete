@@ -127,76 +127,23 @@ function App() {
         }
     }
 
-    function D3Pie() {
-        var self = this;
-
-        self.init = function init() {
+    function SVGPie() {
+        var init = function init() {
             $.ajax({
                 url: '/api' + window.location.pathname
             }).done(function(data) {
-                var totalPie = 100,
-                    type = data.mission || data.campaign,
-                    incomplete = totalPie - type.percent_complete,
-                    children =  type.objective || type.children,
-                    pieId = 'pie';
-
-                if(children.length > 0) {
-                    var pie = new d3pie(pieId, {
-                        header: {
-                            //title: {
-                            //  text: $('h1').text()
-                            //},
-                            location: "pie-center"
-                        },
-                        size: {
-                            pieInnerRadius: "50%",
-                            canvasHeight: 400,
-                            canvasWidth: 400
-                        },
-                        data: {
-                            sortOrder: "label-asc",
-                            content: [
-                              { label: "Complete", value: type.percent_complete, color: '#6091D5'},
-                              { label: "Incomplete", value: incomplete, color: '#002F6F'},
-                            ]
-                        },
-                        labels: {
-                    		outer: {
-                    			format: "none",
-                    			pieDistance: 32
-                    		},
-                    		inner: {
-                    			format: "label-percentage2",
-                    			hideWhenLessThanPercentage: 3
-                    		},
-                    		mainLabel: {
-                    			fontSize: 11,
-                                color: "#ffffff"
-                    		},
-                    		percentage: {
-                    			color: "#ffffff",
-                    			decimalPlaces: 0
-                    		},
-                    		value: {
-                    			color: "#adadad",
-                    			fontSize: 11
-                    		},
-                    		lines: {
-                    			enabled: true
-                    		},
-                    		truncation: {
-                    			enabled: true
-                    		}
-                    	}
-                    });
-                } else {
-                    $('#'+pieId).html('We\'ll build your report as you add new missions and objectives');
-                }
+                var type = data.mission || data.campaign,
+                    path = "",
+                    campaignPercent = $('#campaignPercent'),
+                    snap = Snap("#pieSVG"),
+                    arc = snap.path(path),
+                    outOfOneHundred = type.percent_complete,
+                    panes = new Panes();
+                panes.run(outOfOneHundred/100.1, campaignPercent[0], snap, arc, "#67DB88", 24);
             })
         }
-
         return {
-            init : self.init
+            init : init
         }
     }
 
@@ -250,9 +197,10 @@ function App() {
                      });
                      return false;
                 });
+            }
 
-
-                var missionContainer = $('.missions');
+            var missionContainer = $('.missions');
+            if(missionContainer.length > 0) {
                 missionContainer.isotope({
                     filter: '*',
                     animationOptions: {
@@ -445,36 +393,37 @@ function App() {
     function Panes() {
         var self = this;
 
+        var canvasSize = 250,
+            centre = canvasSize/2,
+            radius = canvasSize*0.8/2,
+            path = "";
+            startY = centre-radius;
+
+        function run(percent, el, snap, arc, strokeColour, strokeWidth) {
+            var endpoint = percent*360;
+            Snap.animate(0, endpoint,   function (val) {
+                arc.remove();
+
+                var d = val,
+                    dr = d-90;
+                    radians = Math.PI*(dr)/180,
+                    endx = centre + radius*Math.cos(radians),
+                    endy = centre + radius * Math.sin(radians),
+                    largeArc = d>180 ? 1 : 0;
+                    var path = "M"+centre+","+startY+" A"+radius+","+radius+" 0 "+largeArc+",1 "+endx+","+endy;
+
+                arc = snap.path(path);
+                arc.attr({
+                  stroke: strokeColour || '#4D9E69',
+                  fill: 'none',
+                  strokeWidth: strokeWidth || 12
+                });
+                el.innerHTML =    Math.round(val/360*100) +'%';
+
+            }, 2000);
+        }
+
         function drawArcs() {
-          function run(percent, el, snap, arc) {
-              var endpoint = percent*360;
-              Snap.animate(0, endpoint,   function (val) {
-                  arc.remove();
-
-                  var d = val,
-                      dr = d-90;
-                      radians = Math.PI*(dr)/180,
-                      endx = centre + radius*Math.cos(radians),
-                      endy = centre + radius * Math.sin(radians),
-                      largeArc = d>180 ? 1 : 0;
-                      var path = "M"+centre+","+startY+" A"+radius+","+radius+" 0 "+largeArc+",1 "+endx+","+endy;
-
-                  arc = snap.path(path);
-                  arc.attr({
-                    stroke: '#4D9E69',
-                    fill: 'none',
-                    strokeWidth: 12
-                  });
-                  el.innerHTML =    Math.round(val/360*100) +'%';
-
-              }, 2000);
-          }
-          
-          var canvasSize = 250,
-              centre = canvasSize/2,
-              radius = canvasSize*0.8/2,
-              path = "";
-              startY = centre-radius;
 
           $('.completeness svg').each(function() {
             var snapId = "#"+$(this).attr('id');
@@ -489,7 +438,6 @@ function App() {
         }
 
         function init() {
-
             $('.inner-column').hover(function() {
                 function slideObjectives() {
                     if($(this).find('.listing-wrapper').find('li').length > 0) {
@@ -524,7 +472,9 @@ function App() {
         }
 
         return {
-            init : init
+            init : init,
+            drawArcs : drawArcs,
+            run : run
         }
     }
 
@@ -580,54 +530,56 @@ function App() {
     function Chat() {
         var self = this;
 
+        var $messages = $('.messages-content'),
+            d, h, m,
+            i = 0;
+
+        function updateScrollbar() {
+          $messages.mCustomScrollbar("update").mCustomScrollbar('scrollTo', 'bottom', {
+            scrollInertia: 10,
+            timeout: 0
+          });
+        }
+
+        function setDate(){
+            d = new Date()
+            m = d.getMinutes();
+            return $('<div class="timestamp">' + d.getHours() + ':' + m + '</div>').appendTo($('.message:last'));
+        }
+
+        function insertMessage(_this, message) {
+          var chatContainer = _this.parents('.chat').find('.messages-content')
+          var date = setDate();
+          var message = $('<div class="message message-personal">' + message + '</div>')
+          var fullMessage = date.appendTo(message);
+          chatContainer.append(message).addClass('new');
+          message.append(date);
+          $('.message-input').val(null);
+          updateScrollbar();
+        }
+
+        function insertAjaxMessage() {
+            var _this = this;
+            _this.parents('form').submit(function(e) {
+              var url = $(this).attr('action');
+
+              $.ajax({
+                type: "POST",
+                url: url,
+                data: _this.parents('form').serialize(),
+                context: _this,
+                success: function(data) {
+                  insertMessage(this, data.message.message);
+                }
+              })
+              e.preventDefault();
+            })
+
+        }
+
         function init() {
             if($('.posts').length > 0) {
-                var $messages = $('.messages-content'),
-                    d, h, m,
-                    i = 0;
 
-                function updateScrollbar() {
-                  $messages.mCustomScrollbar("update").mCustomScrollbar('scrollTo', 'bottom', {
-                    scrollInertia: 10,
-                    timeout: 0
-                  });
-                }
-
-                function setDate(){
-                    d = new Date()
-                    m = d.getMinutes();
-                    return $('<div class="timestamp">' + d.getHours() + ':' + m + '</div>').appendTo($('.message:last'));
-                }
-
-                function insertMessage(_this, message) {
-                  var chatContainer = _this.parents('.chat').find('.messages-content')
-                  var date = setDate();
-                  var message = $('<div class="message message-personal">' + message + '</div>')
-                  var fullMessage = date.appendTo(message);
-                  chatContainer.append(message).addClass('new');
-                  message.append(date);
-                  $('.message-input').val(null);
-                  updateScrollbar();
-                }
-
-                function insertAjaxMessage() {
-                    var _this = this;
-                    _this.parents('form').submit(function(e) {
-                      var url = $(this).attr('action');
-
-                      $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: _this.parents('form').serialize(),
-                        context: _this,
-                        success: function(data) {
-                          insertMessage(this, data.message.message);
-                        }
-                      })
-                      e.preventDefault();
-                    })
-
-                }
 
                 $('.message-submit').each(function() {
                   insertAjaxMessage.apply($(this));
@@ -643,7 +595,8 @@ function App() {
             }
         }
         return {
-            init : init
+            init : init,
+            insertAjaxMessage : insertAjaxMessage
         }
     }
 
@@ -682,8 +635,8 @@ function App() {
         var transparenyModifier = new TransparencyModifier();
         transparenyModifier.init();
 
-        var d3Pie = new D3Pie();
-        d3Pie.init();
+        var svgPie = new SVGPie();
+        svgPie.init();
 
         var isotopes = new Isotopes();
         isotopes.init();
@@ -700,6 +653,59 @@ function App() {
         var chat = new Chat();
         chat.init();
 
+        if (typeof currentUserSkills !== 'undefined') {
+          currentUserSkills.forEach(function(skill) {
+            Echo.channel('chat-room.' + skill + '.' + window.userid)
+            .listen('ObjectiveComplete', function(e) {
+              var test = $('<div class="objects tests columns large-3 ' + e.message.skill_name + '"><div class="post-inner"><h3>' + e.user.name + '</h3>' + e.message.post_content + '</div></div>');
+              var chatContainer = $('<div data-thread-id="" data-post-id="" class="chat objects tests columns large-3">' +
+                                      '<div class="chat-title">' +
+                                          '<h1>'+ e.user.name +'</h1>' +
+                                          '<h2>' + e.message.skill_name + '</h2>' +
+                                          '<figure class="avatar">' +
+                                              '<img src="/images/profiles/'+e.user.image+'" />' +
+                                          '</figure>' +
+                                      '</div>' +
+                                      '<div class="chat-title">' +
+                                          '<h2>' +
+                                              'Talk to them about ' + e.message.skill_name +
+                                          '</h2>' +
+                                      '</div>' +
+                                      '<div class="messages">' +
+                                          '<div class="messages-content">' +
+                                          '</div>' +
+                                      '</div>' +
+                                      '<div class="message-box">' +
+                                          '<form method="POST" action="/messages" accept-charset="UTF-8">' +
+                                              '<input name="_token" type="hidden" value="' + window.csrf +'">' +
+                                              '<textarea class="message-input" placeholder="Type message..." name="message" cols="50" rows="10"></textarea>' +
+                                              '<input name="thread" type="hidden" value="0">' +
+                                              '<input name="post" type="hidden" value="' + e.message.post_id + '">' +
+                                              '<input class="button submit message-submit" type="submit" value="Send!">' +
+                                            '</form>' +
+                                      '</div>' +
+                                    '</div>');
+
+              $('.portfolioContainer')
+              .append(chatContainer)
+              .isotope('appended', chatContainer);
+
+              var chat = new Chat();
+              chat.insertAjaxMessage.apply(chatContainer.find('.message-submit'));
+              $('.message-input').off();
+              $('.message-input').on('keydown', function(e) {
+                if (e.which == 13) {
+                  $(this).parents('form').submit();
+                  return false;
+                }
+              })
+            });
+          });
+        };
+
+        if($(".trigger").length > 0) {
+            $(".trigger").toggleClass("drawn");
+        }
 
         $('.parallax-window').hover(function() {
         	$(this).children('.overlay').fadeToggle(400)

@@ -64,7 +64,6 @@
             </div>
         </div>
 
-
         <div class="columns small-12 medium-6 large-6 text-center">
             <div class="callout">
                 <strong>You started this mission {{ $timeSinceCreation }}</strong>
@@ -74,37 +73,33 @@
 
     <div class="row panes">
         <div class="column small-12 medium-6 large-8">
-            <div class="callout">
-                <h2>Objectives</h2>
-
-                <ol class="objectives listing">
-                    @foreach ($relatedObjectives as $objective)
-                        <li>
-                            <div class="card">
-                                <div class="card-inner">
-                                    <div class="summary">
-
-                                        <div class="objective-title">
-                                            <a href="/campaign/{{$objective->Mission->Campaign->slug}}/mission/{{$objective->mission->mission_slug}}/objective/{{$objective->objective_slug}}">{{$objective->name}}</a>
-                                            @if($objective->done === 1)
-                                                <span class="awesome double maintenance-complete complete"></span>
-                                            @endif
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    @endforeach
-                </ol>
-
+            <h2>Objectives</h2>
+            <div class="row missions panes">
+            		<div class="grid-sizer"></div>
+            		<div class="grid-item"></div>
+            		@foreach ($relatedObjectives as $objective)
+            			@include('partials.pane',
+            								array(
+            									'pane' => $objective,
+                              'url' => '/campaign/'.$objective->Mission->Campaign->slug.'/mission/'.$objective->mission->mission_slug.'/objective/'.$objective->objective_slug,
+            									'containerClasses' => "mission",
+                              'showObjectives' => false,
+                              'parentAttribute' => 'NA',
+                              'completeness' => false
+            								)
+            							)
+            		@endforeach
             </div>
         </div>
         <div class="column small-12 medium-6 large-4">
             <div class="callout">
                 <h2>Completed</h2>
-                <div id="pie"></div>
+                <div class="panes">
+                    <div class="container">
+                        <div class="svg-pie-percent" id="campaignPercent"></div>
+                        <svg id="pieSVG"></svg>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

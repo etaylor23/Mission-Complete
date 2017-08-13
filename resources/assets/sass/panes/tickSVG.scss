@@ -1,0 +1,23 @@
+.circ{
+		opacity: 0;
+		stroke-dasharray: 130;
+		stroke-dashoffset: 130;
+		-webkit-transition: all 3s;
+		-moz-transition: all 3s;
+		-ms-transition: all 3s;
+		-o-transition: all 3s;
+		transition: all 3s;
+}
+.tick{
+		stroke-dasharray: 50;
+		stroke-dashoffset: 50;
+		-webkit-transition: stroke-dashoffset 3s 0.5s ease-out;
+		-moz-transition: stroke-dashoffset 3s 0.5s ease-out;
+		-ms-transition: stroke-dashoffset 3s 0.5s ease-out;
+		-o-transition: stroke-dashoffset 3s 0.5s ease-out;
+		transition: stroke-dashoffset 3s 0.5s ease-out;
+}
+.drawn + svg .path{
+		opacity: 1;
+		stroke-dashoffset: 0;
+}
