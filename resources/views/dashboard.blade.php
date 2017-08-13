@@ -248,16 +248,9 @@
           @endforeach
         ];
 
-        currentUserSkills.forEach(function(skill) {
-          Echo.channel('chat-room.' + skill + '.' + {{ $userId }})
-          .listen('ObjectiveComplete', function(e) {
-            var test = $('<div class="objects tests columns large-3 ' + e.message.skill_name + '"><div class="post-inner"><h3>' + e.user.name + '</h3>' + e.message.post_content + '</div></div>');
-            $('.portfolioContainer')
-            .append(test)
-            .isotope('appended', test);
-          });
-        })
-
+        window.userid = "{{ $userId }}";
+        window.csrf = "{{ csrf_token() }}";
+        
         window.currentUserThreads = [
           @foreach($followPosts->Follows as $followed => $followedValue)
               @foreach ($followedValue->User->Posts as $post => $postValue)

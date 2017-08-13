@@ -229,9 +229,8 @@ class ObjectivesController extends Controller
                 */
                 $followedBy = Auth::user()
                                 ->FollowedBy;
-
                 foreach ($followedBy as $followedByKey => $followedByValue) {
-                  event(new ObjectiveComplete(['user_id' => Auth::user()->id, 'skill_name' => $skill->skill_name, 'post_content' => $objective->name, 'followed_id' => $followedByValue->user_id], Auth::user()));
+                  event(new ObjectiveComplete(['user_id' => Auth::user()->id, 'skill_name' => $skill->skill_name, 'post_content' => $objective->name, 'followed_id' => $followedByValue->user_id, 'post_id' => $createdPost->id], Auth::user()));
                 }
             }
         }
