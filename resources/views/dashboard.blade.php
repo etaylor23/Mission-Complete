@@ -226,6 +226,9 @@
 
     <script type="text/javascript">
 
+
+
+
         window.Echo = new Echo({
             broadcaster: 'pusher',
             // key: '4eb1e04947d0e9832e22'

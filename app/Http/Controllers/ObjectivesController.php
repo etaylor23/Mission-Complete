@@ -213,7 +213,10 @@ class ObjectivesController extends Controller
             **/
             preg_match_all("/(#\w+)/", $objective->name, $matches);
             foreach ($matches[0] as $key => $hashtag) {
-                $skill = Skill::where('skill_name', str_replace('#', '', $hashtag))->first();
+                $skill = Skill::firstOrCreate(
+                  ['skill_name' => str_replace('#', '', $hashtag)],
+                  ['skill_name' => str_replace('#', '', $hashtag)]
+                );
                 $newPost = new Post(['user_id' => Auth::user()->id, 'post_content' => $objective->name, 'objective_id' => $objective->id]);
                 $createdPost = $newPost::create($newPost->toArray());
                 $newPostSkill = new PostSkill(['skill_id' => $skill->id, 'post_id' => $createdPost->id]);
