@@ -148,7 +148,6 @@
                   <div class="text-left small-5 columns main-nav nav"></div>
                   @endif
 
-
     							<div class="home-logo text-center small-2 columns">
                     @if(Auth::check())
                     <a href="/dashboard">
@@ -159,30 +158,30 @@
                     </a>
     							</div>
     							<div class="text-right small-5 columns">
-                                    @if (Route::has('login'))
-                                        <div class="top-right nav-links-row row">
-                                            <div class="nav-links">
-                                                @if(!Auth::check())
-                                                <a href="{{ url('/login') }}" class="login triple fa fa-sign-in"></a>
-                                                <a href="{{ url('/register') }}" class="fa triple fa-user-circle-o"></a>
-                                                @else
-                                                <form id="logout-form" action="{{ url('/logout') }}" method="POST">
-                                                    {{ csrf_field() }}
-                                                    <a href="#" class="logout triple fa fa-sign-out"></a>
-                                                </form>
-                                                <a class="fa fa-tachometer triple" href="{{ url('/dashboard') }}"></a>
-                                                    @if (!str_contains(Route::current()->getUri(), 'objective'))
-                                                    <a class="fa fa-plus-circle triple" data-open="completed-status" aria-controls="completed-status" aria-haspopup="true"></a>
-                                                    @endif
-                                                @endif
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-              						</div>
-              					</div>
-                    <div class="secondary-nav hidden" style="">Lipsum
-                </div>
+                      @if (Route::has('login'))
+                        <div class="top-right nav-links-row row">
+                            <div class="nav-links">
+                                @if(!Auth::check())
+                                <a href="{{ url('/login') }}" class="login triple fa fa-sign-in"></a>
+                                <a href="{{ url('/register') }}" class="fa triple fa-user-circle-o"></a>
+                                @else
+                                  <form id="logout-form" action="{{ url('/logout') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <a href="#" class="logout triple fa fa-sign-out"></a>
+                                  </form>
+                                  @if (!str_contains(Route::current()->getUri(), 'objective'))
+                                    <a class="fa fa-plus-circle triple" data-open="completed-status" aria-controls="completed-status" aria-haspopup="true"></a>
+                                  @endif
+                                  <a class="fa fa-tachometer triple" href="{{ url('/dashboard') }}"></a>
+                                  <a href="{{ url('/chat') }}" class="fa triple fa-user"></a>
+                                @endif
+                            </div>
+                        </div>
+                      @endif
+                    </div>
+              		</div>
+              	</div>
+                <div class="secondary-nav hidden" style="">Lipsum</div>
             </nav>
 				</header>
             </div>
