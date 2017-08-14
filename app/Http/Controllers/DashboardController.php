@@ -17,37 +17,6 @@ use \DB;
 class DashboardController extends Controller
 {
     public function index() {
-        $currentUser = Auth::user();
-
-        $currentUserSkills = array();
-        $currentUserSkillsName = array();
-
-        $currentUser->UserSkill->each(function($skill, $key) use(&$currentUserSkills, &$currentUserSkillsName) {
-            array_push($currentUserSkills, $skill->Skill->id);
-            array_push($currentUserSkillsName, $skill->Skill->skill_name);
-        });
-
-        $currentUserId = Auth::user()->id;
-        $followPosts = \App\User
-                    ::with(['Follows' => function($query) use(&$currentUserSkills) {
-                        $query
-                            ->with(['User.Posts' => function($postSkills) use(&$currentUserSkills) {
-                                    $postSkills
-                                    ->whereHas('PostSkill', function($subQuery) use(&$currentUserSkills) {
-                                        $subQuery
-                                            ->whereIn('skill_id', $currentUserSkills);
-                                    })
-                                    ->with(['PostSkill' => function($testSub) use(&$currentUserSkills) {
-                                        $testSub
-                                            ->with('Skill')
-                                            ->get();
-                                    }]);
-                            }])
-                            ->has('User.Posts.PostSkill')
-                            ->get();
-                    }])
-                    ->where('users.id', '=', $currentUserId)
-                    ->first();
 
       $campaigns = Auth::user()
                   ->Campaign;
@@ -67,9 +36,6 @@ class DashboardController extends Controller
               ->with('campaigns', $campaigns)
               ->with('missions', $missions)
               ->with('nextMaintenceInstanceDate', $nextMaintenceInstanceDate)
-              ->with('followPosts', $followPosts)
-              ->with('currentUserSkillsName', $currentUserSkillsName)
-              ->with('userId', Auth::user()->id)
               ->with('following', count(Auth::user()->Follows))
               ->with('followers', count(Auth::user()->FollowedBy));
 
