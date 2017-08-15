@@ -3,7 +3,6 @@
 
 	<div class="posts">
 			<div class="portfolioFilter row">
-
 					<div class="wrapper">
 							<a class="fourth before after" href="#" data-filter="*">#AllCategories</a>
 					</div>
@@ -106,6 +105,10 @@
 	<script type="text/javascript">
 			window.Echo = new Echo({
 					broadcaster: 'pusher',
+<<<<<<< HEAD
+=======
+					// key: '4eb1e04947d0e9832e22'
+>>>>>>> 1ca2391bb55cfdf86ebe5159a4a416431acd6432
 					key: "{{ env('PUSHER_KEY') }}"
 			});
 
