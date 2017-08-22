@@ -3,9 +3,7 @@
 
 <div class="main-content">
     <div class="row">
-        <div class="column small-12 medium-10 large-10">
-            <h1>{{ $objective->name }}</h1>
-        </div>
+        <h1 class="column small-12 medium-12 large-12 elegantshadow">{{ $objective->name }}</h1>
     </div>
 
     <div class="row">

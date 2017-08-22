@@ -2,12 +2,10 @@
 @section('content')
 
 <div class="main-content">
+    <h1 class="elegantshadow">Your Dashboard</h1>
     <div class="row">
-      <h1 class="column small-12 medium-12 large-12 retroshadow">Your Dashboard</h1>
-      {{-- <h1 class="column small-3 medium-3 large-3 retroshadow">Following: 3</h1>
-      <h1 class="column small-3 medium-3 large-3 retroshadow">Followers: 4</h1> --}}
-{{--
-<h1 class="elegantshadow">Your Dashboard</h1>
+
+{{-- <h1 class="elegantshadow">Your Dashboard</h1>
 <h1 class="deepshadow">Deep Shadow</h1>
 <h1 class="insetshadow">Inset Shadow</h1>
 <h1 class="retroshadow">Retro Shadow</h1> --}}
@@ -82,7 +80,7 @@
                                   <svg id="svg-{{ $campaign->id }}"></svg>
                                 </div>
                                 @else
-                                    <span class="start">Start campaign</start>
+                                    <span class="start"><a href="/campaign/{{ $campaign->slug }}">Start Campaign</start>
                                 @endif
                             </div>
                         </div>

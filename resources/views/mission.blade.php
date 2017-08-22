@@ -3,9 +3,9 @@
 
 <div class="main-content">
     @if($mission)
+    <h1 class="elegantshadow">{{ $mission->name }}</h1>
     <div class="row">
         <div class="column small-12 medium-10 large-9">
-            <h1>{{ $mission->name }}</h1>
             <div class="reveal" id="completed-status" data-reveal data-animation-in="slide-in-down" data-animation-out="slide-out-down">
                 <div class="row">
                         {!! Form::open(['action' => 'ObjectivesController@store', 'class' => 'row']) !!}
@@ -49,31 +49,15 @@
         </div>
     </div>
     <div class="row">
-
-        <div class="columns small-12 medium-6 large-6">
-            <div class="callout">
-                @if(count($relatedObjectives) === 0)
-                    <strong>You have no objectives in this mission, create one now</strong>
-                @else
-                    <div class="percent-complete text-center">
-                        <div>{{ $mission->name }} is:</div>
-                        <div><strong>{{ $mission->percent_complete }}%</strong></div>
-                        <div>complete</div>
-                    </div>
-                @endif
-            </div>
+        <div class="small-8 medium-8 large-8 column">
+          <h2>Objectives</h2>
         </div>
-
-        <div class="columns small-12 medium-6 large-6 text-center">
-            <div class="callout">
-                <strong>You started this mission {{ $timeSinceCreation }}</strong>
-            </div>
+        <div class="small-4 medium-4 large-4 column">
+          <h2>Summary</h2>
         </div>
     </div>
-
     <div class="row panes">
         <div class="column small-12 medium-6 large-8">
-            <h2>Objectives</h2>
             <div class="row missions panes">
             		<div class="grid-sizer"></div>
             		<div class="grid-item"></div>
@@ -91,10 +75,13 @@
             		@endforeach
             </div>
         </div>
-        <div class="column small-12 medium-6 large-4">
-            <div class="callout">
-                <h2>Completed</h2>
-                <div class="panes">
+        <div class="column small-12 medium-6 large-4 panes">
+            <div class="inner-column small">
+              <strong>You started this mission {{ $timeSinceCreation }}</strong>
+            </div>
+            <div class="inner-column">
+                <h2 class="title">Completed</h2>
+                <div>
                     <div class="container">
                         <div class="svg-pie-percent" id="campaignPercent"></div>
                         <svg id="pieSVG"></svg>
