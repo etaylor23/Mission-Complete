@@ -3,9 +3,15 @@
 
 @if($campaign)
     <div class="main-content">
+        @include('partials.main-heading',
+                  array(
+                    'value' => $campaign->name,
+                    'headingWidth' => null,
+                    'showFollowData' => null
+                  )
+                )
         <div class="row">
             <div class="column small-12 medium-6 large-9">
-                <h1>{{ $campaign->name }}</h1>
                 <div class="reveal" id="completed-status" data-reveal data-animation-in="slide-in-down" data-animation-out="slide-out-down">
                     <div class="row">
                           {!! Form::open(['action' => 'MissionsContoller@store', 'class' => 'row']) !!}
@@ -41,42 +47,18 @@
         <div class="row">
 
         </div>
-        <div class="row">
-            <div class="columns small-12 medium-4 large-4">
-                <div class="callout">
-                    @if(count($relatedMissions) !== 0 && $campaign->percent_complete !== null)
-                        <div class="percent-complete text-center">
-                            <div>{{ $campaign->name }} is:</div>
-                            <div><strong>{{$campaign->percent_complete}}%</strong></div>
-                            <div>complete</div>
-                        </div>
-                    @else
-                        @if($campaign->percent_complete === null)
-                            <strong>Now just create an objective for your new mission</strong>
-                        @else
-                            <strong>You have no missions in this campaign, create one now</strong>
-                        @endif
-                    @endif
-                </div>
-            </div>
-            @if(!is_null($missionClosestToCompletion))
-            <div class="columns small-12 medium-4 large-4 text-center">
-                <div class="callout">
-                    <strong>Mission Closest To Completion:<br />{{$missionClosestToCompletion->name}}</strong>
-                </div>
-            </div>
-            @endif
 
-            <div class="columns small-12 medium-4 large-4 text-center">
-                <div class="callout">
-                    <strong>You started this campaign {{ $timeSinceCreation }}</strong>
-                </div>
+        <div class="row">
+            <div class="small-8 medium-8 large-8 column">
+              <h2>Progress</h2>
+            </div>
+            <div class="small-4 medium-4 large-4 column">
+              <h2>Summary</h2>
+
             </div>
         </div>
-
         <div class="row">
             <div class="column small-12 medium-8 large-8">
-                <h2>Missions</h2>
                 <div class="row missions panes">
                 		<div class="grid-sizer"></div>
                 		<div class="grid-item"></div>
@@ -96,15 +78,24 @@
             </div>
 
             <div class="column small-12 medium-4 large-4">
-                <div class="callout">
-                    <h2>Complete</h2>
-                    <div class="panes">
-                        <div class="container">
-                            <div class="svg-pie-percent" id="campaignPercent"></div>
-                            <svg id="pieSVG"></svg>
-                        </div>
+                <div class="inner-column">
+                  <h2 class="title">Complete</h2>
+                  <div>
+                    <div class="container">
+                      <div class="svg-pie-percent" id="campaignPercent"></div>
+                      <svg id="pieSVG"></svg>
                     </div>
+                  </div>
                 </div>
+                @if(!is_null($missionClosestToCompletion))
+                  <div class="inner-column text-center small">
+                    <strong>Mission Closest To Completion:<br />{{$missionClosestToCompletion->name}}</strong>
+                  </div>
+                @endif
+                <div class="inner-column text-center small">
+                  <strong>You started this campaign {{ $timeSinceCreation }}</strong>
+                </div>
+
             </div>
         </div>
 
@@ -148,14 +139,5 @@
         }
 
         </style>
-
-
-        <script>
-
-
-
-        </script>
-
-
 
 @endsection

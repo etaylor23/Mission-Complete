@@ -3,13 +3,13 @@
 
 	<div class="posts">
 			<div class="portfolioFilter row">
-					<a href="#" data-filter="*" class="current">
-						#AllCategories
-					</a>
+					<div class="wrapper">
+							<a class="fourth before after" href="#" data-filter="*">#AllCategories</a>
+					</div>
 					@foreach($currentUserSkillsName as $skillName => $skillValue)
-							<a href="#" data-filter=".{{ $skillValue }}">
-									#{{ $skillValue }}
-							</a>
+							<div class="wrapper">
+							    <a class="fourth before after" href="#" data-filter=".{{ $skillValue }}">#{{ $skillValue }}</a>
+							</div>
 					@endforeach
 			</div>
 
@@ -105,7 +105,6 @@
 	<script type="text/javascript">
 			window.Echo = new Echo({
 					broadcaster: 'pusher',
-					// key: '4eb1e04947d0e9832e22'
 					key: "{{ env('PUSHER_KEY') }}"
 			});
 

@@ -8,7 +8,7 @@
 
 /// Margin around a breadcrumbs container.
 /// @type Number
-$breadcrumbs-margin: 0 0 $global-margin 0 !default;
+$breadcrumbs-margin: $global-margin 0 $global-margin 0;
 
 /// Font size of breadcrumb links.
 /// @type Number
