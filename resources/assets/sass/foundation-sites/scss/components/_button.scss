@@ -208,6 +208,7 @@ $button-hollow-hover-lightness: -50% !default;
 @mixin foundation-button {
   .button {
     @include button;
+    width: 100%;
 
     // Sizes
     @each $size, $value in map-remove($button-sizes, default) {

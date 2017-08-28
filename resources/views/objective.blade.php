@@ -2,11 +2,14 @@
 @section('content')
 
 <div class="main-content">
-    <div class="row">
-        <div class="column small-12 medium-10 large-10">
-            <h1>{{ $objective->name }}</h1>
-        </div>
-    </div>
+
+    @include('partials.main-heading',
+              array(
+                'value' => $objective->name,
+                'headingWidth' => null,
+                'showFollowData' => null
+              )
+            )
 
     <div class="row">
         <div class="column small-11 medium-11 large-11">
