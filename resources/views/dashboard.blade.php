@@ -2,7 +2,18 @@
 @section('content')
 
 <div class="main-content">
-    <h1 class="elegantshadow">Your Dashboard</h1>
+
+    @include('partials.main-heading',
+              array(
+                'value' => 'Your Dashboard',
+                'headingWidth' => 'small-12 medium-9 large-9',
+                'showFollowData' => array(
+                    'follow' => $following,
+                    'followers' => $followers
+                )
+              )
+            )
+
     <div class="row">
 
 {{-- <h1 class="elegantshadow">Your Dashboard</h1>
@@ -80,7 +91,7 @@
                                   <svg id="svg-{{ $campaign->id }}"></svg>
                                 </div>
                                 @else
-                                    <span class="start"><a href="/campaign/{{ $campaign->slug }}">Start Campaign</start>
+                                    <span class="start"><a href="/campaign/{{ $campaign->slug }}">Start Campaign</a>
                                 @endif
                             </div>
                         </div>
@@ -95,16 +106,6 @@
             <div class="row">
                 <div class="column small-12 medium-6 large-6">
                     <h2>Missions</h2>
-                </div>
-                <div class="column small-12 medium-3 large-3">
-                    <a href="/follow/following">
-                        <h2>Following: {{ $following }}</h2>
-                    </a>
-                </div>
-                <div class="column small-12 medium-3 large-3">
-                    <a href="/follow/followers">
-                    <h2>Followers: {{ $followers }}</h2>
-                  </a>
                 </div>
             </div>
 

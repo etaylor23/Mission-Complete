@@ -3,7 +3,13 @@
 
 @if($campaign)
     <div class="main-content">
-        <h1 class="elegantshadow">{{ $campaign->name }}</h1>
+        @include('partials.main-heading',
+                  array(
+                    'value' => $campaign->name,
+                    'headingWidth' => null,
+                    'showFollowData' => null
+                  )
+                )
         <div class="row">
             <div class="column small-12 medium-6 large-9">
                 <div class="reveal" id="completed-status" data-reveal data-animation-in="slide-in-down" data-animation-out="slide-out-down">
@@ -72,6 +78,15 @@
             </div>
 
             <div class="column small-12 medium-4 large-4">
+                <div class="inner-column">
+                  <h2 class="title">Complete</h2>
+                  <div>
+                    <div class="container">
+                      <div class="svg-pie-percent" id="campaignPercent"></div>
+                      <svg id="pieSVG"></svg>
+                    </div>
+                  </div>
+                </div>
                 @if(!is_null($missionClosestToCompletion))
                   <div class="inner-column text-center small">
                     <strong>Mission Closest To Completion:<br />{{$missionClosestToCompletion->name}}</strong>
@@ -79,15 +94,6 @@
                 @endif
                 <div class="inner-column text-center small">
                   <strong>You started this campaign {{ $timeSinceCreation }}</strong>
-                </div>
-                <div class="inner-column">
-                    <h2 class="title">Complete</h2>
-                    <div>
-                        <div class="container">
-                            <div class="svg-pie-percent" id="campaignPercent"></div>
-                            <svg id="pieSVG"></svg>
-                        </div>
-                    </div>
                 </div>
 
             </div>

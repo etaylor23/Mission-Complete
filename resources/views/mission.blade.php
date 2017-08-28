@@ -3,7 +3,13 @@
 
 <div class="main-content">
     @if($mission)
-    <h1 class="elegantshadow">{{ $mission->name }}</h1>
+      @include('partials.main-heading',
+                array(
+                  'value' => $mission->name,
+                  'headingWidth' => null,
+                  'showFollowData' => null
+                )
+              )
     <div class="row">
         <div class="column small-12 medium-10 large-9">
             <div class="reveal" id="completed-status" data-reveal data-animation-in="slide-in-down" data-animation-out="slide-out-down">
@@ -17,7 +23,7 @@
                                 {!! Form::label('description', 'About this mission') !!}
                                 {!! Form::textarea('description', null, ['size' => '30x5']) !!}
                             </div>
-                            <div class="column small-12 medium-12 large-12">
+                            {{-- <div class="column small-12 medium-12 large-12">
                                 <p>Create as completed mission?</p>
                             </div>
                             <div class="column small-12 medium-1 large-1">
@@ -25,9 +31,9 @@
                                 {!! Form::radio('done', '1', true) !!}
                             </div>
                             <div class="column small-12 medium-1 large-1">
-                                {!! Form::label('done', 'No') !!}
-                                {!! Form::radio('done', '0', true) !!}
-                            </div>
+                                {!! Form::label('done', 'No') !!} --}}
+                                {!! Form::hidden('done', '0') !!}
+                            {{-- </div> --}}
 
                             <div class="column small-12 medium-4 large-4">
                                 {!! Form::submit('Create new objective', ['class' => 'button']) !!}
@@ -76,17 +82,17 @@
             </div>
         </div>
         <div class="column small-12 medium-6 large-4 panes">
+          <div class="inner-column">
+            <h2 class="title">Completed</h2>
+            <div>
+              <div class="container">
+                <div class="svg-pie-percent" id="campaignPercent"></div>
+                <svg id="pieSVG"></svg>
+              </div>
+            </div>
+          </div>
             <div class="inner-column small">
               <strong>You started this mission {{ $timeSinceCreation }}</strong>
-            </div>
-            <div class="inner-column">
-                <h2 class="title">Completed</h2>
-                <div>
-                    <div class="container">
-                        <div class="svg-pie-percent" id="campaignPercent"></div>
-                        <svg id="pieSVG"></svg>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

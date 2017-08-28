@@ -32,7 +32,9 @@ body {
 
 
 
-
+    .heading {
+        background-color: $lightGrey;
+    }
 
     h1 {
       // font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
@@ -45,7 +47,7 @@ body {
 
       &.elegantshadow {
         color: #131313;
-        background-color: #e7e5e4;
+        // background-color: #e7e5e4;
         letter-spacing: .15em;
         // text-shadow:
         //   1px -1px 0 #767676,
@@ -345,12 +347,7 @@ body {
     }
     .delete {
         .fa {
-            font-size: 3rem;
-            padding: 10px;
-            margin-bottom: 1rem;
-        }
-        form {
-            margin-top: -45px;
+            font-size: 2rem;
         }
     }
 
@@ -508,6 +505,8 @@ body {
             line-height: 1rem;
             a {
                 color: #000;
+                display: inline-block;
+                width: 80%;
             }
         }
         .plan {
@@ -526,13 +525,14 @@ body {
         color: $hintColor;
         float: right;
         width: 40px;
+        padding: 0;
     }
 
     .alert {
         .fa {
             color: $darkGrey;
             float: right;
-            font-size: 2.5em;
+            font-size: 2em;
             margin-right: 3px;
         }
         &.overdue {
@@ -848,6 +848,17 @@ body {
     &.active {
       opacity: 1;
     }
+  }
+}
+
+.follow-details {
+  margin-top: 35px;
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+  }
+  .follow-value {
+    font-size: 1.8rem;
   }
 }
 
