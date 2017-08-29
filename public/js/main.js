@@ -711,6 +711,10 @@ function App() {
         	$(this).children('.overlay').fadeToggle(400)
         });
 
+        if (window.firstLogin === "1") {
+            $('#dashboard-intro-video').foundation('open');
+        }
+
     }
 }
 

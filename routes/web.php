@@ -40,14 +40,8 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::resource('campaign.mission.objective', 'ObjectivesController');
 
-
-
-
     Route::get('messages', 'ChatsController@fetchMessages');
     Route::post('messages', 'ChatsController@sendMessage');
-
-
-
 
     Route::post('campaign/create', 'CampaignsController@store');
     Route::post('mission/create', 'MissionsContoller@store');
@@ -55,6 +49,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('campaign/{slug}', 'CampaignsController@showCampaign');
 
     Route::get('/home', 'HomeController@index');
+
+    Route::post('/tutorials', 'DashboardController@tutorials');
 
 
 

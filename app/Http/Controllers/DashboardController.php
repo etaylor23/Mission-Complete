@@ -37,7 +37,8 @@ class DashboardController extends Controller
               ->with('missions', $missions)
               ->with('nextMaintenceInstanceDate', $nextMaintenceInstanceDate)
               ->with('following', count(Auth::user()->Follows))
-              ->with('followers', count(Auth::user()->FollowedBy));
+              ->with('followers', count(Auth::user()->FollowedBy))
+              ->with('firstLogin', Auth::user()->firstLogin);
 
     }
 
@@ -50,6 +51,14 @@ class DashboardController extends Controller
       $resetDate = $alertDate->addDays($objective->maintenance_aggression)->toDateString().' 00:00:00';
       $objective->next_maintenance_instance_date = $resetDate;
       $objective->save();
+      return redirect('dashboard');
+    }
+
+    public function tutorials(Request $request) {
+      $tutorialStatus = $request->input('no-tutorials');
+      $user = Auth::user();
+      $user->firstLogin = $tutorialStatus;
+      $user->save();
       return redirect('dashboard');
     }
 
