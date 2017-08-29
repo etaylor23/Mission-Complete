@@ -132,4 +132,16 @@
 
 </div>
 
+<div class="reveal" id="dashboard-intro-video" data-reveal data-animation-in="slide-in-down" data-animation-out="slide-out-down">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/tXQneqLJbmI" frameborder="0" allowfullscreen></iframe>
+    {!! Form::open(['method' => 'POST', 'action' => ['DashboardController@tutorials']]) !!}
+        {!! Form::hidden('no-tutorials', '0') !!}
+        {!! Form::submit('Don\'t show me tutorials', ['class' => 'button']) !!}
+    {!! Form::close() !!}
+</div>
+
+<script type="text/javascript">
+    window.firstLogin = "{{ $firstLogin }}";
+</script>
+
 @endsection
