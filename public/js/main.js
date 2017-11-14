@@ -527,79 +527,6 @@ function App() {
         }
     }
 
-    function Chat() {
-        var self = this;
-
-        var $messages = $('.messages-content'),
-            d, h, m,
-            i = 0;
-
-        function updateScrollbar() {
-          $messages.mCustomScrollbar("update").mCustomScrollbar('scrollTo', 'bottom', {
-            scrollInertia: 10,
-            timeout: 0
-          });
-        }
-
-        function setDate(){
-            d = new Date()
-            m = d.getMinutes();
-            return $('<div class="timestamp">' + d.getHours() + ':' + m + '</div>').appendTo($('.message:last'));
-        }
-
-        function insertMessage(_this, message) {
-          var chatContainer = _this.parents('.chat').find('.messages-content')
-          var date = setDate();
-          var message = $('<div class="message message-personal">' + message + '</div>')
-          var fullMessage = date.appendTo(message);
-          chatContainer.append(message).addClass('new');
-          message.append(date);
-          $('.message-input').val(null);
-          updateScrollbar();
-        }
-
-        function insertAjaxMessage() {
-            var _this = this;
-            _this.parents('form').submit(function(e) {
-              var url = $(this).attr('action');
-
-              $.ajax({
-                type: "POST",
-                url: url,
-                data: _this.parents('form').serialize(),
-                context: _this,
-                success: function(data) {
-                  insertMessage(this, data.message.message);
-                }
-              })
-              e.preventDefault();
-            })
-
-        }
-
-        function init() {
-            if($('.posts').length > 0) {
-
-
-                $('.message-submit').each(function() {
-                  insertAjaxMessage.apply($(this));
-                });
-
-                $('.message-input').on('keydown', function(e) {
-                  if (e.which == 13) {
-                    $(this).parents('form').submit();
-                    return false;
-                  }
-                })
-
-            }
-        }
-        return {
-            init : init,
-            insertAjaxMessage : insertAjaxMessage
-        }
-    }
-
     this.init = function() {
         var objective = new Objective();
         objective.slideMaintenance();
@@ -649,60 +576,7 @@ function App() {
 
         var select2Config = new Select2();
         select2Config.init();
-
-        var chat = new Chat();
-        chat.init();
-
-        if (typeof currentUserSkills !== 'undefined') {
-          currentUserSkills.forEach(function(skill) {
-            Echo.channel('chat-room.' + skill + '.' + window.userid)
-            .listen('ObjectiveComplete', function(e) {
-              var test = $('<div class="objects tests columns large-3 ' + e.message.skill_name + '"><div class="post-inner"><h3>' + e.user.name + '</h3>' + e.message.post_content + '</div></div>');
-              var chatContainer = $('<div data-thread-id="" data-post-id="" class="chat objects tests columns large-3">' +
-                                      '<div class="chat-title">' +
-                                          '<h1>'+ e.user.name +'</h1>' +
-                                          '<h2>' + e.message.skill_name + '</h2>' +
-                                          '<figure class="avatar">' +
-                                              '<img src="/images/profiles/'+e.user.image+'" />' +
-                                          '</figure>' +
-                                      '</div>' +
-                                      '<div class="chat-title">' +
-                                          '<h2>' +
-                                              'Talk to them about ' + e.message.skill_name +
-                                          '</h2>' +
-                                      '</div>' +
-                                      '<div class="messages">' +
-                                          '<div class="messages-content">' +
-                                          '</div>' +
-                                      '</div>' +
-                                      '<div class="message-box">' +
-                                          '<form method="POST" action="/messages" accept-charset="UTF-8">' +
-                                              '<input name="_token" type="hidden" value="' + window.csrf +'">' +
-                                              '<textarea class="message-input" placeholder="Type message..." name="message" cols="50" rows="10"></textarea>' +
-                                              '<input name="thread" type="hidden" value="0">' +
-                                              '<input name="post" type="hidden" value="' + e.message.post_id + '">' +
-                                              '<input class="button submit message-submit" type="submit" value="Send!">' +
-                                            '</form>' +
-                                      '</div>' +
-                                    '</div>');
-
-              $('.portfolioContainer')
-              .append(chatContainer)
-              .isotope('appended', chatContainer);
-
-              var chat = new Chat();
-              chat.insertAjaxMessage.apply(chatContainer.find('.message-submit'));
-              $('.message-input').off();
-              $('.message-input').on('keydown', function(e) {
-                if (e.which == 13) {
-                  $(this).parents('form').submit();
-                  return false;
-                }
-              })
-            });
-          });
-        };
-
+        
         if($(".trigger").length > 0) {
             $(".trigger").toggleClass("drawn");
         }

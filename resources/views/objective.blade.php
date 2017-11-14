@@ -164,29 +164,5 @@
     @endforeach
     </div>
 
-    <script>
-    window.Echo = new Echo({
-        broadcaster: 'pusher',
-        // key: '4eb1e04947d0e9832e22'
-        key: "{{ env('PUSHER_KEY') }}"
-    });
-
-    window.currentUserThreads = [
-        @foreach ($threads as $thread)
-            "{{ $thread->id }}",
-        @endforeach
-    ]
-
-    currentUserThreads.forEach(function(thread) {
-        Echo.channel('thread.' + thread)
-        .listen('MessageSent', function(e) {
-          $('.portfolioContainer')
-          .children('[data-thread-id*="' + e.message.thread_id + '"]')
-          .find('.messages-content')
-          .append('<div class="message new"><figure class="avatar"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg"></figure>' + e.message.message + '</div>');
-        });
-    })
-    </script>
-
 </div>
 @endsection

@@ -163,7 +163,6 @@
                             <div class="nav-links">
                                 @if(!Auth::check())
                                 <a href="{{ url('/login') }}" class="login triple fa fa-sign-in"></a>
-                                <a href="{{ url('/register') }}" class="fa triple fa-user-circle-o"></a>
                                 @else
                                   <form id="logout-form" action="{{ url('/logout') }}" method="POST">
                                     {{ csrf_field() }}
@@ -173,7 +172,6 @@
                                     <a class="fa fa-plus-circle triple" data-open="completed-status" aria-controls="completed-status" aria-haspopup="true"></a>
                                   @endif
                                   <a class="fa fa-tachometer triple" href="{{ url('/dashboard') }}"></a>
-                                  <a href="{{ url('/chat') }}" class="fa triple fa-user"></a>
                                 @endif
                             </div>
                         </div>

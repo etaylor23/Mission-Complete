@@ -22,7 +22,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('dashboard/maintenance-complete/{objective_slug}', 'DashboardController@maintenanceComplete');
 
     Route::get('dashboard', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
-    Route::get('chat', 'ChatsController@index');
 
     Route::get('follow/search', 'FollowController@searchUser');
     Route::get('follow/following', 'FollowController@showFollowing');
@@ -51,8 +50,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/home', 'HomeController@index');
 
     Route::post('/tutorials', 'DashboardController@tutorials');
-
-
 
 });
 
